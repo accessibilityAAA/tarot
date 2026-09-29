@@ -1,6 +1,6 @@
 /* ==========================================================================
    Astraea AI Tarot - 核心邏輯 (js/app.js)
-   修正：修復 undefined 按鈕、還原 3D 扇形牌堆與卡槽拖拽/點擊
+   實現：自然彩帶弧形展牌 (Arc Ribbon Deck)、滑動抽取、卡槽退牌與多語系
    ========================================================================== */
 
 let currentSpread = 1;
@@ -17,6 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
   applyLanguageUI();
   initFanDeck();
   initSlots();
+
+  // 視窗大小改變時重新計算弧形位置
+  window.addEventListener('resize', () => {
+    initFanDeck();
+  });
 });
 
 function toggleDarkMode() {
@@ -45,6 +50,7 @@ function updateThemeBtn() {
 
 function toggleLargeFont() {
   document.body.classList.toggle('large-mode');
+  initFanDeck();
 }
 
 function switchLanguage(lang) {
@@ -121,7 +127,6 @@ function resetToHome() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// 切換 1, 3, 5 張牌陣 (修正按鈕樣式與切換)
 function selectSpread(count) {
   currentSpread = count;
   drawnCards = [];
@@ -144,6 +149,7 @@ function selectSpread(count) {
   initSlots();
 }
 
+// 🌟 自然彩帶弧形展牌算法 (Arc Ribbon Deck Algorithm)
 function initFanDeck() {
   const wrapper = document.getElementById('fan-deck-wrapper');
   if (!wrapper) return;
@@ -153,18 +159,34 @@ function initFanDeck() {
   
   currentDeckPool = [...TAROT_CARDS_DB].sort(() => Math.random() - 0.5);
 
+  const screenWidth = window.innerWidth;
+  // 展展 22 張牌，創造飽滿圓潤的弧形視覺
   const displayCards = 22;
   const cardBackSvg = getCosmicDeckBackSvg();
 
+  // 弧形幾何變數計算
+  const isMobile = screenWidth <= 600;
+  const totalArcAngle = isMobile ? 42 : 54; // 總展開弧度
+  const startAngle = -totalArcAngle / 2;
+  const angleStep = totalArcAngle / (displayCards - 1);
+  const cardOverlapX = isMobile ? 13 : 20; // 橫向堆疊推移量
+
+  const midIdx = (displayCards - 1) / 2;
+
   for (let i = 0; i < displayCards; i++) {
-    const rot = (i - 10.5) * 2.6;
-    const transX = (i - 10.5) * 18;
+    const angle = startAngle + i * angleStep; // 當前卡牌角度
+    const offsetFromCenter = i - midIdx;
+    
+    // 拋物線幾何：越靠兩側，縱向 Y 軸下沉越明顯，形成優美拱形弧度
+    const normOffset = offsetFromCenter / midIdx;
+    const transY = Math.pow(normOffset, 2) * (isMobile ? 18 : 28);
+    const transX = offsetFromCenter * cardOverlapX;
 
     const card = document.createElement('div');
     card.className = 'fan-card';
     card.id = `fan-card-${i}`;
     
-    const baseTransform = `translateX(${transX}px) rotate(${rot}deg)`;
+    const baseTransform = `translate(${transX}px, ${transY}px) rotate(${angle}deg)`;
     card.style.setProperty('--base-transform', baseTransform);
     card.style.transform = baseTransform;
     card.style.zIndex = i;
@@ -221,7 +243,7 @@ function initSlots() {
     if (currentSpread > 1) {
       const offset = i - midIndex;
       const rot = offset * 2.5;
-      const transY = Math.abs(offset) * 5;
+      const transY = Math.abs(offset) * 4;
       slot.style.transform = `translateY(${transY}px) rotate(${rot}deg)`;
     } else {
       slot.style.transform = 'none';
@@ -254,7 +276,7 @@ function initSlots() {
       }
     };
 
-    slot.innerHTML = `<span style="font-size:0.82rem; color:var(--text-sub); font-weight:bold;">Card ${i + 1}</span>`;
+    slot.innerHTML = `<span style="font-size:0.8rem; color:var(--text-sub); font-weight:bold;">Card ${i + 1}</span>`;
     grid.appendChild(slot);
   }
 }
@@ -332,7 +354,7 @@ function removeCardFromSlot(slotIdx) {
   const slotEl = document.getElementById(`slot-${slotIdx + 1}`);
   if (slotEl) {
     slotEl.classList.remove('active');
-    slotEl.innerHTML = `<span style="font-size:0.82rem; color:var(--text-sub); font-weight:bold;">Card ${slotIdx + 1}</span>`;
+    slotEl.innerHTML = `<span style="font-size:0.8rem; color:var(--text-sub); font-weight:bold;">Card ${slotIdx + 1}</span>`;
   }
 
   updateStatusNotice();
@@ -394,7 +416,7 @@ function generateAIReading() {
   const leftSlotsBox = document.getElementById('result-left-slots');
   if (leftSlotsBox) {
     leftSlotsBox.innerHTML = validCards.map((c, i) => `
-      <div class="slot-box active" style="width:75px; height:120px;">
+      <div class="slot-box active" style="width:70px; height:114px;">
         ${renderNativeCardHtml(c, c.isReversed, isZh, i)}
       </div>
     `).join('');
@@ -404,9 +426,9 @@ function generateAIReading() {
     <div class="cards-detail-list">
       ${validCards.map((c, i) => `
         <div class="card-detail-item">
-          <span style="background:#7e22ce; color:#fff; width:20px; height:22px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.7rem; font-weight:bold; flex-shrink:0;">${i + 1}</span>
+          <span style="background:#7e22ce; color:#fff; width:18px; height:18px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:bold; flex-shrink:0;">${i + 1}</span>
           <div>
-            <div style="font-size:0.78rem; color:var(--text-sub); font-weight:bold;">${isZh ? `位置 ${i + 1} 的指引` : `Position ${i + 1}`}</div>
+            <div style="font-size:0.75rem; color:var(--text-sub); font-weight:bold;">${isZh ? `位置 ${i + 1} 指引` : `Position ${i + 1}`}</div>
             <div style="font-size:0.85rem; font-weight:800; color:var(--text-main);">
               ${isZh ? c.nameZh : c.nameEn}
               <span style="font-size:0.7rem; color:${c.isReversed ? '#ef4444' : '#10b981'}; margin-left:4px;">
