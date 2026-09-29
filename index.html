@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Astraea AI Tarot | Free Online AI Tarot Reading</title>
+  <meta name="description" content="Discover your destiny with Astraea AI Tarot. Instant personalized tarot readings.">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script src="js/i18n.js" defer></script>
+  <script src="js/tarot-data.js" defer></script>
+  <script src="js/audio-engine.js" defer></script>
+  <script src="js/app.js" defer></script>
+</head>
+<body>
+
+  <!-- 1. 頂部 Header 工具列 -->
+  <header class="site-header" role="banner">
+    <div class="header-inner">
+      <a href="javascript:void(0)" onclick="resetToHome()" style="text-decoration: none; color: inherit;" title="Return to Home">
+        <h1 class="brand-title" id="brand-title">🔮 Astraea AI Tarot</h1>
+      </a>
+      
+      <div class="header-actions">
+        <button type="button" class="btn-head" onclick="toggleLargeFont()" aria-label="Toggle Font Size">🔠 大字體</button>
+        <button type="button" class="btn-head" id="theme-btn" onclick="toggleDarkMode()" aria-label="Toggle Theme">☀️ 白天</button>
+        
+        <!-- 23 國多國語系選項 -->
+        <select class="btn-head" id="lang-select" onchange="switchLanguage(this.value)" style="outline:none; cursor:pointer;" aria-label="Select Language">
+          <option value="en">English</option>
+          <option value="zh-TW">正體中文</option>
+          <option value="zh-CN">简体中文</option>
+          <option value="ja">日本語</option>
+          <option value="ko">한국어</option>
+          <option value="es">Español</option>
+          <option value="fr">Français</option>
+          <option value="de">Deutsch</option>
+          <option value="it">Italiano</option>
+          <option value="pt">Português</option>
+          <option value="ru">Русский</option>
+          <option value="nl">Nederlands</option>
+          <option value="uk">Українська</option>
+          <option value="he">עברית</option>
+          <option value="th">ไทย</option>
+          <option value="tr">Türkçe</option>
+          <option value="pl">Polski</option>
+          <option value="da">Dansk</option>
+          <option value="no">Norsk</option>
+          <option value="fi">Suomi</option>
+          <option value="sv">Svenska</option>
+          <option value="vi">Tiếng Việt</option>
+          <option value="id">Bahasa Indonesia</option>
+        </select>
+      </div>
+    </div>
+  </header>
+
+  <!-- 2. 主要內容區域 -->
+  <main class="container" role="main">
+    <div class="glass-card" style="text-align: center;">
+      
+      <!-- Toast 美型提示訊息區 (WCAG Live Region) -->
+      <div id="toast-banner-box" style="display: none;" class="custom-toast-msg" aria-live="polite" role="status"></div>
+
+      <!-- 設定區 -->
+      <div id="interactive-setup-area">
+        <label for="user-query" class="sr-only" style="position:absolute; width:1px; height:1px; overflow:hidden;">Input your question</label>
+        <textarea id="user-query" style="width:100%; min-height:70px; padding:0.75rem; border-radius:0.75rem; border:1px solid var(--border-color); background:rgba(0,0,0,0.05); color:var(--text-main); font-size:0.98rem; outline:none; resize:none;" placeholder="Type your question..."></textarea>
+
+        <div style="display:flex; flex-wrap:wrap; gap:0.4rem; justify-content:center; margin:0.6rem 0 0.85rem 0;" role="group" aria-label="Preset Questions">
+          <button type="button" onclick="fillQuestion('love')" id="tag-love" style="background:rgba(168,85,247,0.15); border:1px solid var(--primary-purple); color:var(--text-main); padding:0.35rem 0.85rem; border-radius:9999px; font-size:0.82rem; font-weight:bold; cursor:pointer;">💕 真命天子在哪裡？</button>
+          <button type="button" onclick="fillQuestion('career')" id="tag-career" style="background:rgba(168,85,247,0.15); border:1px solid var(--primary-purple); color:var(--text-main); padding:0.35rem 0.85rem; border-radius:9999px; font-size:0.82rem; font-weight:bold; cursor:pointer;">💼 該換工作還是留著？</button>
+          <button type="button" onclick="fillQuestion('fortune')" id="tag-fortune" style="background:rgba(168,85,247,0.15); border:1px solid var(--primary-purple); color:var(--text-main); padding:0.35rem 0.85rem; border-radius:9999px; font-size:0.82rem; font-weight:bold; cursor:pointer;">🪙 未來三個月財運？</button>
+          <button type="button" onclick="fillQuestion('universe')" id="tag-universe" style="background:rgba(168,85,247,0.15); border:1px solid var(--primary-purple); color:var(--text-main); padding:0.35rem 0.85rem; border-radius:9999px; font-size:0.82rem; font-weight:bold; cursor:pointer;">✨ 宇宙今天想告訴我什麼？</button>
+        </div>
+
+        <div style="display:flex; justify-content:center; gap:0.5rem; margin:0.75rem 0;" role="radiogroup" aria-label="Select Spread">
+          <button type="button" id="btn-spread-1" onclick="selectSpread(1)" aria-checked="true" style="background:var(--primary-purple); color:#FFF; border:1px solid var(--primary-purple); padding:0.35rem 0.8rem; border-radius:0.5rem; font-weight:bold; cursor:pointer;">1 卡牌 (每日指引)</button>
+          <button type="button" id="btn-spread-3" onclick="selectSpread(3)" aria-checked="false" style="background:transparent; color:var(--text-main); border:1px solid var(--border-color); padding:0.35rem 0.8rem; border-radius:0.5rem; font-weight:bold; cursor:pointer;">3 卡牌 (時間軸)</button>
+          <button type="button" id="btn-spread-5" onclick="selectSpread(5)" aria-checked="false" style="background:transparent; color:var(--text-main); border:1px solid var(--border-color); padding:0.35rem 0.8rem; border-radius:0.5rem; font-weight:bold; cursor:pointer;">5 卡牌 (深度牌陣)</button>
+        </div>
+      </div>
+
+      <!-- 78 張展牌區 -->
+      <div id="fan-deck-stage-wrapper">
+        <div id="fan-deck-wrapper" class="fan-deck-stage" role="region" aria-label="Tarot Deck Stage"></div>
+        <p id="tarot-hint-status" style="font-weight:bold; color:var(--primary-purple); margin-bottom:0.5rem;" aria-live="polite"></p>
+      </div>
+
+      <!-- 未抽牌時居中的卡槽 -->
+      <div id="slots-grid" class="slots-grid" role="region" aria-label="Selected Card Slots"></div>
+
+      <!-- 🔮 正式觸發解讀大按鈕 -->
+      <div id="start-divination-btn-box" style="margin: 1rem 0 0.5rem 0;">
+        <button type="button" id="btn-submit-divination" onclick="startTarotDivination()" class="btn-gold" style="font-size: 1.05rem; width: 85%; max-width: 340px; min-height: 46px;">
+          🔮 開始免費占卜 / Start Reading
+        </button>
+      </div>
+
+      <!-- 重抽按鈕 (解籤後顯示) -->
+      <div id="re-draw-btn-box" style="display: none; margin: 0.5rem 0 1rem 0;">
+        <button type="button" id="btn-redraw-action" onclick="resetToHome()" class="btn-gold" style="font-size: 0.95rem; padding: 0.5rem 1.5rem;">
+          🔄 重新請示 / Read Again
+        </button>
+      </div>
+
+      <!-- 誠心祈禱沉澱提示橫幅 (解讀中顯示) -->
+      <div id="ritual-blessing-notice" style="display: none; padding: 1rem; background: rgba(168, 85, 247, 0.12); border: 1px solid var(--primary-purple); border-radius: 0.75rem; margin: 1rem 0;">
+        <div style="font-size: 1.1rem; font-weight: 800; color: #f59e0b; margin-bottom: 0.3rem;">✨ 請誠心默禱，靜心感受宇宙指引...</div>
+        <div style="font-size: 0.88rem; color: var(--text-sub);">大師正在為您連結靈性能量，揭示牌陣奧秘...</div>
+      </div>
+
+      <!-- 解籤專用：雙欄式區域 (預設隱藏) -->
+      <div id="result-two-column-wrapper" style="display: none;" class="result-layout-grid">
+        <div class="result-left-column">
+          <div id="result-left-slots" class="result-mini-slots"></div>
+          <div id="cards-summary"></div>
+        </div>
+
+        <div class="ai-chat-box">
+          <div id="typewriter-text" style="font-size:0.95rem; color:var(--text-main);" aria-live="polite"></div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- 🌟 3. 頁底 Footer 區塊 (通過 WCAG 2.1 高對比規範) -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="footer-inner">
+      <div class="footer-lang-links" aria-label="Language Selector">
+        <a href="javascript:void(0)" onclick="switchLanguage('en')">English</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('zh-TW')">正體中文</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('zh-CN')">简体中文</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('ja')">日本語</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('ko')">한국어</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('es')">Español</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('de')">Deutsch</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('pt')">Português</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('fr')">Français</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('it')">Italiano</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('nl')">Nederlands</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('ru')">Русский</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('uk')">Українська</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('he')">עברית</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('th')">ไทย</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('tr')">Türkçe</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('pl')">Polski</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('da')">Dansk</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('no')">Norsk</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('vi')">Tiếng Việt</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('fi')">Suomi</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('sv')">Svenska</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('id')">Bahasa Indonesia</a>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 Astraea AI Tarot Ltd. 版權所有.</span>
+        <div class="footer-policy-links">
+          <a href="javascript:void(0)" onclick="openPolicyModal('privacy')">隱私政策</a> · 
+          <a href="javascript:void(0)" onclick="openPolicyModal('terms')">服務條款</a> · 
+          <a href="javascript:void(0)" onclick="openPolicyModal('refund')">退款政策</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 4. 條款彈出視窗 (Modal Popup) 結構 -->
+  <div id="policy-modal" class="modal-overlay" style="display: none;" onclick="closePolicyModal(event)">
+    <div class="modal-card" onclick="event.stopPropagation()">
+      <div class="modal-header">
+        <h3 id="modal-title">條款標題</h3>
+        <button type="button" class="modal-close-btn" onclick="closePolicyModal()">×</button>
+      </div>
+      <div class="modal-body" id="modal-content">
+        條款內容加載中...
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

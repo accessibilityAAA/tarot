@@ -1,0 +1,476 @@
+/* ==========================================================================
+   Astraea AI Tarot - 全局雙主題 ✕ WCAG高對比無障礙 ✕ 精緻頁尾 (css/style.css)
+   ========================================================================== */
+
+:root {
+  /* 預設深色宇宙主題 */
+  --bg-main: #0c071e;
+  --card-bg: rgba(255, 255, 255, 0.05);
+  --text-main: #f3e8ff;
+  --text-sub: #c084fc;
+  --primary-purple: #a855f7;
+  --border-color: rgba(216, 180, 254, 0.25);
+  --glow-color: rgba(168, 85, 247, 0.4);
+  --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --header-bg: #1a0b36;
+  --footer-bg: #0f0826; /* 🌟 核心修復：高質感極深紫夜色 */
+  --footer-text: #e2e8f0; /* 🌟 高對比清晰白字 */
+  --footer-text-muted: #a7f3d0;
+  --input-bg: rgba(0, 0, 0, 0.25);
+  --focus-ring: #f59e0b;
+}
+
+body.light-mode {
+  --bg-main: #f4f1ea;
+  --card-bg: #ffffff;
+  --text-main: #1f2937;
+  --text-sub: #6b21a8;
+  --primary-purple: #7e22ce;
+  --border-color: #d1d5db;
+  --glow-color: rgba(126, 34, 206, 0.2);
+  --header-bg: #5b21b6;
+  --footer-bg: #1e1b4b; /* 🌟 白天模式下頁尾亦使用高對比深色基底 */
+  --footer-text: #f3e8ff;
+  --input-bg: #ffffff;
+}
+
+body.large-mode { font-size: 1.2rem !important; }
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background-color: var(--bg-main);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  line-height: 1.5;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* 鍵盤聚焦高對比無障礙框 (WCAG 2.1 AA) */
+:focus-visible {
+  outline: 3px solid var(--focus-ring) !important;
+  outline-offset: 4px !important;
+}
+
+/* 頂部 Header 工具列 */
+.site-header {
+  background: var(--header-bg);
+  color: #ffffff;
+  padding: 0.65rem 1.25rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.header-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand-title { font-size: 1.35rem; font-weight: 800; }
+.header-actions { display: flex; gap: 0.5rem; }
+
+.btn-head {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  padding: 0.4rem 0.85rem;
+  border-radius: 0.5rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  cursor: pointer;
+  min-height: 38px;
+  display: inline-flex;
+  align-items: center;
+}
+
+.btn-head:hover { background: rgba(255, 255, 255, 0.25); }
+
+.btn-head option {
+  background-color: #1a0b36 !important;
+  color: #f3e8ff !important;
+  padding: 8px 12px;
+}
+
+body.light-mode .btn-head option {
+  background-color: #ffffff !important;
+  color: #1f2937 !important;
+}
+
+.container { max-width: 1050px; margin: 1rem auto; padding: 0 1rem; }
+
+.glass-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  padding: 1.25rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.15);
+}
+
+.btn-gold {
+  background: var(--gold-gradient);
+  color: #ffffff;
+  border: none;
+  font-weight: 800;
+  padding: 0.65rem 1.6rem;
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.custom-toast-msg {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid #f59e0b;
+  color: #fbbf24;
+  padding: 0.55rem 1.2rem;
+  border-radius: 0.75rem;
+  font-weight: bold;
+  font-size: 0.9rem;
+  margin: 0.5rem auto 0.75rem auto;
+  max-width: 480px;
+  animation: fadeInDown 0.3s ease-out;
+}
+
+.input-error-shake {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5) !important;
+  animation: shake 0.4s ease-in-out;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+@keyframes fadeInDown {
+  0% { opacity: 0; transform: translateY(-10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* 展牌舞台區 */
+.fan-deck-stage {
+  position: relative;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  perspective: 1200px;
+  margin: 1rem 0;
+  width: 100%;
+}
+
+.fan-card {
+  position: absolute;
+  width: 68px;
+  height: 112px;
+  border-radius: 8px;
+  cursor: pointer !important;
+  transform-origin: bottom center;
+  transition: transform 0.2s ease-out, opacity 0.3s;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  background-color: #1e1b4b;
+  overflow: hidden;
+  user-select: none;
+  touch-action: none;
+}
+
+.fan-card:hover, .fan-card:focus-visible {
+  transform: var(--base-transform) translateY(-10px) !important;
+  z-index: 9999 !important;
+  box-shadow: 0 10px 24px var(--glow-color);
+}
+
+.slots-grid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.slot-box {
+  width: 95px;
+  height: 155px;
+  border: 2px dashed var(--border-color);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, border-color 0.3s, background-color 0.3s;
+  background: var(--input-bg);
+  position: relative;
+  cursor: pointer !important;
+}
+
+.slot-box.drag-over {
+  border-color: #f59e0b;
+  background: rgba(245, 158, 11, 0.15);
+  transform: scale(1.05);
+}
+
+.slot-box.active {
+  border: none;
+  background: transparent;
+}
+
+.card-render-box {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
+  border: 2px solid #e2e8f0;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0.3rem;
+  position: relative;
+  overflow: visible !important;
+  animation: flipPop 0.35s ease-out;
+}
+
+@keyframes flipPop {
+  0% { transform: scale(0.6) rotateY(90deg); opacity: 0; }
+  100% { transform: scale(1) rotateY(0deg); opacity: 1; }
+}
+
+.card-number-badge {
+  position: absolute;
+  top: -8px;
+  left: -8px;
+  width: 22px;
+  height: 22px;
+  background: #7e22ce;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  font-size: 0.72rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 20;
+}
+
+.card-reversed { transform: rotate(180deg); }
+
+.result-layout-grid {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 1.25rem;
+  align-items: start;
+  text-align: left;
+  margin-top: 1rem;
+  overflow: visible;
+}
+
+.result-left-column {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  overflow: visible;
+  padding-top: 10px;
+}
+
+.result-mini-slots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  overflow: visible;
+  padding-top: 5px;
+}
+
+.result-mini-slots .slot-box {
+  width: 75px;
+  height: 120px;
+  transform: none !important;
+  overflow: visible !important;
+  cursor: default;
+}
+
+.cards-detail-list {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: 0.85rem;
+  padding: 0.75rem;
+}
+
+.card-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.card-detail-item:last-child { border-bottom: none; }
+
+.ai-chat-box {
+  background: rgba(0, 0, 0, 0.04);
+  border: 1px solid var(--border-color);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  line-height: 1.6;
+}
+
+/* ==========================================================================
+   🌟 核心修復：高對比無障礙頁尾 Footer (WCAG 2.1 AA 通過)
+   ========================================================================== */
+.site-footer {
+  background: var(--footer-bg);
+  border-top: 1px solid rgba(216, 180, 254, 0.2);
+  padding: 2.5rem 1.25rem 2rem 1.25rem;
+  margin-top: 3.5rem;
+  font-size: 0.88rem;
+  color: var(--footer-text);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.footer-inner {
+  max-width: 1050px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.footer-lang-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem 1.25rem;
+  line-height: 1.8;
+}
+
+.footer-lang-links a {
+  color: var(--footer-text);
+  text-decoration: none;
+  font-weight: 500;
+  opacity: 0.85;
+  transition: opacity 0.2s, color 0.2s, transform 0.2s;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.footer-lang-links a:hover, .footer-lang-links a:focus-visible {
+  opacity: 1;
+  color: #f59e0b;
+  text-decoration: underline;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.82rem;
+  color: #cbd5e1;
+}
+
+.footer-policy-links {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.footer-policy-links a {
+  color: #fef08a;
+  text-decoration: none;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+.footer-policy-links a:hover, .footer-policy-links a:focus-visible {
+  color: #f59e0b;
+  text-decoration: underline;
+}
+
+/* 條款彈出視窗 (Modal Popup) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 1rem;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.modal-card {
+  background: #1a0b36;
+  border: 1px solid var(--border-color);
+  border-radius: 1.25rem;
+  max-width: 600px;
+  width: 100%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+  animation: scaleUp 0.25s ease-out;
+}
+
+.modal-header {
+  padding: 1.2rem 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h3 {
+  color: #f59e0b;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: #c084fc;
+  font-size: 1.6rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0 0.5rem;
+}
+
+.modal-close-btn:hover { color: #ef4444; }
+
+.modal-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: #f3e8ff;
+  text-align: left;
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes scaleUp { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+@media (max-width: 768px) {
+  .result-layout-grid { grid-template-columns: 1fr; }
+  .fan-deck-stage { height: 160px; }
+  .fan-card { width: 56px; height: 96px; }
+  .slot-box { width: 85px; height: 140px; }
+  .header-inner { flex-direction: column; gap: 0.75rem; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+}
