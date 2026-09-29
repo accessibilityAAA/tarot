@@ -1,0 +1,31 @@
+astral-tarot/
+├── index.html                  # 全球版一頁式主入口 (Landing & App)
+├── css/
+│   ├── style.css               # 全局星空暗黑風、Glassmorphism 與響應式變數
+│   └── tarot-deck.css          # 3D 扇形牌組、卡牌翻轉與牌陣動畫
+├── js/
+│   ├── app.js                  # 全站主控邏輯與狀態管理
+│   ├── i18n.js                 # 多語系字典 (EN, ZH-TW, ZH-CN, ES, FR)
+│   ├── tarot-data.js           # 78 張偉特塔羅牌資料庫 (正/逆位與牌義)
+│   ├── tarot-engine.js         # 扇形展牌、洗牌、抽牌與 3D 翻牌物理邏輯
+│   ├── ai-reader.js            # AI 對話解牌對接與打字機串流效能
+│   └── audio-engine.js         # Web Audio API 模擬洗牌、翻牌與勝音特效
+├── assets/
+│   ├── images/
+│   │   ├── cards/              # 78 張塔羅牌圖檔 (major_0.jpg ~ minor_55.jpg)
+│   │   └── ui/                 # Logo、Favicon、徽章圖示
+├── workers/
+│   └── ai-proxy.js             # Cloudflare Workers API 金鑰安全代理 (選配)
+└── robots.txt / sitemap.xml    # 全球 SEO 爬蟲索引
+
+
+
+astral-tarot/
+├── index.html
+├── css/
+│   └── style.css
+└── js/
+    ├── i18n.js
+    ├── tarot-data.js
+    ├── audio-engine.js
+    └── app.js

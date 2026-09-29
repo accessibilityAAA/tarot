@@ -1,97 +1,116 @@
 /* ==========================================================================
-   3D 弧形展牌 ✕ 翻牌動畫 ✕ 牌陣位置 (css/tarot-deck.css)
+   Astraea AI Tarot - 3D 展牌與卡槽樣式 (css/tarot-deck.css)
    ========================================================================== */
 
-/* 1. 3D 展牌舞台 */
-.deck-stage {
-  position: relative;
-  height: 180px;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  perspective: 1000px;
-  margin: 1.5rem 0;
+/* 1. 3D 扇形展牌舞台 (保證有高度且卡牌顯示) */
+.fan-deck-stage {
+  position: relative !important;
+  height: 180px !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: flex-end !important;
+  perspective: 1200px !important;
+  margin: 1rem 0 !important;
+  width: 100% !important;
 }
 
-/* 扇形展開單卡 */
 .fan-card {
-  position: absolute;
-  width: 54px;
-  height: 94px;
-  background: linear-gradient(135deg, #3b0764 0%, #1e1b4b 100%);
-  border: 1.5px solid var(--text-sub);
-  border-radius: 6px;
-  cursor: pointer;
-  transform-origin: bottom center;
-  transition: transform 0.25s ease, border-color 0.25s, box-shadow 0.25s;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  position: absolute !important;
+  width: 68px !important;
+  height: 112px !important;
+  border-radius: 8px !important;
+  cursor: pointer !important;
+  transform-origin: bottom center !important;
+  transition: transform 0.2s ease-out, opacity 0.3s !important;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5) !important;
+  background-color: #1e1b4b !important;
+  overflow: hidden !important;
+  user-select: none !important;
+  touch-action: none !important;
 }
 
-.fan-card:hover {
-  transform: translateY(-22px) scale(1.22) !important;
-  z-index: 99 !important;
-  border-color: var(--gold-accent);
-  box-shadow: 0 10px 25px var(--primary-glow);
+.fan-card:hover,
+.fan-card:focus-visible {
+  transform: var(--base-transform) translateY(-10px) !important;
+  z-index: 9999 !important;
+  box-shadow: 0 10px 24px var(--glow-color, rgba(168, 85, 247, 0.4)) !important;
 }
 
-/* 2. 牌陣插槽 (Slots) */
-.spread-slots-grid {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin: 1.5rem 0;
+/* 2. 卡槽 Grid */
+.slots-grid {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  flex-wrap: wrap !important;
+  margin: 1rem 0 !important;
 }
 
 .slot-box {
-  width: 90px;
-  height: 150px;
-  border: 2px dashed var(--border-glass);
-  border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  transition: all 0.3s ease;
+  width: 95px !important;
+  height: 155px !important;
+  border: 2px dashed var(--border-color, rgba(216, 180, 254, 0.25)) !important;
+  border-radius: 8px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: transform 0.3s ease, border-color 0.3s, background-color 0.3s !important;
+  background: var(--input-bg, rgba(0, 0, 0, 0.25)) !important;
+  position: relative !important;
+  cursor: pointer !important;
+}
+
+.slot-box.drag-over {
+  border-color: #f59e0b !important;
+  background: rgba(245, 158, 11, 0.15) !important;
+  transform: scale(1.05) !important;
 }
 
 .slot-box.active {
-  border-style: solid;
-  border-color: var(--primary-purple);
-  box-shadow: 0 0 18px var(--primary-glow);
+  border: none !important;
+  background: transparent !important;
 }
 
-/* 3. 翻牌 3D 動畫 */
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-style: preserve-3d;
+/* 3. 卡牌內容渲染 */
+.card-render-box {
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 8px !important;
+  background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%) !important;
+  border: 2px solid #e2e8f0 !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0.5rem 0.3rem !important;
+  position: relative !important;
 }
 
-.flip-card-inner.flipped {
-  transform: rotateY(180deg);
-}
-
-.card-front, .card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: 6px;
-}
-
-.card-back {
-  background: linear-gradient(135deg, #3b0764 0%, #1e1b4b 100%);
-  border: 2px solid var(--text-sub);
-}
-
-.card-front {
-  transform: rotateY(180deg);
-  object-fit: cover;
+.card-number-badge {
+  position: absolute !important;
+  top: -8px !important;
+  left: -8px !important;
+  width: 22px !important;
+  height: 22px !important;
+  background: #7e22ce !important;
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  border-radius: 50% !important;
+  font-size: 0.72rem !important;
+  font-weight: 800 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 20 !important;
 }
 
 .card-reversed {
-  transform: rotateY(180deg) rotate(180deg) !important;
+  transform: rotate(180deg) !important;
+}
+
+@media (max-width: 768px) {
+  .fan-deck-stage { height: 160px !important; }
+  .fan-card { width: 56px !important; height: 96px !important; }
+  .slot-box { width: 85px !important; height: 140px !important; }
 }

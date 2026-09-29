@@ -1,5 +1,6 @@
 /* ==========================================================================
-   Astraea AI Tarot - 雙向退牌 ✕ Modal彈窗條款 ✕ 多語系 (js/app.js)
+   Astraea AI Tarot - 核心邏輯 (js/app.js)
+   修正：修復 undefined 按鈕、還原 3D 扇形牌堆與卡槽拖拽/點擊
    ========================================================================== */
 
 let currentSpread = 1;
@@ -120,6 +121,7 @@ function resetToHome() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
+// 切換 1, 3, 5 張牌陣 (修正按鈕樣式與切換)
 function selectSpread(count) {
   currentSpread = count;
   drawnCards = [];
@@ -291,7 +293,7 @@ function drawCard(cardEl, targetSlotIdx = null) {
     playSound('draw');
   }
 
-  const randomCard = currentDeckPool.pop();
+  const randomCard = currentDeckPool.pop() || TAROT_CARDS_DB[0];
   const isReversed = Math.random() < 0.25;
   const cardData = { ...randomCard, isReversed, sourceCardId: cardEl.id };
 
@@ -368,10 +370,10 @@ function startTarotDivination() {
   document.getElementById('fan-deck-stage-wrapper').style.display = 'none';
   
   const blessingNotice = document.getElementById('ritual-blessing-notice');
-  blessingNotice.style.display = 'block';
+  if (blessingNotice) blessingNotice.style.display = 'block';
 
   setTimeout(() => {
-    blessingNotice.style.display = 'none';
+    if (blessingNotice) blessingNotice.style.display = 'none';
     generateAIReading();
   }, 1200);
 }
@@ -382,7 +384,7 @@ function generateAIReading() {
   
   document.getElementById('re-draw-btn-box').style.display = 'block';
   const resultGrid = document.getElementById('result-two-column-wrapper');
-  resultGrid.style.display = 'grid';
+  if (resultGrid) resultGrid.style.display = 'grid';
 
   const userQuery = document.getElementById('user-query').value.trim() || 'General Life Path';
   const isZh = currentLang.startsWith('zh');
@@ -390,11 +392,13 @@ function generateAIReading() {
   const validCards = drawnCards.filter(c => c != null);
 
   const leftSlotsBox = document.getElementById('result-left-slots');
-  leftSlotsBox.innerHTML = validCards.map((c, i) => `
-    <div class="slot-box active" style="width:75px; height:120px;">
-      ${renderNativeCardHtml(c, c.isReversed, isZh, i)}
-    </div>
-  `).join('');
+  if (leftSlotsBox) {
+    leftSlotsBox.innerHTML = validCards.map((c, i) => `
+      <div class="slot-box active" style="width:75px; height:120px;">
+        ${renderNativeCardHtml(c, c.isReversed, isZh, i)}
+      </div>
+    `).join('');
+  }
   
   const summaryHtml = `
     <div class="cards-detail-list">
@@ -424,7 +428,7 @@ function generateAIReading() {
   typewriterEffect('typewriter-text', readingText, 25);
 
   setTimeout(() => {
-    resultGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (resultGrid) resultGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }, 100);
 }
 
@@ -445,7 +449,6 @@ function typewriterEffect(elementId, text, speed) {
   }, speed);
 }
 
-// 🌟 彈出式 Modal 視窗控制邏輯 (隱私政策 / 服務條款 / 退款政策)
 function openPolicyModal(type) {
   const modal = document.getElementById('policy-modal');
   const title = document.getElementById('modal-title');
@@ -470,8 +473,8 @@ function openPolicyModal(type) {
     refund: {
       titleZh: '🪙 退款政策 Refund Policy',
       titleEn: '🪙 Refund Policy',
-      textZh: '本網站目前提供免費算牌服務。若未來推出高級會員訂閱或深度付費諮詢，您可以在購買後 7 天內申請全額退款（需尚未解鎖超過 3 次深度專屬牌陣）。',
-      textEn: 'Free readings are completely open to all users. Premium membership features qualify for a 7-day full refund if less than 3 deep reading reports have been unlocked.'
+      textZh: '本網站目前提供免費算牌服務。',
+      textEn: 'Free readings are completely open to all users.'
     }
   };
 

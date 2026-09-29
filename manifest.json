@@ -1,0 +1,30 @@
+{
+  "name": "Astraea AI Tarot 天下第一塔羅牌",
+  "short_name": "AI塔羅牌",
+  "description": "極速無廣告、78張西洋偉特塔羅牌深度解讀。支援 3D 物理展牌與全球多語系。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0c071e",
+  "theme_color": "#0c071e",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "./assets/images/ui/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/images/ui/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./assets/images/ui/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

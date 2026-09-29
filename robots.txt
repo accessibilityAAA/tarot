@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+Allow: /css/
+Allow: /js/
+Allow: /assets/
+
+Allow: /tarot.html
+Allow: /manifest.json
+
+Disallow: /workers/
+
+Sitemap: https://www.longminglee.com/sitemap.xml

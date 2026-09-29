@@ -1,0 +1,133 @@
+/* ==========================================================================
+   天下第一塔羅牌 - Modal 彈窗與美型組件樣式表 (css/modal-widgets.css)
+   徹底修復：預設會自動跳出遮擋畫面 Bug、手機端極致防破版
+   ========================================================================== */
+
+/* 1. Modal 彈窗黑半透明背景 (預設強制 display: none) */
+.modal-overlay {
+  display: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  background: rgba(12, 7, 30, 0.8) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  justify-content: center !important;
+  align-items: center !important;
+  z-index: 99999 !important;
+  padding: 1rem !important;
+}
+
+/* 只有當 JS 加入 .open 類別時才顯示 */
+.modal-overlay.open {
+  display: flex !important;
+  animation: modalFadeIn 0.25s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 2. Modal 卡片主體 */
+.modal-card {
+  background: var(--bg-main, #0c071e) !important;
+  border: 1.5px solid var(--border-color, rgba(255,255,255,0.2)) !important;
+  border-radius: 1.25rem !important;
+  max-width: 580px !important;
+  width: 100% !important;
+  max-height: 82vh !important;
+  max-height: 82dvh !important;
+  display: flex !important;
+  flex-direction: column !important;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7) !important;
+  overflow: hidden !important;
+  animation: modalScaleUp 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalScaleUp {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+  padding: 1rem 1.25rem !important;
+  border-bottom: 1px solid var(--border-color, rgba(255,255,255,0.12)) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.modal-header h3 {
+  color: var(--gold-accent, #f59e0b) !important;
+  font-size: 1.15rem !important;
+  font-weight: 800 !important;
+  margin: 0 !important;
+}
+
+.modal-close-btn {
+  background: transparent !important;
+  border: none !important;
+  color: var(--text-sub, #c084fc) !important;
+  font-size: 1.6rem !important;
+  font-weight: bold !important;
+  cursor: pointer !important;
+  padding: 0 0.5rem !important;
+  line-height: 1 !important;
+  transition: color 0.2s !important;
+}
+
+.modal-close-btn:hover {
+  color: #ef4444 !important;
+}
+
+.modal-body {
+  padding: 1.25rem !important;
+  overflow-y: auto !important;
+  font-size: 0.95rem !important;
+  line-height: 1.65 !important;
+  color: var(--text-main, #f3e8ff) !important;
+  text-align: left !important;
+}
+
+/* 3. 卡牌詳情對照表清單 */
+.cards-detail-list {
+  background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border-color, rgba(255,255,255,0.12));
+  border-radius: 0.85rem;
+  padding: 0.75rem;
+}
+
+.card-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed var(--border-color, rgba(255,255,255,0.12));
+}
+
+.card-detail-item:last-child {
+  border-bottom: none;
+}
+
+/* 手機版 (≤ 480px) 特效微調 */
+@media (max-width: 480px) {
+  .modal-card {
+    max-height: 88vh !important;
+    max-height: 88dvh !important;
+    border-radius: 1rem !important;
+  }
+
+  .modal-header {
+    padding: 0.85rem 1rem !important;
+  }
+
+  .modal-body {
+    padding: 1rem !important;
+    font-size: 0.88rem !important;
+  }
+}
