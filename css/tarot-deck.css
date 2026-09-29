@@ -1,42 +1,47 @@
 /* ==========================================================================
-   Astraea AI Tarot - 3D 展牌與卡槽樣式 (css/tarot-deck.css)
+   Astraea AI Tarot - 橫向滑動展牌軌道與卡槽 (css/tarot-deck.css)
    ========================================================================== */
 
-/* 1. 滑動軌道外框 */
+/* 1. 外層滑動軌道（允許橫向 Touch/滑鼠滑動，隱藏滾動條） */
 #fan-deck-stage-wrapper {
   width: 100% !important;
+  max-width: 100% !important;
   margin: 0.4rem 0 !important;
   overflow-x: auto !important;
   overflow-y: hidden !important;
   -webkit-overflow-scrolling: touch !important;
   cursor: grab !important;
-  padding: 5px 0 !important;
-}
-
-#fan-deck-stage-wrapper:active {
-  cursor: grabbing !important;
+  padding: 15px 10px !important;
+  box-sizing: border-box !important;
+  scrollbar-width: none !important;
 }
 
 #fan-deck-stage-wrapper::-webkit-scrollbar {
   display: none !important;
 }
 
-/* 2. 內部卡牌長軌道 */
+#fan-deck-stage-wrapper:active {
+  cursor: grabbing !important;
+}
+
+/* 2. 內部 22 張卡牌的可滑動舞台 */
 .fan-deck-stage {
   position: relative !important;
-  width: 820px !important;
+  width: 680px !important;
   height: 130px !important;
   margin: 0 auto !important;
   display: flex !important;
   justify-content: center !important;
   align-items: flex-end !important;
+  box-sizing: border-box !important;
+  padding-bottom: 10px !important;
 }
 
-/* 3. 個別卡牌 */
+/* 3. 個別卡牌樣式 */
 .fan-card {
   position: absolute !important;
-  width: 56px !important;
-  height: 92px !important;
+  width: 52px !important;
+  height: 84px !important;
   border-radius: 6px !important;
   cursor: pointer !important;
   transform-origin: 50% 160% !important;
@@ -48,28 +53,33 @@
   border: 1px solid rgba(245, 158, 11, 0.6) !important;
 }
 
-.fan-card:hover {
+.fan-card:hover, .fan-card:active {
   transform: var(--base-transform) translateY(-18px) scale(1.15) !important;
   z-index: 9999 !important;
   box-shadow: 0 10px 22px rgba(168, 85, 247, 0.6) !important;
 }
 
-/* 4. 下方放置卡槽 Grid (稍微加大 margin，防止與上方字體貼太近) */
+/* 4. 下方卡槽 Grid */
 .slots-grid {
   display: flex !important;
   justify-content: center !important;
   align-items: center !important;
-  gap: 0.6rem !important;
-  flex-wrap: wrap !important;
-  margin: 0.8rem 0 0.4rem 0 !important;
-  min-height: 105px !important;
+  gap: 0.5rem !important;
+  flex-wrap: nowrap !important;
+  margin: 0.6rem 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  min-height: 100px !important;
+  box-sizing: border-box !important;
+  padding: 0 0.2rem !important;
 }
 
 .slot-box {
-  width: 64px !important;
-  height: 104px !important;
-  max-width: 64px !important;
-  max-height: 104px !important;
+  width: 58px !important;
+  height: 94px !important;
+  max-width: 58px !important;
+  max-height: 94px !important;
+  flex: 0 1 auto !important;
   border: 1.5px dashed var(--border-color, rgba(216, 180, 254, 0.3)) !important;
   border-radius: 6px !important;
   display: flex !important;
@@ -106,6 +116,7 @@
   justify-content: space-between !important;
   padding: 0.25rem 0.15rem !important;
   position: relative !important;
+  box-sizing: border-box !important;
 }
 
 .card-number-badge {
@@ -130,8 +141,22 @@
   transform: rotate(180deg) !important;
 }
 
-@media (max-width: 600px) {
-  .fan-deck-stage { width: 620px !important; height: 115px !important; }
-  .fan-card { width: 46px !important; height: 76px !important; }
-  .slot-box { width: 54px !important; height: 88px !important; }
+/* 📱 手機版微調 (<= 600px) */
+@media screen and (max-width: 600px) {
+  .fan-deck-stage {
+    width: 580px !important;
+    height: 115px !important;
+  }
+
+  .fan-card {
+    width: 44px !important;
+    height: 72px !important;
+  }
+
+  .slot-box {
+    width: 48px !important;
+    height: 78px !important;
+    max-width: 48px !important;
+    max-height: 78px !important;
+  }
 }

@@ -1,0 +1,1254 @@
+{
+  "the-fool": {
+    "id": "the-fool",
+    "number": 0,
+    "arcana": "major",
+    "element": "Air",
+    "archetype": "純真者 / 冒險家",
+    "name": { "zh": "愚者", "en": "The Fool" },
+    "keywords": {
+      "upright": ["全新開始", "無畏冒險", "無限潛能", "純真信賴"],
+      "reversed": ["輕率冒失", "盲目衝動", "逃避責任", "草率決定"]
+    },
+    "interpretations": {
+      "upright": { 
+        "general": "愚者象徵全新的旅程與無畏的冒險精神。拋開過去的負擔與恐懼，勇敢跨出第一步，信任宇宙會為你鋪路。"
+      },
+      "reversed": { 
+        "general": "逆位的愚者提醒切勿盲目衝動或魯莽行事。此時需要多一分理智評估，切忌因為逃避現狀而做出草率決定。"
+      }
+    }
+  },
+  "the-magician": {
+    "id": "the-magician",
+    "number": 1,
+    "arcana": "major",
+    "element": "Air",
+    "archetype": "顯化者 / 創造者",
+    "name": { "zh": "魔術師", "en": "The Magician" },
+    "keywords": {
+      "upright": ["創造力", "資源整合", "顯化能力", "強大意志"],
+      "reversed": ["投機取巧", "操弄人心", "才華未顯", "意志薄弱"]
+    },
+    "interpretations": {
+      "upright": { "general": "魔術師代表強大的顯化能量與資源整合能力。你手頭已具備成功所需的一切工具，專注目標即可化無形為有形。" },
+      "reversed": { "general": "逆位魔術師警示表面花招、操弄或資源被浪費。注意訊息真實性，切勿試圖走捷徑或投機取巧。" }
+    }
+  },
+  "the-high-priestess": {
+    "id": "the-high-priestess",
+    "number": 2,
+    "arcana": "major",
+    "element": "Water",
+    "archetype": "直覺守護者 / 潛意識聖女",
+    "name": { "zh": "女祭司", "en": "The High Priestess" },
+    "keywords": {
+      "upright": ["直覺敏銳", "內在智慧", "潛意識", "靜心觀察"],
+      "reversed": ["忽視直覺", "情緒壓抑", "表面浮躁", "秘密外洩"]
+    },
+    "interpretations": {
+      "upright": { "general": "女祭司守護著潛意識的大門。答案早已在你心中，靜下心來傾聽內在直覺，勝過外界無謂的嘈雜聲音。" },
+      "reversed": { "general": "逆位女祭司代表忽視了內心的警告，或陷入浮躁與情緒壓抑中。請重新回歸安靜，切忌盲目相信表面。" }
+    }
+  },
+  "the-empress": {
+    "id": "the-empress",
+    "number": 3,
+    "arcana": "major",
+    "element": "Earth",
+    "archetype": "大地之母 / 豐盛女神",
+    "name": { "zh": "皇后", "en": "The Empress" },
+    "keywords": {
+      "upright": ["豐盛富足", "母性滋養", "愛與和諧", "美感藝術"],
+      "reversed": ["過度依賴", "創造力阻塞", "過度控制", "物質匱乏"]
+    },
+    "interpretations": {
+      "upright": { "general": "皇后代表極致的豐盛、愛與滋養。當前正是生命結出纍纍碩果的時刻，盡情感受美與萬物的饋贈。" },
+      "reversed": { "general": "逆位皇后提示創造力停滯、過度依賴或窒息式的控制。學會先好好滋養自己的心靈，才能給予他人。" }
+    }
+  },
+  "the-emperor": {
+    "id": "the-emperor",
+    "number": 4,
+    "arcana": "major",
+    "element": "Fire",
+    "archetype": "領袖 / 秩序建構者",
+    "name": { "zh": "皇帝", "en": "The Emperor" },
+    "keywords": {
+      "upright": ["權威領導", "嚴謹秩序", "穩固架構", "自律邏輯"],
+      "reversed": ["專制獨裁", "剛愎自用", "控制狂", "規則混亂"]
+    },
+    "interpretations": {
+      "upright": { "general": "皇帝代表秩序、領導力與不可動搖的架構。以條理、自律與宏觀的視野管理局勢，建立穩固的基礎。" },
+      "reversed": { "general": "逆位皇帝警示權力濫用、剛愎自用或制度崩解。過度的控制欲只會引發反彈，宜調整彈性。" }
+    }
+  },
+  "the-hierophant": {
+    "id": "the-hierophant",
+    "number": 5,
+    "arcana": "major",
+    "element": "Earth",
+    "archetype": "精神導師 / 傳統信仰者",
+    "name": { "zh": "教皇", "en": "The Hierophant" },
+    "keywords": {
+      "upright": ["精神指引", "傳統價值", "良師益友", "社會規範"],
+      "reversed": ["打破陳腐", "盲從教條", "叛逆創新", "虛偽體制"]
+    },
+    "interpretations": {
+      "upright": { "general": "教皇象徵傳統智慧、學習與良師益友的指引。尊重既有體制與規範，向經驗豐富的前輩請益將大有收獲。" },
+      "reversed": { "general": "逆位教皇鼓勵打破僵化的陳腐教條。不要盲目從眾，勇敢尋求符合你個人靈魂的獨特價值觀。" }
+    }
+  },
+  "the-lovers": {
+    "id": "the-lovers",
+    "number": 6,
+    "arcana": "major",
+    "element": "Air",
+    "archetype": "靈魂伴侶 / 核心抉擇",
+    "name": { "zh": "戀人", "en": "The Lovers" },
+    "keywords": {
+      "upright": ["靈魂契合", "真摯情感", "重大選擇", "價值觀和諧"],
+      "reversed": ["價值觀衝突", "溝通失衡", "背叛不忠", "猶豫不決"]
+    },
+    "interpretations": {
+      "upright": { "general": "戀人牌代表深層的心靈連結與重大的價值抉擇。在平等與誠實的基礎上，做出符合內心真愛的選擇。" },
+      "reversed": { "general": "逆位戀人提示關係中的溝通失衡、價值觀分歧或逃避抉擇。需要誠實面對問題根源並重新校準。" }
+    }
+  },
+  "the-chariot": {
+    "id": "the-chariot",
+    "number": 7,
+    "arcana": "major",
+    "element": "Water",
+    "archetype": "征服者 / 意志戰士",
+    "name": { "zh": "戰車", "en": "The Chariot" },
+    "keywords": {
+      "upright": ["堅強意志", "克服困難", "掌控局勢", "快速推進"],
+      "reversed": ["方向失控", "情緒衝動", "挫折受阻", "橫衝直撞"]
+    },
+    "interpretations": {
+      "upright": { "general": "戰車代表強大的意志力與克服萬難的決心。駕馭內心衝突的力量，集中目標即可一舉衝破瓶頸。" },
+      "reversed": { "general": "逆位戰車警告失控、情緒衝動或方向偏離。此時強衝只會撞牆，請先停下重新掌控內心韁繩。" }
+    }
+  },
+  "strength": {
+    "id": "strength",
+    "number": 8,
+    "arcana": "major",
+    "element": "Fire",
+    "archetype": "柔能克剛 / 內在勇者",
+    "name": { "zh": "力量", "en": "Strength" },
+    "keywords": {
+      "upright": ["柔能克剛", "內在勇氣", "包容耐心", "情緒掌控"],
+      "reversed": ["自我懷疑", "軟弱無力", "暴躁失控", "自信崩塌"]
+    },
+    "interpretations": {
+      "upright": { "general": "力量展現了柔能克剛的真正勇氣。用耐心、慈悲與理解去撫平野性，內在的堅韌能勝過一切蠻力。" },
+      "reversed": { "general": "逆位力量代表陷入自我懷疑或情緒暴躁失控。請重新安撫內心的不安，相信你本就擁有的韌性。" }
+    }
+  },
+  "the-hermit": {
+    "id": "the-hermit",
+    "number": 9,
+    "arcana": "major",
+    "element": "Earth",
+    "archetype": "尋道者 / 智慧老者",
+    "name": { "zh": "隱士", "en": "The Hermit" },
+    "keywords": {
+      "upright": ["沉思內省", "獨處尋道", "燈塔指引", "慎思明辨"],
+      "reversed": ["孤立排外", "偏執自私", "孤獨寂寞", "逃避人群"]
+    },
+    "interpretations": {
+      "upright": { "general": "隱士召喚你進行深度的內省與沉澱。遠離外界噪音，在孤獨與沉靜中，你會找到屬於你的光明答案。" },
+      "reversed": { "general": "逆位隱士警告孤立過度、走向偏執或逃避人群。不要把獨處變成孤立，適時向外尋求連結。" }
+    }
+  },
+  "wheel-of-fortune": {
+    "id": "wheel-of-fortune",
+    "number": 10,
+    "arcana": "major",
+    "element": "Fire",
+    "archetype": "命運天道 / 轉輪者",
+    "name": { "zh": "命運之輪", "en": "Wheel of Fortune" },
+    "keywords": {
+      "upright": ["命運轉折", "幸運契機", "因果流轉", "順應時勢"],
+      "reversed": ["抗拒改變", "低潮阻礙", "重複錯誤", "運勢受阻"]
+    },
+    "interpretations": {
+      "upright": { "general": "命運之輪正在旋轉，帶來轉機與幸運的變革。順應天道的循環流轉，把握突如其來的良機。" },
+      "reversed": { "general": "逆位命運之輪代表遭遇暫時的低潮或頑強抗拒改變。理解起伏乃人生常態，保持平常心等待轉機。" }
+    }
+  },
+  "justice": {
+    "id": "justice",
+    "number": 11,
+    "arcana": "major",
+    "element": "Air",
+    "archetype": "執法者 / 天平仲裁",
+    "name": { "zh": "正義", "en": "Justice" },
+    "keywords": {
+      "upright": ["公平公正", "客觀理性", "因果報應", "誠實決策"],
+      "reversed": ["不公不義", "偏見袒護", "逃避責任", "不誠實"]
+    },
+    "interpretations": {
+      "upright": { "general": "正義代表客觀、真相與因果法則。以誠實與清醒的理智做出抉擇，你過去的行為將獲得公正的回報。" },
+      "reversed": { "general": "逆位正義警示不公待遇、偏見或試圖逃避後果。勇敢坦承錯誤並校正偏差，才能重建平衡。" }
+    }
+  },
+  "the-hanged-man": {
+    "id": "the-hanged-man",
+    "number": 12,
+    "arcana": "major",
+    "element": "Water",
+    "archetype": "臣服者 / 換位智者",
+    "name": { "zh": "倒吊人", "en": "The Hanged Man" },
+    "keywords": {
+      "upright": ["主動臣服", "換位思考", "暫停沉澱", "新視野"],
+      "reversed": ["無謂犧牲", "拖延逃避", "死板掙扎", "原地踏步"]
+    },
+    "interpretations": {
+      "upright": { "general": "倒吊人代表主動臣服與換位思考。暫時放慢甚至停下腳步，倒過來看世界，反而能破解長期困局。" },
+      "reversed": { "general": "逆位倒吊人警示無謂的犧牲或拖延。若你只是在原地痛苦掙扎，請果斷採取行動打破僵局。" }
+    }
+  },
+  "death": {
+    "id": "death",
+    "number": 13,
+    "arcana": "major",
+    "element": "Water",
+    "archetype": "收割者 / 重生者",
+    "name": { "zh": "死神", "en": "Death" },
+    "keywords": {
+      "upright": ["舊事結束", "徹底蛻變", "全新重生", "告別過去"],
+      "reversed": ["恐懼改變", "死守舊物", "拖延過渡", "痛苦沉淪"]
+    },
+    "interpretations": {
+      "upright": { "general": "死神代表舊階段的終結與煥然一新的重生。勇於向不再適合你的過去道別，空出雙手才能擁抱未來。" },
+      "reversed": { "general": "逆位死神代表對改變的極度恐懼，死守早已枯萎的人事物。學會放手，生命能量才能重新流動。" }
+    }
+  },
+  "temperance": {
+    "id": "temperance",
+    "number": 14,
+    "arcana": "major",
+    "element": "Fire",
+    "archetype": "調和天使 / 中庸者",
+    "name": { "zh": "節制", "en": "Temperance" },
+    "keywords": {
+      "upright": ["中庸之道", "和諧調和", "耐心整合", "平衡節奏"],
+      "reversed": ["極端過度", "失去平衡", "衝突對立", "消耗無度"]
+    },
+    "interpretations": {
+      "upright": { "general": "節制牌帶來溫和與和諧的調和能量。保持中庸之道與耐心，巧妙融合矛盾的意見，達到身心靈平衡。" },
+      "reversed": { "general": "逆位節制代表生活節奏失控、陷入極端或過度消耗。請及時調整作息與心態，找回內心中軸。" }
+    }
+  },
+  "the-devil": {
+    "id": "the-devil",
+    "number": 15,
+    "arcana": "major",
+    "element": "Earth",
+    "archetype": "誘惑者 / 影子自我",
+    "name": { "zh": "惡魔", "en": "The Devil" },
+    "keywords": {
+      "upright": ["物質執著", "慾望枷鎖", "盲目沉迷", "自我限制"],
+      "reversed": ["掙脫枷鎖", "意識覺醒", "奪回主權", "重獲自由"]
+    },
+    "interpretations": {
+      "upright": { "general": "惡魔揭示了內心的誘惑、執著與物質枷鎖。請看清這份束縛往往是自己給自己的，你隨時有能力離開。" },
+      "reversed": { "general": "逆位惡魔代表從有毒關係或癮頭中清醒。你正在掙脫精神與物質的枷鎖，重獲生命的自由。" }
+    }
+  },
+  "the-tower": {
+    "id": "the-tower",
+    "number": 16,
+    "arcana": "major",
+    "element": "Fire",
+    "archetype": "毀滅與覺醒者",
+    "name": { "zh": "高塔", "en": "The Tower" },
+    "keywords": {
+      "upright": ["突發衝擊", "幻滅崩解", "徹底覺醒", "突破偽裝"],
+      "reversed": ["災難延後", "掩耳盜鈴", "恐懼瓦解", "避免崩塌"]
+    },
+    "interpretations": {
+      "upright": { "general": "高塔帶來震撼性的突發變革與舊體制崩解。雖然伴隨短暫陣痛，但這是在破除虛假，讓你重新扎根。" },
+      "reversed": { "general": "逆位高塔代表試圖掩蓋危機或延緩必要的崩解。掩耳盜鈴無法根治問題，早日面對才能早日重生。" }
+    }
+  },
+  "the-star": {
+    "id": "the-star",
+    "number": 17,
+    "arcana": "major",
+    "element": "Air",
+    "archetype": "希望之星 / 療癒女神",
+    "name": { "zh": "星星", "en": "The Star" },
+    "keywords": {
+      "upright": ["希望曙光", "靈魂療癒", "信心重現", "靈感泉湧"],
+      "reversed": ["失去信心", "絕望沮喪", "懷疑自己", "悲觀自憐"]
+    },
+    "interpretations": {
+      "upright": { "general": "星星牌在暴風雨後帶來溫柔的希望與療癒。保持對未來的信心，你的真誠與靈感正在引領你走向光明。" },
+      "reversed": { "general": "逆位星星代表陷入短暫的沮喪或失去信心。請提醒自己，即使雲層遮蔽，星光依然在夜空中為你閃耀。" }
+    }
+  },
+  "the-moon": {
+    "id": "the-moon",
+    "number": 18,
+    "arcana": "major",
+    "element": "Water",
+    "archetype": "幻象幻影 / 潛意識深淵",
+    "name": { "zh": "月亮", "en": "The Moon" },
+    "keywords": {
+      "upright": ["潛意識不安", "迷霧幻象", "直覺考驗", "情緒波瀾"],
+      "reversed": ["撥雲見日", "克服恐懼", "揭開謊言", "真相大白"]
+    },
+    "interpretations": {
+      "upright": { "general": "月亮牌照亮潛意識深處的不安與迷霧。不要被內心幻想的恐懼嚇倒，依靠冷靜與直覺緩步穿過黑夜。" },
+      "reversed": { "general": "逆位月亮代表迷霧逐漸散去，真相浮出水面。你正克服心中的不安與幻象，迎來清醒與坦然。" }
+    }
+  },
+  "the-sun": {
+    "id": "the-sun",
+    "number": 19,
+    "arcana": "major",
+    "element": "Fire",
+    "archetype": "光明智者 / 喜悅孩童",
+    "name": { "zh": "太陽", "en": "The Sun" },
+    "keywords": {
+      "upright": ["成功光明", "喜悅活力", "自信熱情", "清晰真理"],
+      "reversed": ["暫時陰霾", "延遲成功", "缺乏熱情", "小有挫折"]
+    },
+    "interpretations": {
+      "upright": { "general": "太陽牌帶來極致的光明、成功與充沛活力。大方展示你的自信與熱情，你的光芒能溫暖並照亮身邊所有人。" },
+      "reversed": { "general": "逆位太陽依然帶有正面能量，只是成功可能稍有延遲，或是內心被微小的悲觀陰霾所影響。" }
+    }
+  },
+  "judgement": {
+    "id": "judgement",
+    "number": 20,
+    "arcana": "major",
+    "element": "Fire",
+    "archetype": "靈魂號角 / 重生審判者",
+    "name": { "zh": "審判", "en": "Judgement" },
+    "keywords": {
+      "upright": ["靈魂召喚", "深刻覺醒", "重大決策", "重生昇華"],
+      "reversed": ["自我批判", "猶豫延誤", "悔恨糾結", "錯失良機"]
+    },
+    "interpretations": {
+      "upright": { "general": "審判牌吹響了靈魂覺醒的號角。這是總結過去、原諒自我並做出重大決定，邁向更高階段的時刻。" },
+      "reversed": { "general": "逆位審判代表過度的自我批判或猶豫不決。不要讓過去的罪惡感或悔恨牽絆你邁向未來的腳步。" }
+    }
+  },
+  "the-world": {
+    "id": "the-world",
+    "number": 21,
+    "arcana": "major",
+    "element": "Earth",
+    "archetype": "大圓滿 / 宇宙統合者",
+    "name": { "zh": "世界", "en": "The World" },
+    "keywords": {
+      "upright": ["大圓滿", "完美結束", "成就統合", "輝煌成功"],
+      "reversed": ["未竟之業", "臨門一腳", "缺乏閉環", "延遲圓滿"]
+    },
+    "interpretations": {
+      "upright": { "general": "世界牌代表生命旅程的大圓滿與輝煌完成。你成功整合了所有經驗，圓滿達成使命，準備邁入下一階段。" },
+      "reversed": { "general": "逆位世界代表距離圓滿只差臨門一腳，或是缺乏最後的閉環。補齊微小缺口即可迎來完美終點。" }
+    }
+  },
+  "ace-of-wands": {
+    "id": "ace-of-wands",
+    "number": 22,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖一", "en": "Ace of Wands" },
+    "keywords": {
+      "upright": ["新起源", "行動契機", "靈感點燃", "熱情爆發"],
+      "reversed": ["起步受阻", "能量耗盡", "時機未到", "缺乏動力"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖一代表全新行動的開始與強大的創造熱情。當前是啟動新計畫、勇於冒險的黃金時刻。" },
+      "reversed": { "general": "逆位權杖一提示行動遭遇阻礙或缺乏動力。切忌強行推進，宜先重新尋回內心的熱情火花。" }
+    }
+  },
+  "two-of-wands": {
+    "id": "two-of-wands",
+    "number": 23,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖二", "en": "Two of Wands" },
+    "keywords": {
+      "upright": ["遠景規劃", "面臨抉擇", "宏觀思維", "擴展版圖"],
+      "reversed": ["猶豫不決", "局限自我", "害怕未知", "計畫延誤"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖二代表站在成功的起點思考未來的佈局。擁有宏觀視野，正準備跨出舒適圈走向更廣闊的世界。" },
+      "reversed": { "general": "逆位權杖二暗示對未知的恐懼或缺乏長遠眼光，導致不敢做出關鍵抉擇而原地踏步。" }
+    }
+  },
+  "three-of-wands": {
+    "id": "three-of-wands",
+    "number": 24,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖三", "en": "Three of Wands" },
+    "keywords": {
+      "upright": ["成果初顯", "團隊合作", "拓展遠景", "貿易交流"],
+      "reversed": ["進度延誤", "合作溝通不良", "期望落空", "局限視野"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖三象徵基礎已穩固，第一階段成果已顯現。適合繼續拓展事業版圖或開展跨界合作。" },
+      "reversed": { "general": "逆位權杖三提醒合作可能出現裂痕或海外/遠程計畫遭遇延誤，需重新檢視執行細節。" }
+    }
+  },
+  "four-of-wands": {
+    "id": "four-of-wands",
+    "number": 25,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖四", "en": "Four of Wands" },
+    "keywords": {
+      "upright": ["穩定安居", "慶祝成功", "鞏固基礎", "和諧家庭"],
+      "reversed": ["基礎不穩", "家庭波折", "慶祝延後", "過度保守"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖四代表階段性的圓滿與慶祝。環境和諧穩定，適合建立長期基地或享受團隊努力的成果。" },
+      "reversed": { "general": "逆位權杖四暗示內部可能存在微小的不和睦，或過度沉迷於一時的穩定而忽視了潛在的變革。" }
+    }
+  },
+  "five-of-wands": {
+    "id": "five-of-wands",
+    "number": 26,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖五", "en": "Five of Wands" },
+    "keywords": {
+      "upright": ["競爭挑戰", "利益衝突", "意見分歧", "混亂磨合"],
+      "reversed": ["化解爭端", "達成和解", "避開鋒芒", "內部內耗"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖五代表競爭、衝突與多元意見的碰撞。雖然過程混亂，但這是團隊磨合與激發創意的必經過程。" },
+      "reversed": { "general": "逆位權杖五代表紛爭逐漸平息，或提示不要捲入無謂的情緒內耗，學會妥協與和解。" }
+    }
+  },
+  "six-of-wands": {
+    "id": "six-of-wands",
+    "number": 27,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖六", "en": "Six of Wands" },
+    "keywords": {
+      "upright": ["勝利榮耀", "獲得認可", "順利推進", "自信滿滿"],
+      "reversed": ["短暫挫折", "缺乏肯定", "虛榮驕傲", "延遲獲勝"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖六帶來勝利與凱旋的喜悅。你的付出將獲得公眾的讚賞與實質肯定，事業順風順水。" },
+      "reversed": { "general": "逆位權杖六提醒避免驕傲自滿，或是警示預期的肯定可能會延遲，需要保持謙遜累積實力。" }
+    }
+  },
+  "seven-of-wands": {
+    "id": "seven-of-wands",
+    "number": 28,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖七", "en": "Seven of Wands" },
+    "keywords": {
+      "upright": ["堅守陣地", "捍衛立場", "不屈毅力", "面對考驗"],
+      "reversed": ["力不從心", "放棄抵抗", "壓力過重", "孤立無援"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖七代表孤軍奮戰但絕不退縮。只要堅守信念與立場，你擁有足夠的實力克服眾多競爭者的挑戰。" },
+      "reversed": { "general": "逆位權杖七暗示壓力過重導致力不從心，或是盲目堅持不適合的方向，宜審視是否需要適時求助。" }
+    }
+  },
+  "eight-of-wands": {
+    "id": "eight-of-wands",
+    "number": 29,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖八", "en": "Eight of Wands" },
+    "keywords": {
+      "upright": ["快速推進", "訊息傳遞", "果斷行動", "旅行消息"],
+      "reversed": ["訊息誤導", "阻礙延誤", "急躁衝動", "方向偏離"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖八象徵極高的速度與能量流轉。事情將以雷霆之勢迅速發展，好消息或關鍵決策即將快速抵達。" },
+      "reversed": { "general": "逆位權杖八提示因為太過急躁而忙中出錯，或是訊息傳遞出錯導致計畫受到意料之外的延誤。" }
+    }
+  },
+  "nine-of-wands": {
+    "id": "nine-of-wands",
+    "number": 30,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖九", "en": "Nine of Wands" },
+    "keywords": {
+      "upright": ["堅持到底", "最後防線", "累積經驗", "慎重防備"],
+      "reversed": ["筋疲力盡", "過度防備", "頑固抗拒", "防線崩潰"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖九代表即便身心俱疲仍咬牙堅持。你離最後的成功只差最後一步，保持戒備與韌性就能守住成果。" },
+      "reversed": { "general": "逆位權杖九警示過度猜忌與防備導致精神耗盡，或者是頑固拒絕改變而讓自己陷入孤立困境。" }
+    }
+  },
+  "ten-of-wands": {
+    "id": "ten-of-wands",
+    "number": 31,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖十", "en": "Ten of Wands" },
+    "keywords": {
+      "upright": ["責任重擔", "極限考驗", "過度承諾", "堅持抗壓"],
+      "reversed": ["卸下重負", "學會分擔", "崩潰瓦解", "拋棄負擔"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖十暗示背負了過多的責任與壓力。雖然毅力可嘉，但已接近體能與心理極限，需要評估優先順序。" },
+      "reversed": { "general": "逆位權杖十代表學會放下不屬於自己的重擔，或是負擔過重導致崩潰，必須立刻尋求授權與分擔。" }
+    }
+  },
+  "page-of-wands": {
+    "id": "page-of-wands",
+    "number": 32,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖侍者", "en": "Page of Wands" },
+    "keywords": {
+      "upright": ["好奇學習", "新鮮訊息", "熱情探索", "新冒險"],
+      "reversed": ["不成熟", "假消息", "缺乏定性", "衝動三分鐘熱度"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖侍者充滿活力與探索慾。代表帶來令人興奮的新消息、全新的學習機會或心靈的冒險起點。" },
+      "reversed": { "general": "逆位權杖侍者警告三分鐘熱度、做事缺乏定性，或是收到不真實、誇大的虛假訊息。" }
+    }
+  },
+  "knight-of-wands": {
+    "id": "knight-of-wands",
+    "number": 33,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖騎士", "en": "Knight of Wands" },
+    "keywords": {
+      "upright": ["勇往直前", "無畏衝刺", "熱情行動", "積極追求"],
+      "reversed": ["魯莽衝動", "缺乏耐性", "後勁不足", "脾氣暴躁"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖騎士擁有強大的行動力與冒險心。敢作敢當、果斷開路，能為停滯的局勢注入強烈動能。" },
+      "reversed": { "general": "逆位權杖騎士提示有頭無尾、衝動冒進。缺乏周詳規劃導致後力不足，切忌魯莽行事。" }
+    }
+  },
+  "queen-of-wands": {
+    "id": "queen-of-wands",
+    "number": 34,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖王后", "en": "Queen of Wands" },
+    "keywords": {
+      "upright": ["自信魅力", "溫暖滋養", "獨立智慧", "熱情開朗"],
+      "reversed": ["情緒化", "嫉妒控制", "內心匱乏", "蠻橫霸道"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖王后展現出自信、樂觀與強大的個人魅力。能夠用熱情感染身邊所有人，充滿獨立創業家精神。" },
+      "reversed": { "general": "逆位權杖王后警示情緒化、控制欲過強或產生嫉妒心，需要重新安撫內心的自卑與不安全感。" }
+    }
+  },
+  "king-of-wands": {
+    "id": "king-of-wands",
+    "number": 35,
+    "arcana": "minor",
+    "suit": "wands",
+    "element": "Fire",
+    "name": { "zh": "權杖國王", "en": "King of Wands" },
+    "keywords": {
+      "upright": ["成熟領導", "掌控大局", "權威專業", "遠見卓識"],
+      "reversed": ["專制獨裁", "嚴苛冷酷", "濫用權力", "急功近利"]
+    },
+    "interpretations": {
+      "upright": { "general": "權杖國王是天生的領袖，具備宏觀的戰略眼光與執行力。能帶領團隊克服艱難，達成輝煌的目標。" },
+      "reversed": { "general": "逆位權杖國王警告專制獨裁、不聽人勸，或因為急功近利而做出錯誤的決策。" }
+    }
+  },
+  "ace-of-cups": {
+    "id": "ace-of-cups",
+    "number": 36,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃一", "en": "Ace of Cups" },
+    "keywords": {
+      "upright": ["情感萌芽", "愛與滋養", "直覺充沛", "心靈療癒"],
+      "reversed": ["情感阻塞", "付出無回報", "壓抑情緒", "心靈匱乏"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃一代表情感與直覺的滿溢。象徵新戀情、真摯友誼或心靈療癒的開始，帶來無條件的愛與和諧。" },
+      "reversed": { "general": "逆位聖盃一代表情感上的受挫或封閉。可能因為過往傷痛而不敢展現真心，需要先學會愛自己。" }
+    }
+  },
+  "two-of-cups": {
+    "id": "two-of-cups",
+    "number": 37,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃二", "en": "Two of Cups" },
+    "keywords": {
+      "upright": ["和諧合作", "互相吸引", "平等溝通", "締結良緣"],
+      "reversed": ["溝通脫節", "夥伴決裂", "價值分歧", "關係失衡"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃二代表兩顆心靈的和諧交融。無論是愛情中的靈魂伴侶還是事業上的黃金搭檔，都能建立深厚信任。" },
+      "reversed": { "general": "逆位聖盃二提醒關係中出現誤解、溝通障礙或利益分歧，需要重新校準彼此的期望。" }
+    }
+  },
+  "three-of-cups": {
+    "id": "three-of-cups",
+    "number": 38,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃三", "en": "Three of Cups" },
+    "keywords": {
+      "upright": ["歡慶聚會", "友誼支持", "分享喜悅", "團隊成就"],
+      "reversed": ["過度沉迷", "社交疲勞", "小圈子排外", "歡樂落空"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃三代表歡聚與社群的支持。適合與好友慶祝成功、分享喜悅，並在良好的社交圈中獲得滋養。" },
+      "reversed": { "general": "逆位聖盃三警示社交中的流言蜚語、過度飲酒揮霍，或是感覺被團體孤立、無法融入。" }
+    }
+  },
+  "four-of-cups": {
+    "id": "four-of-cups",
+    "number": 39,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃四", "en": "Four of Cups" },
+    "keywords": {
+      "upright": ["沉思內省", "倦怠冷漠", "視而不見", "等待突破"],
+      "reversed": ["覺醒契機", "重新出發", "接納新選擇", "打破僵局"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃四代表對現狀感到厭倦與停滯。沉浸在自己的小世界中，容易忽視宇宙遞給你的新機會。" },
+      "reversed": { "general": "逆位聖盃四代表從麻木中甦醒，開始主動看見身邊的新契機，重新注入生活熱情。" }
+    }
+  },
+  "five-of-cups": {
+    "id": "five-of-cups",
+    "number": 40,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃五", "en": "Five of Cups" },
+    "keywords": {
+      "upright": ["失落悲傷", "聚焦過失", "悔恨遺憾", "忽視希望"],
+      "reversed": ["走出陰霾", "接受現實", "重拾信心", "轉身向前"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃五代表因挫折而陷入悲傷。但請注意背後依然有站立的聖盃，轉過身就能看到希望。" },
+      "reversed": { "general": "逆位聖盃五象徵療癒的開始。你正逐漸走出過往的傷痛與自責，準備迎接嶄新的未來。" }
+    }
+  },
+  "six-of-cups": {
+    "id": "six-of-cups",
+    "number": 41,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃六", "en": "Six of Cups" },
+    "keywords": {
+      "upright": ["溫馨懷念", "純真童心", "舊人重逢", "無私贈予"],
+      "reversed": ["沉溺過去", "拒絕長大", "脫離現實", "向後看"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃六帶來溫馨、安全感與童年般的純真美好。可能代表老友重逢、收到禮物或充滿保護力的照顧。" },
+      "reversed": { "general": "逆位聖盃六提醒不要沉溺於過去的光環或懷舊情緒中，應該勇敢面對當前的現實挑戰。" }
+    }
+  },
+  "seven-of-cups": {
+    "id": "seven-of-cups",
+    "number": 42,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃七", "en": "Seven of Cups" },
+    "keywords": {
+      "upright": ["幻想白日夢", "選擇繁多", "欲望誘惑", "不切實際"],
+      "reversed": ["看清現實", "釐清目標", "做出決定", "幻象破滅"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃七代表面前有很多選擇與誘惑，但多半是空中樓閣。需要分辨何為幻想、何為務實的目標。" },
+      "reversed": { "general": "逆位聖盃七代表迷霧散去，你終於看清真相，擺脫浮誇的幻想並做出踏實的選擇。" }
+    }
+  },
+  "eight-of-cups": {
+    "id": "eight-of-cups",
+    "number": 43,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃八", "en": "Eight of Cups" },
+    "keywords": {
+      "upright": ["轉身離去", "尋求更高意義", "勇敢放棄", "心靈探索"],
+      "reversed": ["不敢離開", "妥協安於現狀", "害怕改變", "裹足不前"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃八代表即便物質或現狀尚可，但心靈已無法獲得滿足。勇敢轉身離開舒適圈，踏上尋求真實靈魂價值的旅程。" },
+      "reversed": { "general": "逆位聖盃八暗示因為恐懼未知而不敢離開不適合的環境，選擇在不快樂的現狀中勉強妥協。" }
+    }
+  },
+  "nine-of-cups": {
+    "id": "nine-of-cups",
+    "number": 44,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃九", "en": "Nine of Cups" },
+    "keywords": {
+      "upright": ["心願達成", "物質滿足", "享受成就", "快樂圓滿"],
+      "reversed": ["自滿放縱", "唯物主義", "表面風光", "慾望難填"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃九被稱為『許願牌』，代表你的願望即將實現。情感與物質層面都將獲得極大的滿足與享受。" },
+      "reversed": { "general": "逆位聖盃九警示過度自滿、揮霍放縱，或者是表面看似風光，但內心深處依然感到空虛不安。" }
+    }
+  },
+  "ten-of-cups": {
+    "id": "ten-of-cups",
+    "number": 45,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃十", "en": "Ten of Cups" },
+    "keywords": {
+      "upright": ["家庭美滿", "極致幸福", "和諧情感", "靈魂歸屬"],
+      "reversed": ["家庭爭執", "價值觀衝突", "幸福假象", "關係裂痕"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃十代表情感上的終極圓滿與家庭美滿。與所愛之人分享愛與和諧，獲得最深沉的歸屬感。" },
+      "reversed": { "general": "逆位聖盃十暗示家庭或團隊內部出現溝通障礙與價值觀衝突，美好的表面下藏有裂痕。" }
+    }
+  },
+  "page-of-cups": {
+    "id": "page-of-cups",
+    "number": 46,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃侍者", "en": "Page of Cups" },
+    "keywords": {
+      "upright": ["情感訊息", "直覺靈感", "浪漫驚喜", "溫柔學習"],
+      "reversed": ["情緒化", "過度敏感", "失約失望", "不成熟的愛"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃侍者帶來溫柔、浪漫的新訊息與藝術靈感。保持孩童般的好奇心與柔軟的心感受生活。" },
+      "reversed": { "general": "逆位聖盃侍者警告情緒過度脆弱敏感、沉溺於被害者情結，或是收到令人失望的感情回應。" }
+    }
+  },
+  "knight-of-cups": {
+    "id": "knight-of-cups",
+    "number": 47,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃騎士", "en": "Knight of Cups" },
+    "keywords": {
+      "upright": ["浪漫追求", "情感邀約", "理想主義", "優雅陪伴"],
+      "reversed": ["花言巧語", "逃避現實", "情感不專", "過度空想"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃騎士是浪漫與和平的使者。帶著真誠的情感邀約與藝術才華向你走來，追求理想中的美好。" },
+      "reversed": { "general": "逆位聖盃騎士警示花言巧語但缺乏實質行動，或是過度理想主義導致無法落實到現實生活。" }
+    }
+  },
+  "queen-of-cups": {
+    "id": "queen-of-cups",
+    "number": 48,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃王后", "en": "Queen of Cups" },
+    "keywords": {
+      "upright": ["慈悲同理", "敏銳直覺", "情感支持", "溫柔滋養"],
+      "reversed": ["情緒勒索", "過度依賴", "心力交瘁", "神經質"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃王后擁有無與倫比的同理心與直覺力。傾聽並理解他人的苦痛，是充滿智慧與溫柔的精神支柱。" },
+      "reversed": { "general": "逆位聖盃王后提醒過度吸收他人的負能量導致心力交瘁，或出現情緒勒索與精神依賴現象。" }
+    }
+  },
+  "king-of-cups": {
+    "id": "king-of-cups",
+    "number": 49,
+    "arcana": "minor",
+    "suit": "cups",
+    "element": "Water",
+    "name": { "zh": "聖盃國王", "en": "King of Cups" },
+    "keywords": {
+      "upright": ["情緒成熟", "寬容沉穩", "外交智慧", "心靈導師"],
+      "reversed": ["冷酷操弄", "情緒失控", "雙重標準", "壓抑隱瞞"]
+    },
+    "interpretations": {
+      "upright": { "general": "聖盃國王代表情商（EQ）的極致。即使身處驚滔駭浪中依然保持平靜與寬容，以溫和智慧協調衝突。" },
+      "reversed": { "general": "逆位聖盃國王警示情緒壓抑崩潰，或是利用他人的情感軟肋進行情緒操弄與雙重標準。" }
+    }
+  },
+  "ace-of-swords": {
+    "id": "ace-of-swords",
+    "number": 50,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍一", "en": "Ace of Swords" },
+    "keywords": {
+      "upright": ["理智突破", "真相大白", "果斷決策", "思維清晰"],
+      "reversed": ["思緒混亂", "言語傷害", "決策失誤", "強詞奪理"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍一代表心智與理性的突破。以銳利的洞察力斬斷迷霧，運用客觀邏輯做出關鍵決策。" },
+      "reversed": { "general": "逆位寶劍一警告思緒混亂或言語傷害。切忌在情緒激動時做決定，以免雙刃劍傷及無辜。" }
+    }
+  },
+  "two-of-swords": {
+    "id": "two-of-swords",
+    "number": 51,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍二", "en": "Two of Swords" },
+    "keywords": {
+      "upright": ["逃避真相", "僵局對峙", "封閉內心", "冷靜權衡"],
+      "reversed": ["揭開遮眼布", "真相揭曉", "打破僵局", "資訊過載"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍二代表戴上蒙眼布拒絕面對現實。陷入兩難困境中，試圖以冷漠與防備維持暫時的表面平靜。" },
+      "reversed": { "general": "逆位寶劍二代表不得不摘下遮眼布面對殘酷真相，僵局被打破，必須做出艱難的選擇。" }
+    }
+  },
+  "three-of-swords": {
+    "id": "three-of-swords",
+    "number": 52,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍三", "en": "Three of Swords" },
+    "keywords": {
+      "upright": ["心碎傷痛", "背叛失落", "言語刺傷", "悲傷切割"],
+      "reversed": ["傷口療癒", "放下執念", "走出悲傷", "釋懷原諒"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍三代表直擊心靈的傷痛、背叛或分離。允許自己經歷並釋放悲傷，痛定思痛才能走向重生。" },
+      "reversed": { "general": "逆位寶劍三象徵陣痛期即將過去。你正逐漸釋懷過往的傷害，拔出心中的利劍，開啟自我療癒。" }
+    }
+  },
+  "four-of-swords": {
+    "id": "four-of-swords",
+    "number": 53,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍四", "en": "Four of Swords" },
+    "keywords": {
+      "upright": ["休養生息", "靜心沉澱", "養精蓄銳", "暫時撤退"],
+      "reversed": ["重新復出", "打破停滯", "疲憊不堪", "被迫行動"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍四召喚你在高壓後進行身體與心靈的休養。遠離戰場進行深層冥想，養精蓄銳準備下一階段。" },
+      "reversed": { "general": "逆位寶劍四代表休息結束重新投入戰場，或者是休息不足便被迫行動，導致體力透支。" }
+    }
+  },
+  "five-of-swords": {
+    "id": "five-of-swords",
+    "number": 54,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍五", "en": "Five of Swords" },
+    "keywords": {
+      "upright": ["慘勝雙輸", "自私競爭", "衝突升級", "爭強好勝"],
+      "reversed": ["停止無謂爭執", "承認失敗", "修復關係", "放下自尊"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍五警告贏了口舌卻輸了關係的慘勝。過度爭強好勝只會留下滿地瘡痍，需要評估代價是否值得。" },
+      "reversed": { "general": "逆位寶劍五代表意識到爭執無意義，願意放下自尊尋求和解，或是選擇退出無謂的權力鬥爭。" }
+    }
+  },
+  "six-of-swords": {
+    "id": "six-of-swords",
+    "number": 55,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍六", "en": "Six of Swords" },
+    "keywords": {
+      "upright": ["渡過難關", "療癒過渡", "離苦得樂", "平穩前行"],
+      "reversed": ["進退兩難", "困在過去", "航程受阻", "問題復發"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍六代表漸漸脫離最艱難的暴風圈。雖然帶著傷痕，但正航向平靜的彼岸，情況將逐步好轉。" },
+      "reversed": { "general": "逆位寶劍六提示過渡期遭遇卡頓，舊問題反覆發作，或是自己頑強抗拒前往新的階段。" }
+    }
+  },
+  "seven-of-swords": {
+    "id": "seven-of-swords",
+    "number": 56,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍七", "en": "Seven of Swords" },
+    "keywords": {
+      "upright": ["智取策略", "隱瞞避鋒", "靈活應變", "獨立行動"],
+      "reversed": ["東窗事發", "坦承面對", "策略失敗", "自欺欺人"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍七代表不宜硬碰硬，需要靈活運用智謀與策略。有時也警示需要留心潛在的欺瞞與秘密行動。" },
+      "reversed": { "general": "逆位寶劍七代表秘密或謊言被揭穿，必須坦承面對後果，或是良心發現主動改正錯誤。" }
+    }
+  },
+  "eight-of-swords": {
+    "id": "eight-of-swords",
+    "number": 57,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍八", "en": "Eight of Swords" },
+    "keywords": {
+      "upright": ["自我限制", "思維牢籠", "受害者心態", "孤立無援"],
+      "reversed": ["掙脫心牢", "重獲自由", "看清出路", "勇於突破"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍八揭示眼前的困境多半是自己給自己的心理牢籠。只要願意摘下蒙眼布並挪動腳步，隨時可以走出來。" },
+      "reversed": { "general": "逆位寶劍八代表打破限制性的思維信念，重新奪回人生主導權，看清並踏出困局的出路。" }
+    }
+  },
+  "nine-of-swords": {
+    "id": "nine-of-swords",
+    "number": 58,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍九", "en": "Nine of Swords" },
+    "keywords": {
+      "upright": ["焦慮失眠", "噩夢壓頂", "過度擔憂", "精神折磨"],
+      "reversed": ["噩夢終結", "尋求專業求助", "釋放焦慮", "光明重現"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍九代表被內心的焦慮、愧疚與恐懼折磨得夜不能寐。請記住，大腦想像的恐懼往往比現實嚴重許多。" },
+      "reversed": { "general": "逆位寶劍九代表最糟糕的精神折磨已經過去。開始理清思緒、尋求支援，將焦慮轉化為實質行動。" }
+    }
+  },
+  "ten-of-swords": {
+    "id": "ten-of-swords",
+    "number": 59,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍十", "en": "Ten of Swords" },
+    "keywords": {
+      "upright": ["谷底絕境", "徹底終結", "黎明前夕", "放棄抵抗"],
+      "reversed": ["死裏逃生", "谷底反彈", "絕地重生", "傷痛復原"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍十代表痛苦到達終點與舊局勢的徹底瓦解。情況不可能更壞了，地平線上已隱約露出黎明的曙光。" },
+      "reversed": { "general": "逆位寶劍十象徵從絕境中死裡逃生、谷底反彈。最艱難的時刻已過，生命正在緩慢但堅定地重生。" }
+    }
+  },
+  "page-of-swords": {
+    "id": "page-of-swords",
+    "number": 60,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍侍者", "en": "Page of Swords" },
+    "keywords": {
+      "upright": ["警覺觀察", "求知心切", "訊息蒐集", "敏銳思考"],
+      "reversed": ["流言蜚語", "偏激固執", "偷窺猜忌", "言語刺人"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍侍者保持高度的警覺與求知慾。代表靈敏的訊息收集、心智的學習，以及對新領域的精明探索。" },
+      "reversed": { "general": "逆位寶劍侍者警示網路上的流言蜚語、惡意攻擊，或是因為猜忌心過重而對人橫加指責。" }
+    }
+  },
+  "knight-of-swords": {
+    "id": "knight-of-swords",
+    "number": 61,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍騎士", "en": "Knight of Swords" },
+    "keywords": {
+      "upright": ["迅猛果斷", "犀利突破", "直言不諱", "風馳電掣"],
+      "reversed": ["衝動蠻幹", "尖酸刻薄", "自以為是", "方向偏差"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍騎士以銳不可當的理智與速度向前衝刺。不畏艱難直擊問題核心，迅速掃清眼前的障礙。" },
+      "reversed": { "general": "逆位寶劍騎士警告急躁蠻幹、講話尖酸刻薄傷人，或是因為過於自以為是而招致反彈。" }
+    }
+  },
+  "queen-of-swords": {
+    "id": "queen-of-swords",
+    "number": 62,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍王后", "en": "Queen of Swords" },
+    "keywords": {
+      "upright": ["獨立清明", "客觀公正", "犀利洞察", "界線分明"],
+      "reversed": ["冷酷無情", "刻薄批判", "孤力防備", "仇恨報復"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍王后經歷過風雨後擁有極高理智與洞察力。絕不感情用事，以清明客觀的態度捍衛真實與界線。" },
+      "reversed": { "general": "逆位寶劍王后警示冷酷刻薄、用尖銳的言語作為武器，或是因為過去傷痛而築起冰冷心牆。" }
+    }
+  },
+  "king-of-swords": {
+    "id": "king-of-swords",
+    "number": 63,
+    "arcana": "minor",
+    "suit": "swords",
+    "element": "Air",
+    "name": { "zh": "寶劍國王", "en": "King of Swords" },
+    "keywords": {
+      "upright": ["專業權威", "邏輯極致", "公平法律", "冷靜決策"],
+      "reversed": ["冷血殘酷", "濫用法規", "剛愎自用", "智力壓制"]
+    },
+    "interpretations": {
+      "upright": { "general": "寶劍國王代表智慧、法律與專業權威的頂峰。以絕對公正、無私的邏輯做出一針見血的判斷。" },
+      "reversed": { "general": "逆位寶劍國王警告冷血無情、濫用權力或條文壓迫他人，缺乏基本的溫情與同理心。" }
+    }
+  },
+  "ace-of-pentacles": {
+    "id": "ace-of-pentacles",
+    "number": 64,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣一", "en": "Ace of Pentacles" },
+    "keywords": {
+      "upright": ["物質新契機", "豐盛財富", "務實回報", "穩固起步"],
+      "reversed": ["錯失良機", "財務風險", "過度物質", "投資失利"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣一代表物質與財務上的實質回報。新的工作機會、投資項目或穩固的現實基礎正向你敞開。" },
+      "reversed": { "general": "逆位星幣一提醒留意財務漏洞或資源浪費。切忌盲目跟風投資，務必腳踏實地評估風險。" }
+    }
+  },
+  "two-of-pentacles": {
+    "id": "two-of-pentacles",
+    "number": 65,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣二", "en": "Two of Pentacles" },
+    "keywords": {
+      "upright": ["收支平衡", "靈活應變", "多工作業", "適應變化"],
+      "reversed": ["失去平衡", "財務緊縮", "手忙腳亂", "過度承諾"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣二代表在變化中維持極佳的動態平衡。靈活調配資源、時間與資金，輕鬆應對多重任務。" },
+      "reversed": { "general": "逆位星幣二警告平衡失控、手忙腳亂。財務壓力或過多任務導致顧此失彼，需要刪減不必要開支。" }
+    }
+  },
+  "three-of-pentacles": {
+    "id": "three-of-pentacles",
+    "number": 66,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣三", "en": "Three of Pentacles" },
+    "keywords": {
+      "upright": ["專業合作", "精湛工藝", "團隊建構", "品質認可"],
+      "reversed": ["專業不足", "團隊磨合不良", "粗製濫造", "溝通脫節"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣三代表不同領域專業人才的完美合作。透過精益求精的工匠精神，共同打磨出高品質的成果。" },
+      "reversed": { "general": "逆位星幣三提示團隊分工不明、專業能力不足或溝通不良，導致專案品質打折甚至延誤。" }
+    }
+  },
+  "four-of-pentacles": {
+    "id": "four-of-pentacles",
+    "number": 67,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣四", "en": "Four of Pentacles" },
+    "keywords": {
+      "upright": ["鞏固資產", "守財保守", "控制邊界", "安全感需求"],
+      "reversed": ["過度吝嗇", "害怕失去", "僵化守舊", "揮霍無度"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣四代表重視財務安全與資源掌控。雖然基礎穩固，但警示切勿因為過度守財而阻礙了資源的流動。" },
+      "reversed": { "general": "逆位星幣四走向兩個極端：要么因為恐懼缺乏而極度吝嗇封閉，要么失控揮霍導致資產流失。" }
+    }
+  },
+  "five-of-pentacles": {
+    "id": "five-of-pentacles",
+    "number": 68,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣五", "en": "Five of Pentacles" },
+    "keywords": {
+      "upright": ["物質匱乏", "孤立無援", "寒冬考驗", "忽視救贖"],
+      "reversed": ["困境轉機", "獲得援助", "重獲溫暖", "財務復甦"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣五代表面臨經濟或健康上的寒冬考驗。但請抬頭看，聖殿的溫暖燈光就在身邊，適時開口求助。" },
+      "reversed": { "general": "逆位星幣五象徵最艱難的寒冬即將結束。獲得貴人援助或財務狀況逐漸回溫，重獲安全感。" }
+    }
+  },
+  "six-of-pentacles": {
+    "id": "six-of-pentacles",
+    "number": 69,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣六", "en": "Six of Pentacles" },
+    "keywords": {
+      "upright": ["資源共享", "慈善施捨", "公平回報", "互利共贏"],
+      "reversed": ["不平等關係", "條件式施捨", "債務糾紛", "利益利用"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣六代表財富與資源的和諧流動。給予者慷慨分享，接受者感念在心，建立良性互利的平衡。" },
+      "reversed": { "general": "逆位星幣六警示不對等的權力或金錢關係、附帶苛刻條件的援助，或是陷入債務糾紛中。" }
+    }
+  },
+  "seven-of-pentacles": {
+    "id": "seven-of-pentacles",
+    "number": 70,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣七", "en": "Seven of Pentacles" },
+    "keywords": {
+      "upright": ["審視成果", "耐心等待", "長期投資", "評估回報"],
+      "reversed": ["急功近利", "投資血本無歸", "缺乏耐性", "方向錯誤"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣七代表耕耘後停下腳步審視果實。需要耐心等待作物成熟，並認真評估長期的投資報酬率。" },
+      "reversed": { "general": "逆位星幣七提示因為急功近利而過早收割，或者是發現投入與回報嚴重不成正比，需要及損。" }
+    }
+  },
+  "eight-of-pentacles": {
+    "id": "eight-of-pentacles",
+    "number": 71,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣八", "en": "Eight of Pentacles" },
+    "keywords": {
+      "upright": ["專注匠心", "技能提升", "腳踏實地", "精益求精"],
+      "reversed": ["眼高手低", "缺乏專注", "投機取巧", "工作倦怠"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣八代表專注於細節與技能重複淬鍊的匠人精神。腳踏實地積累經驗，必能打造出卓越專業。" },
+      "reversed": { "general": "逆位星幣八警告眼高手低、缺乏專注與耐心，或是因為重複勞動而產生嚴重的職業倦怠感。" }
+    }
+  },
+  "nine-of-pentacles": {
+    "id": "nine-of-pentacles",
+    "number": 72,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣九", "en": "Nine of Pentacles" },
+    "keywords": {
+      "upright": ["自給自足", "優雅富足", "享受生活", "獨立成就"],
+      "reversed": ["過度揮霍", "依靠他人", "表面風光", "財務透支"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣九代表憑藉自律與努力獲得的極致物質獨立。能在屬於自己的優雅花園中，自在享有高品質生活。" },
+      "reversed": { "general": "逆位星幣九警示為了維持表面奢華而財務透支，或是過度依賴他人經濟來源而失去個人獨立。" }
+    }
+  },
+  "ten-of-pentacles": {
+    "id": "ten-of-pentacles",
+    "number": 73,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣十", "en": "Ten of Pentacles" },
+    "keywords": {
+      "upright": ["家族基業", "世代累積", "長遠安全", "輝煌富貴"],
+      "reversed": ["遺產爭執", "家族負債", "基業動搖", "短視近利"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣十代表物質層面的極致大圓滿。遺產、家族事業或長期投資結出碩果，為子孫奠定穩固基業。" },
+      "reversed": { "general": "逆位星幣十警示家族內部的財產爭執、投資失敗導致基業動搖，或是忽視了傳統價值的延續。" }
+    }
+  },
+  "page-of-pentacles": {
+    "id": "page-of-pentacles",
+    "number": 74,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣侍者", "en": "Page of Pentacles" },
+    "keywords": {
+      "upright": ["務實學習", "財務新機會", "專注投入", "踏實規劃"],
+      "reversed": ["目光短淺", "浪費機會", "缺乏執行力", "金錢損失"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣侍者帶來務實的新機會或學業計畫。懷抱謙遜學習的心態，腳踏實地為未來財務奠定基礎。" },
+      "reversed": { "general": "逆位星幣侍者警告缺乏計畫與執行力，眼高手低導致錯失良機，或因粗心造成小額財務損失。" }
+    }
+  },
+  "knight-of-pentacles": {
+    "id": "knight-of-pentacles",
+    "number": 75,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣騎士", "en": "Knight of Pentacles" },
+    "keywords": {
+      "upright": ["沉穩務實", "恪盡職守", "堅持不懈", "值得信賴"],
+      "reversed": ["固執墨守", "效率低下", "缺乏彈性", "過度死板"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣騎士是最可靠的執行者。雖然速度不快，但風雨無阻、恪盡職守，一步一腳印走向預定目標。" },
+      "reversed": { "general": "逆位星幣騎士警示過度死板固執、缺乏靈活性與創意，導致工作效率低下或錯失市場時機。" }
+    }
+  },
+  "queen-of-pentacles": {
+    "id": "queen-of-pentacles",
+    "number": 76,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣王后", "en": "Queen of Pentacles" },
+    "keywords": {
+      "upright": ["賢妻良母", "理財有道", "溫暖照顧", "實用智慧"],
+      "reversed": ["過度物質", "焦慮錢財", "忽略身心", "控制欲強"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣王后兼具溫暖照顧與出色理財能力。腳踏實地打造舒適溫馨的環境，給予身邊人最強大的物質後盾。" },
+      "reversed": { "general": "逆位星幣王后提醒過度焦慮財務安全感，導致唯物主義，或是過度操勞而忽視了自身的健康的照顧。" }
+    }
+  },
+  "king-of-pentacles": {
+    "id": "king-of-pentacles",
+    "number": 77,
+    "arcana": "minor",
+    "suit": "pentacles",
+    "element": "Earth",
+    "name": { "zh": "星幣國王", "en": "King of Pentacles" },
+    "keywords": {
+      "upright": ["商業帝國", "資產大師", "穩固可靠", "事業頂峰"],
+      "reversed": ["守財奴", "唯利是圖", "商業風險", "固執霸道"]
+    },
+    "interpretations": {
+      "upright": { "general": "星幣國王是商業與財富管理的頂尖大師。擁有極高的商業敏銳度與穩健手腕，建立不可動搖的事業帝國。" },
+      "reversed": { "general": "逆位星幣國王警告唯利是圖、缺乏商業道德，或者是過度守財而失去人情味與創新活力。" }
+    }
+  }
+}

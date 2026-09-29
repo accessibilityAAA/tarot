@@ -1,6 +1,6 @@
 /* ==========================================================================
    Astraea AI Tarot - 核心邏輯 (js/app.js)
-   實現：自然彩帶弧形展牌 (Arc Ribbon Deck)、滑動抽取、卡槽退牌與多語系
+   實現：自然彩帶弧形展牌 (Arc Ribbon Deck)、滑動抽取、自動置中、多語系、Wiki Tabs 與全能 URL 參數解析
    ========================================================================== */
 
 let currentSpread = 1;
@@ -18,7 +18,33 @@ document.addEventListener('DOMContentLoaded', () => {
   initFanDeck();
   initSlots();
 
-  // 視窗大小改變時重新計算弧形位置
+  // 🌟 全能 URL 參數解析器 (?q=...&spread=...&card=...)
+  const urlParams = new URLSearchParams(window.location.search);
+  const qParam = urlParams.get('q');
+  const spreadParam = urlParams.get('spread');
+  const cardParam = urlParams.get('card');
+
+  if (qParam) {
+    const queryInput = document.getElementById('user-query');
+    if (queryInput) queryInput.value = decodeURIComponent(qParam);
+  }
+
+  if (spreadParam) {
+    const count = parseInt(spreadParam, 10);
+    if ([1, 3, 5].includes(count)) selectSpread(count);
+  }
+
+  if (cardParam && typeof TAROT_CARDS_DB !== 'undefined') {
+    const foundCard = TAROT_CARDS_DB.find(c => c.id === cardParam || c.number === parseInt(cardParam, 10));
+    if (foundCard) {
+      const queryInput = document.getElementById('user-query');
+      if (queryInput && !queryInput.value) {
+        const isZh = currentLang.startsWith('zh');
+        queryInput.value = isZh ? `請幫我深度解讀【${foundCard.nameZh}】牌對我當前運勢的啟示` : `Deep interpretation for ${foundCard.nameEn}`;
+      }
+    }
+  }
+
   window.addEventListener('resize', () => {
     initFanDeck();
   });
@@ -58,9 +84,7 @@ function switchLanguage(lang) {
   localStorage.setItem('tarot_lang', lang);
   
   const langSelect = document.getElementById('lang-select');
-  if (langSelect) {
-    langSelect.value = lang;
-  }
+  if (langSelect) langSelect.value = lang;
 
   applyLanguageUI();
 }
@@ -97,8 +121,7 @@ function fillQuestion(type) {
 
 function showToast(msg) {
   const box = document.getElementById('toast-banner-box');
-  if (!box) return;
-  
+  if (!box) return;  
   box.innerText = msg;
   box.style.display = 'block';
 
@@ -149,7 +172,15 @@ function selectSpread(count) {
   initSlots();
 }
 
-// 🌟 自然彩帶弧形展牌算法 (Arc Ribbon Deck Algorithm)
+// 🌟 桌機輔助橫向捲動
+function scrollDeck(amount) {
+  const wrapper = document.getElementById('fan-deck-stage-wrapper');
+  if (wrapper) {
+    wrapper.scrollBy({ left: amount, behavior: 'smooth' });
+  }
+}
+
+// 自然彩帶弧形展牌算法
 function initFanDeck() {
   const wrapper = document.getElementById('fan-deck-wrapper');
   if (!wrapper) return;
@@ -160,24 +191,21 @@ function initFanDeck() {
   currentDeckPool = [...TAROT_CARDS_DB].sort(() => Math.random() - 0.5);
 
   const screenWidth = window.innerWidth;
-  // 展展 22 張牌，創造飽滿圓潤的弧形視覺
   const displayCards = 22;
   const cardBackSvg = getCosmicDeckBackSvg();
 
-  // 弧形幾何變數計算
   const isMobile = screenWidth <= 600;
-  const totalArcAngle = isMobile ? 42 : 54; // 總展開弧度
+  const totalArcAngle = isMobile ? 42 : 54;
   const startAngle = -totalArcAngle / 2;
   const angleStep = totalArcAngle / (displayCards - 1);
-  const cardOverlapX = isMobile ? 13 : 20; // 橫向堆疊推移量
+  const cardOverlapX = isMobile ? 18 : 22;
 
   const midIdx = (displayCards - 1) / 2;
 
   for (let i = 0; i < displayCards; i++) {
-    const angle = startAngle + i * angleStep; // 當前卡牌角度
+    const angle = startAngle + i * angleStep;
     const offsetFromCenter = i - midIdx;
     
-    // 拋物線幾何：越靠兩側，縱向 Y 軸下沉越明顯，形成優美拱形弧度
     const normOffset = offsetFromCenter / midIdx;
     const transY = Math.pow(normOffset, 2) * (isMobile ? 18 : 28);
     const transX = offsetFromCenter * cardOverlapX;
@@ -202,9 +230,7 @@ function initFanDeck() {
       card.style.opacity = '0.5';
     };
 
-    card.ondragend = () => {
-      card.style.opacity = '1';
-    };
+    card.ondragend = () => { card.style.opacity = '1'; };
 
     card.onclick = (e) => {
       e.preventDefault();
@@ -222,6 +248,14 @@ function initFanDeck() {
   }
 
   updateStatusNotice();
+
+  // 🌟 初始化後自動將滾動軌道捲動至正中央
+  setTimeout(() => {
+    const stageWrapper = document.getElementById('fan-deck-stage-wrapper');
+    if (stageWrapper) {
+      stageWrapper.scrollLeft = (stageWrapper.scrollWidth - stageWrapper.clientWidth) / 2;
+    }
+  }, 50);
 }
 
 function initSlots() {
@@ -254,9 +288,7 @@ function initSlots() {
       slot.classList.add('drag-over');
     };
 
-    slot.ondragleave = () => {
-      slot.classList.remove('drag-over');
-    };
+    slot.ondragleave = () => { slot.classList.remove('drag-over'); };
 
     slot.ondrop = (e) => {
       e.preventDefault();
@@ -311,8 +343,8 @@ function drawCard(cardEl, targetSlotIdx = null) {
 
   if (drawnCards[fillIdx] || fillIdx >= currentSpread) return;
 
-  if (typeof playSound === 'function') {
-    playSound('draw');
+  if (typeof TarotAudio !== 'undefined' && TarotAudio.playDraw) {
+    TarotAudio.playDraw();
   }
 
   const randomCard = currentDeckPool.pop() || TAROT_CARDS_DB[0];
@@ -337,8 +369,8 @@ function removeCardFromSlot(slotIdx) {
   const cardData = drawnCards[slotIdx];
   if (!cardData) return;
 
-  if (typeof playSound === 'function') {
-    playSound('draw');
+  if (typeof TarotAudio !== 'undefined' && TarotAudio.playDraw) {
+    TarotAudio.playDraw();
   }
 
   if (cardData.sourceCardId) {
@@ -384,8 +416,8 @@ function startTarotDivination() {
     return;
   }
 
-  if (typeof playSound === 'function') {
-    playSound('win');
+  if (typeof TarotAudio !== 'undefined' && TarotAudio.playChime) {
+    TarotAudio.playChime();
   }
 
   document.getElementById('start-divination-btn-box').style.display = 'none';
@@ -471,6 +503,27 @@ function typewriterEffect(elementId, text, speed) {
   }, speed);
 }
 
+function switchWikiTab(tabName) {
+  const tabs = ['cards', 'questions', 'combinations', 'spreads'];
+  
+  tabs.forEach(name => {
+    const btn = document.getElementById(`tab-btn-${name}`);
+    const content = document.getElementById(`wiki-tab-${name}`);
+    
+    if (btn && content) {
+      if (name === tabName) {
+        btn.style.background = 'var(--primary-purple)';
+        btn.style.color = '#ffffff';
+        content.style.display = 'block';
+      } else {
+        btn.style.background = 'rgba(168, 85, 247, 0.15)';
+        btn.style.color = 'var(--text-main)';
+        content.style.display = 'none';
+      }
+    }
+  });
+}
+
 function openPolicyModal(type) {
   const modal = document.getElementById('policy-modal');
   const title = document.getElementById('modal-title');
@@ -483,13 +536,13 @@ function openPolicyModal(type) {
     privacy: {
       titleZh: '🔒 隱私政策 Privacy Policy',
       titleEn: '🔒 Privacy Policy',
-      textZh: '我們高度重視您的個人隱私。本占卜應用為匿名娛樂與心靈探索工具，不會未經允許收集您的個人身分資料。您輸入的提問與抽取之卡牌紀錄僅會用於即時 AI 解讀計算，不會對外販售或公開。',
+      textZh: '我們高度重視您的個人隱私。本占卜應用為匿名娛樂與心靈探索工具，不會未經允許收集您的個人身分資料。您輸入的提問與抽取之卡牌紀錄僅會用於即時解讀計算，不會對外販售或公開。',
       textEn: 'We strictly protect your privacy. This application is designed for personalized spiritual exploration and entertainment. We do not sell or transmit your personal query data to third parties.'
     },
     terms: {
       titleZh: '📜 服務條款 Terms of Service',
       titleEn: '📜 Terms of Service',
-      textZh: '歡迎使用 Astraea AI 塔羅占卜服務。本系統所提供之解牌內容係基於象徵學與 AI 語意分析生成之指引，僅供心靈啟發與娛樂參考，不可替代專業醫療、法律、財務或心理諮商之建議。',
+      textZh: '歡迎使用 Astraea AI 塔羅占卜服務。本系統所提供之解牌內容係基於象徵學與語意分析生成之指引，僅供心靈啟發與娛樂參考，不可替代專業醫療、法律、財務或心理諮商之建議。',
       textEn: 'By using Astraea AI Tarot, you agree that readings provided are for inspiration and entertainment purposes only, and should not replace professional legal, financial, or medical advice.'
     },
     refund: {

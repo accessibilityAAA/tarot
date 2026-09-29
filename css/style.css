@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Astraea AI Tarot - 全局與配色防隱形修正樣式表 (css/style.css)
+   Astraea AI Tarot - 全局與極致 RWD 樣式表 (css/style.css)
    ========================================================================== */
 
 :root {
@@ -23,20 +23,21 @@
   --focus-ring: #f59e0b;
 }
 
+/* 🌟 白天高對比度修正：將淺黃/黃字變數換成深紫與琥珀棕，全站文字立刻清晰 */
 body.light-mode {
   --bg-main: #f4f1ea;
   --card-bg: #ffffff;
   --glass-border: rgba(126, 34, 206, 0.2);
-  --text-main: #1f2937;
-  --text-sub: #581c87;
+  --text-main: #0f172a;       /* 深黑藍文字 */
+  --text-sub: #581c87;        /* 深紫文字 */
   --primary-purple: #7e22ce;
-  --border-color: #d1d5db;
+  --border-color: #cbd5e1;
   --glow-color: rgba(126, 34, 206, 0.2);
   --header-bg: #5b21b6;
   
   --footer-bg: #e8e3d9;
-  --footer-text: #374151;
-  --footer-link: #6b21a8;
+  --footer-text: #1e293b;
+  --footer-link: #6b21a8;     /* 腳頁連結改為清晰深紫 */
   --footer-link-hover: #b45309;
   --input-bg: #ffffff;
 }
@@ -45,17 +46,18 @@ body.large-mode {
   font-size: 1.05rem !important;
 }
 
-* {
-  box-sizing: border-box;
+/* 🌟 全局硬性防爆約束：強制杜絕 X 軸滾動條 */
+*, *::before, *::after {
+  box-sizing: border-box !important;
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
-  width: 100%;
+  width: 100% !important;
+  max-width: 100vw !important;
   min-height: 100vh;
-  max-width: 100%;
   overflow-x: hidden !important;
 }
 
@@ -71,7 +73,7 @@ body {
   flex-direction: column;
 }
 
-/* Header */
+/* Header 自適應 */
 .site-header {
   background: var(--header-bg);
   backdrop-filter: blur(12px);
@@ -80,6 +82,7 @@ body {
   padding: 0.45rem 0.85rem;
   border-bottom: 1px solid var(--glass-border);
   flex-shrink: 0;
+  width: 100% !important;
 }
 
 .header-inner {
@@ -88,7 +91,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
   gap: 0.35rem;
+  width: 100% !important;
 }
 
 .brand-title {
@@ -101,10 +106,18 @@ body {
   white-space: nowrap;
 }
 
+/* 白天模式 Header 標題高對比 */
+body.light-mode .brand-title {
+  background: none;
+  -webkit-text-fill-color: initial;
+  color: #ffffff;
+}
+
 .header-actions {
   display: flex;
   gap: 0.35rem;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .btn-head {
@@ -129,7 +142,8 @@ body {
 
 /* 主容器 */
 .container {
-  max-width: 1000px;
+  width: 100% !important;
+  max-width: 1000px !important;
   margin: 0.5rem auto;
   padding: 0 0.75rem;
   flex: 1;
@@ -143,6 +157,8 @@ body {
   border-radius: 1rem;
   padding: 0.85rem;
   box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35);
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* 預設問題標籤 */
@@ -155,6 +171,7 @@ body {
   padding-bottom: 0.2rem !important;
   -webkit-overflow-scrolling: touch;
   white-space: nowrap !important;
+  width: 100% !important;
 }
 
 .preset-tags-wrapper::-webkit-scrollbar {
@@ -172,6 +189,23 @@ body {
   cursor: pointer;
   flex-shrink: 0 !important;
   white-space: nowrap !important;
+  max-width: 100%;
+}
+
+/* 白天模式標籤按鈕醒目化 */
+body.light-mode .kw-btn {
+  background: #f1f5f9;
+  border-color: #7e22ce;
+  color: #581c87;
+}
+
+.spread-btn-group {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  gap: 0.35rem !important;
+  margin: 0.6rem 0 !important;
+  width: 100% !important;
 }
 
 /* 大按鈕 */
@@ -187,24 +221,41 @@ body {
   transition: all 0.25s ease;
   letter-spacing: 0.05em;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+  max-width: 100% !important;
 }
 
-/* 🌟 關鍵修復：提示訊息框（深紅橘底 + 深棕黑字，100% 高對比清晰） */
+/* 高對比清晰提示框 (白天與黑夜通用高辨識底色) */
 .custom-toast-msg {
-  background: #fef3c7 !important;
-  border: 2px solid #f59e0b !important;
-  color: #78350f !important;
+  background: #5b21b6 !important;
+  border: 2px solid #7c3aed !important;
+  color: #ffffff !important;
   padding: 0.45rem 1rem !important;
   border-radius: 0.5rem !important;
   font-weight: 900 !important;
   font-size: 0.9rem !important;
   margin: 0.3rem auto 0.5rem auto !important;
-  box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4) !important;
+  box-shadow: 0 4px 15px rgba(91, 33, 182, 0.35) !important;
 }
 
 .input-error-shake {
   border-color: #ef4444 !important;
   box-shadow: 0 0 12px rgba(239, 68, 68, 0.5) !important;
+}
+
+/* 白天模式下儀式感提示橫幅顏色調整 */
+body.light-mode #ritual-blessing-notice {
+  background: rgba(126, 34, 206, 0.1) !important;
+}
+body.light-mode #ritual-blessing-notice > div:first-child {
+  color: #6b21a8 !important; /* 告別原本淺黃字，改為深紫字 */
+}
+
+/* 🌟 百科副標題顏色適應 */
+#wiki-index-section h2 {
+  color: var(--primary-purple) !important;
+}
+body.light-mode #wiki-index-section h3 {
+  color: #6b21a8 !important; /* 白天模式下大阿爾克那/小阿爾克那副標改深紫 */
 }
 
 /* 解牌結果區域 */
@@ -237,6 +288,10 @@ body {
   padding: 0.65rem;
 }
 
+body.light-mode .cards-detail-list {
+  background: rgba(126, 34, 206, 0.05);
+}
+
 .card-detail-item {
   display: flex;
   align-items: center;
@@ -257,6 +312,10 @@ body {
   line-height: 1.6;
 }
 
+body.light-mode .ai-chat-box {
+  background: #f8fafc;
+}
+
 /* Footer */
 .site-footer {
   background: var(--footer-bg);
@@ -266,6 +325,7 @@ body {
   color: var(--footer-text);
   flex-shrink: 0;
   margin-top: 1.5rem;
+  width: 100% !important;
 }
 
 .footer-inner {
@@ -307,7 +367,7 @@ body {
   font-weight: bold;
 }
 
-/* Modal 彈窗 */
+/* Modal 條款視窗 */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -363,9 +423,9 @@ body {
   text-align: left;
 }
 
-@media (max-width: 600px) {
+/* 📱 手機版 RWD 強制壓合限制 (<= 600px) */
+@media screen and (max-width: 600px) {
   .header-inner {
-    flex-direction: row !important;
     justify-content: space-between !important;
   }
 
@@ -398,6 +458,10 @@ body {
 
   .result-layout-grid {
     grid-template-columns: 1fr;
+  }
+
+  .glass-card {
+    padding: 0.6rem 0.5rem !important;
   }
 
   .footer-bottom {
