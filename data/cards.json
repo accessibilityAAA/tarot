@@ -5,17 +5,48 @@
     "arcana": "major",
     "element": "Air",
     "archetype": "純真者 / 冒險家",
+    "yes_no": "Yes (象徵全新的開啟)",
     "name": { "zh": "愚者", "en": "The Fool" },
     "keywords": {
       "upright": ["全新開始", "無畏冒險", "無限潛能", "純真信賴"],
       "reversed": ["輕率冒失", "盲目衝動", "逃避責任", "草率決定"]
     },
     "interpretations": {
-      "upright": { 
-        "general": "愚者象徵全新的旅程與無畏的冒險精神。拋開過去的負擔與恐懼，勇敢跨出第一步，信任宇宙會為你鋪路。"
+      "upright": {
+        "general": "愚者象徵全新的旅程與無畏的冒險精神。拋開過去的負擔與恐懼，勇敢跨出第一步，信任宇宙會為你鋪路。",
+        "love": {
+          "single": "即將迎來毫無負擔的新戀情，請保持開放心態。",
+          "crush": "對方抱持輕鬆交友態度，適合自然接觸，切忌給予過多壓力。",
+          "relationship": "關係進入嶄新階段，適合一起嘗試新事物打破沉悶。",
+          "reconciliation": "需要徹底放下過去包袱重新認識，否則難以真正重來。",
+          "partner_thoughts": "覺得你很有吸引力且有趣，但目前尚未思考太長遠的承諾。"
+        },
+        "career": {
+          "job_seeking": "適合嘗試全新領域或非傳統職場。",
+          "career_change": "當前是跨出舒適圈的最佳時機，勇敢轉型。",
+          "workplace": "環境充滿變數與新計畫，需要靈活應變與創意。",
+          "entrepreneurship": "適合開創新型態業務或藍海市場。"
+        },
+        "fortune": "收入來源可能出現副業或非傳統管道，注意控制衝動消費。",
+        "daily_advice": "保持開放與好奇的心態，勇敢擁抱當前的變化。"
       },
-      "reversed": { 
-        "general": "逆位的愚者提醒切勿盲目衝動或魯莽行事。此時需要多一分理智評估，切忌因為逃避現狀而做出草率決定。"
+      "reversed": {
+        "general": "逆位的愚者提醒切勿盲目衝動或魯莽行事。此時需要多一分理智評估，切忌因為逃避現狀而做出草率決定。",
+        "love": {
+          "single": "容易遇到不給承諾、態度輕浮的對象。",
+          "crush": "對方心態飄忽不定，暫時不宜投入過多感情。",
+          "relationship": "出現不負責任行為或逃避承諾的情況。",
+          "reconciliation": "條件未成熟，盲目重來只會重複過往錯誤。",
+          "partner_thoughts": "感到焦慮或想逃避當前的承諾與責任。"
+        },
+        "career": {
+          "job_seeking": "缺乏明確目標與準備，容易病急亂投醫。",
+          "career_change": "若是為了逃避現狀而轉職，風險極高。",
+          "workplace": "執行計畫缺乏周詳規劃，容易因粗心犯低級錯誤。",
+          "entrepreneurship": "盲目衝動投資，缺乏財務風險防護網。"
+        },
+        "fortune": "財務狀況不穩定，切忌聽信高風險投機訊息。",
+        "daily_advice": "暫緩重大決定，腳踏實地確認安全網再出發。"
       }
     }
   },
@@ -25,6 +56,7 @@
     "arcana": "major",
     "element": "Air",
     "archetype": "顯化者 / 創造者",
+    "yes_no": "Yes (資源齊備極具優勢)",
     "name": { "zh": "魔術師", "en": "The Magician" },
     "keywords": {
       "upright": ["創造力", "資源整合", "顯化能力", "強大意志"],
@@ -41,6 +73,7 @@
     "arcana": "major",
     "element": "Water",
     "archetype": "直覺守護者 / 潛意識聖女",
+    "yes_no": "Neutral (宜靜不宜動)",
     "name": { "zh": "女祭司", "en": "The High Priestess" },
     "keywords": {
       "upright": ["直覺敏銳", "內在智慧", "潛意識", "靜心觀察"],
@@ -57,6 +90,7 @@
     "arcana": "major",
     "element": "Earth",
     "archetype": "大地之母 / 豐盛女神",
+    "yes_no": "Yes (極致豐盛與和諧)",
     "name": { "zh": "皇后", "en": "The Empress" },
     "keywords": {
       "upright": ["豐盛富足", "母性滋養", "愛與和諧", "美感藝術"],
@@ -73,6 +107,7 @@
     "arcana": "major",
     "element": "Fire",
     "archetype": "領袖 / 秩序建構者",
+    "yes_no": "Yes (代表權威與掌控)",
     "name": { "zh": "皇帝", "en": "The Emperor" },
     "keywords": {
       "upright": ["權威領導", "嚴謹秩序", "穩固架構", "自律邏輯"],
@@ -89,6 +124,7 @@
     "arcana": "major",
     "element": "Earth",
     "archetype": "精神導師 / 傳統信仰者",
+    "yes_no": "Yes (遵守規範即獲貴人)",
     "name": { "zh": "教皇", "en": "The Hierophant" },
     "keywords": {
       "upright": ["精神指引", "傳統價值", "良師益友", "社會規範"],
@@ -105,6 +141,7 @@
     "arcana": "major",
     "element": "Air",
     "archetype": "靈魂伴侶 / 核心抉擇",
+    "yes_no": "Yes (真愛與選擇)",
     "name": { "zh": "戀人", "en": "The Lovers" },
     "keywords": {
       "upright": ["靈魂契合", "真摯情感", "重大選擇", "價值觀和諧"],
@@ -121,6 +158,7 @@
     "arcana": "major",
     "element": "Water",
     "archetype": "征服者 / 意志戰士",
+    "yes_no": "Yes (憑意志衝破瓶頸)",
     "name": { "zh": "戰車", "en": "The Chariot" },
     "keywords": {
       "upright": ["堅強意志", "克服困難", "掌控局勢", "快速推進"],
@@ -137,6 +175,7 @@
     "arcana": "major",
     "element": "Fire",
     "archetype": "柔能克剛 / 內在勇者",
+    "yes_no": "Yes (柔能克剛)",
     "name": { "zh": "力量", "en": "Strength" },
     "keywords": {
       "upright": ["柔能克剛", "內在勇氣", "包容耐心", "情緒掌控"],
@@ -153,6 +192,7 @@
     "arcana": "major",
     "element": "Earth",
     "archetype": "尋道者 / 智慧老者",
+    "yes_no": "Neutral (需先向內尋求)",
     "name": { "zh": "隱士", "en": "The Hermit" },
     "keywords": {
       "upright": ["沉思內省", "獨處尋道", "燈塔指引", "慎思明辨"],
@@ -169,6 +209,7 @@
     "arcana": "major",
     "element": "Fire",
     "archetype": "命運天道 / 轉輪者",
+    "yes_no": "Yes (命運帶來良機)",
     "name": { "zh": "命運之輪", "en": "Wheel of Fortune" },
     "keywords": {
       "upright": ["命運轉折", "幸運契機", "因果流轉", "順應時勢"],
@@ -185,6 +226,7 @@
     "arcana": "major",
     "element": "Air",
     "archetype": "執法者 / 天平仲裁",
+    "yes_no": "Neutral (取決於公平與真實)",
     "name": { "zh": "正義", "en": "Justice" },
     "keywords": {
       "upright": ["公平公正", "客觀理性", "因果報應", "誠實決策"],
@@ -201,6 +243,7 @@
     "arcana": "major",
     "element": "Water",
     "archetype": "臣服者 / 換位智者",
+    "yes_no": "No (暫時停滯，需換位思考)",
     "name": { "zh": "倒吊人", "en": "The Hanged Man" },
     "keywords": {
       "upright": ["主動臣服", "換位思考", "暫停沉澱", "新視野"],
@@ -217,6 +260,7 @@
     "arcana": "major",
     "element": "Water",
     "archetype": "收割者 / 重生者",
+    "yes_no": "No (結束舊局始得重生)",
     "name": { "zh": "死神", "en": "Death" },
     "keywords": {
       "upright": ["舊事結束", "徹底蛻變", "全新重生", "告別過去"],
@@ -233,6 +277,7 @@
     "arcana": "major",
     "element": "Fire",
     "archetype": "調和天使 / 中庸者",
+    "yes_no": "Yes (和諧調和成功)",
     "name": { "zh": "節制", "en": "Temperance" },
     "keywords": {
       "upright": ["中庸之道", "和諧調和", "耐心整合", "平衡節奏"],
@@ -249,6 +294,7 @@
     "arcana": "major",
     "element": "Earth",
     "archetype": "誘惑者 / 影子自我",
+    "yes_no": "No (警力慾望與陷阱)",
     "name": { "zh": "惡魔", "en": "The Devil" },
     "keywords": {
       "upright": ["物質執著", "慾望枷鎖", "盲目沉迷", "自我限制"],
@@ -265,6 +311,7 @@
     "arcana": "major",
     "element": "Fire",
     "archetype": "毀滅與覺醒者",
+    "yes_no": "No (突發衝擊破除虛假)",
     "name": { "zh": "高塔", "en": "The Tower" },
     "keywords": {
       "upright": ["突發衝擊", "幻滅崩解", "徹底覺醒", "突破偽裝"],
@@ -281,6 +328,7 @@
     "arcana": "major",
     "element": "Air",
     "archetype": "希望之星 / 療癒女神",
+    "yes_no": "Yes (充滿希望與療癒)",
     "name": { "zh": "星星", "en": "The Star" },
     "keywords": {
       "upright": ["希望曙光", "靈魂療癒", "信心重現", "靈感泉湧"],
@@ -297,6 +345,7 @@
     "arcana": "major",
     "element": "Water",
     "archetype": "幻象幻影 / 潛意識深淵",
+    "yes_no": "No (迷霧未散不宜急進)",
     "name": { "zh": "月亮", "en": "The Moon" },
     "keywords": {
       "upright": ["潛意識不安", "迷霧幻象", "直覺考驗", "情緒波瀾"],
@@ -313,6 +362,7 @@
     "arcana": "major",
     "element": "Fire",
     "archetype": "光明智者 / 喜悅孩童",
+    "yes_no": "Yes (光明極致成功)",
     "name": { "zh": "太陽", "en": "The Sun" },
     "keywords": {
       "upright": ["成功光明", "喜悅活力", "自信熱情", "清晰真理"],
@@ -329,6 +379,7 @@
     "arcana": "major",
     "element": "Fire",
     "archetype": "靈魂號角 / 重生審判者",
+    "yes_no": "Yes (號角響起重大重生)",
     "name": { "zh": "審判", "en": "Judgement" },
     "keywords": {
       "upright": ["靈魂召喚", "深刻覺醒", "重大決策", "重生昇華"],
@@ -345,6 +396,7 @@
     "arcana": "major",
     "element": "Earth",
     "archetype": "大圓滿 / 宇宙統合者",
+    "yes_no": "Yes (圓滿成就)",
     "name": { "zh": "世界", "en": "The World" },
     "keywords": {
       "upright": ["大圓滿", "完美結束", "成就統合", "輝煌成功"],

@@ -1,6 +1,6 @@
 /* ==========================================================================
    Astraea AI Tarot - 核心邏輯 (js/app.js)
-   實現：自然彩帶弧形展牌 (Arc Ribbon Deck)、滑動抽取、自動置中、多語系、Wiki Tabs 與全能 URL 參數解析
+   實現：自然彩帶弧形展牌 (Arc Ribbon Deck)、多牌完整解讀、牌陣坑位語意、自動置中、多語系、Wiki Tabs 與 URL 參數解析
    ========================================================================== */
 
 let currentSpread = 1;
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initFanDeck();
   initSlots();
 
-  // 🌟 全能 URL 參數解析器 (?q=...&spread=...&card=...)
+  // 全能 URL 參數解析器 (?q=...&spread=...&card=...)
   const urlParams = new URLSearchParams(window.location.search);
   const qParam = urlParams.get('q');
   const spreadParam = urlParams.get('spread');
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (spreadParam) {
     const count = parseInt(spreadParam, 10);
-    if ([1, 3, 5].includes(count)) selectSpread(count);
+    if ([1, 3, 4, 5].includes(count)) selectSpread(count);
   }
 
   if (cardParam && typeof TAROT_CARDS_DB !== 'undefined') {
@@ -91,6 +91,12 @@ function switchLanguage(lang) {
 
 function applyLanguageUI() {
   const t = I18N_DICT[currentLang] || I18N_DICT['en'];
+
+  const queryLabel = document.getElementById('user-query-label');
+  if (queryLabel && t.inputLabel) {
+    queryLabel.innerText = t.inputLabel;
+  }
+
   document.getElementById('brand-title').innerText = t.brandTitle;
   document.getElementById('user-query').placeholder = t.placeholder;
   document.getElementById('btn-submit-divination').innerText = t.btnSubmit;
@@ -172,15 +178,6 @@ function selectSpread(count) {
   initSlots();
 }
 
-// 🌟 桌機輔助橫向捲動
-function scrollDeck(amount) {
-  const wrapper = document.getElementById('fan-deck-stage-wrapper');
-  if (wrapper) {
-    wrapper.scrollBy({ left: amount, behavior: 'smooth' });
-  }
-}
-
-// 自然彩帶弧形展牌算法
 function initFanDeck() {
   const wrapper = document.getElementById('fan-deck-wrapper');
   if (!wrapper) return;
@@ -249,7 +246,6 @@ function initFanDeck() {
 
   updateStatusNotice();
 
-  // 🌟 初始化後自動將滾動軌道捲動至正中央
   setTimeout(() => {
     const stageWrapper = document.getElementById('fan-deck-stage-wrapper');
     if (stageWrapper) {
@@ -432,6 +428,7 @@ function startTarotDivination() {
   }, 1200);
 }
 
+// 🌟 靈性解讀核心：結合牌陣坑位語意與正逆位特別解析
 function generateAIReading() {
   document.getElementById('interactive-setup-area').style.display = 'none';
   document.getElementById('slots-grid').style.display = 'none';
@@ -440,11 +437,12 @@ function generateAIReading() {
   const resultGrid = document.getElementById('result-two-column-wrapper');
   if (resultGrid) resultGrid.style.display = 'grid';
 
-  const userQuery = document.getElementById('user-query').value.trim() || 'General Life Path';
+  const userQuery = document.getElementById('user-query').value.trim() || '通用運勢指引';
   const isZh = currentLang.startsWith('zh');
 
   const validCards = drawnCards.filter(c => c != null);
 
+  // 1. 渲染左側卡槽
   const leftSlotsBox = document.getElementById('result-left-slots');
   if (leftSlotsBox) {
     leftSlotsBox.innerHTML = validCards.map((c, i) => `
@@ -454,13 +452,31 @@ function generateAIReading() {
     `).join('');
   }
   
+  // 2. 匹配牌陣位置定義[cite: 12]
+  const posNamesZh = {
+    1: ['核心指引'],
+    3: ['過去因果脈絡', '現在局勢狀態', '未來發展趨勢'],
+    4: ['問題核心關鍵', '當前主要障礙', '行動建言對策', '手邊優勢資源'],
+    5: ['當事人的核心狀態', '對選項A/對方的感情態度', '選項A現況/對方當前狀態', '對選項B/對方對我的態度', '最終演變發展結果']
+  };
+
+  const posNamesEn = {
+    1: ['Core Guidance'],
+    3: ['Past Context', 'Present Situation', 'Future Trend'],
+    4: ['Core Issue', 'Main Obstacle', 'Action Advice', 'Available Resources'],
+    5: ['Your Current State', 'Attitude Towards A/Partner', 'Option A / Partner State', 'Attitude Towards B/Partner View', 'Potential Outcome']
+  };
+
+  const currentPosList = (isZh ? posNamesZh[validCards.length] : posNamesEn[validCards.length]) || [];
+
+  // 3. 渲染左側詳細清單
   const summaryHtml = `
     <div class="cards-detail-list">
       ${validCards.map((c, i) => `
         <div class="card-detail-item">
           <span style="background:#7e22ce; color:#fff; width:18px; height:18px; border-radius:50%; display:inline-flex; align-items:center; justify-content:center; font-size:0.65rem; font-weight:bold; flex-shrink:0;">${i + 1}</span>
           <div>
-            <div style="font-size:0.75rem; color:var(--text-sub); font-weight:bold;">${isZh ? `位置 ${i + 1} 指引` : `Position ${i + 1}`}</div>
+            <div style="font-size:0.72rem; color:var(--text-sub); font-weight:bold;">${currentPosList[i] || `位置 ${i + 1}`}</div>
             <div style="font-size:0.85rem; font-weight:800; color:var(--text-main);">
               ${isZh ? c.nameZh : c.nameEn}
               <span style="font-size:0.7rem; color:${c.isReversed ? '#ef4444' : '#10b981'}; margin-left:4px;">
@@ -472,14 +488,51 @@ function generateAIReading() {
       `).join('')}
     </div>
   `;
-
   document.getElementById('cards-summary').innerHTML = summaryHtml;
 
-  const readingText = isZh 
-    ? `親愛的心靈探索者，針對您的提問「${userQuery}」，宇宙能量正透過牌陣傳遞指引：\n\n起手牌【${validCards[0].nameZh}】(${validCards[0].isReversed ? '逆位' : '正位'}) 顯示了您目前心境的轉折：${validCards[0].isReversed ? validCards[0].reversedZh : validCards[0].uprightZh}\n\n請放下過度的焦慮與內耗，保持靈活的心態順應改變，屬於您的幸運隨後就會明朗！`
-    : `Greetings, Seeker. Regarding your query: "${userQuery}", the cosmic energy offers profound clarity.\n\nThe leading card, ${validCards[0].nameEn} (${validCards[0].isReversed ? 'Reversed' : 'Upright'}), indicates: ${validCards[0].isReversed ? validCards[0].reversedEn : validCards[0].uprightEn}\n\nRelease doubts and align with your true purpose. Answers are already unfolding around you.`;
+  // 4. 動態生成全張數詳細解讀[cite: 12]
+  let readingText = "";
 
-  typewriterEffect('typewriter-text', readingText, 25);
+  if (isZh) {
+    readingText = `親愛的心靈探索者，針對您請示的問題：「${userQuery}」，宇宙能量已透過 ${validCards.length} 張牌陣為您對照內心真實景象[cite: 12]：\n\n`;
+    
+    validCards.forEach((c, idx) => {
+      const posName = currentPosList[idx] || `位置 ${idx + 1}`;
+      const statusText = c.isReversed ? '逆位' : '正位';
+      
+      // 智慧特別解析[cite: 12]
+      let specialNotice = "";
+      if (posName.includes('障礙') && !c.isReversed) {
+        specialNotice = "（注意：正位好牌出現在障礙位，提示需防範過度樂觀、盲目自信或沉迷舒適圈[cite: 12]）";
+      } else if (posName.includes('對策') && c.isReversed) {
+        specialNotice = "（建言：逆位提示暫時不宜強攻，需先調整內在心態，化解潛在的思維死角[cite: 12]）";
+      }
+
+      const meaning = c.isReversed 
+        ? (c.reversedZh || '當前能量有所受阻，提醒您先收斂衝動，靜心檢視內在盲點。') 
+        : (c.uprightZh || '能量順暢流動，請展現自信與清晰的行動力。');
+      
+      readingText += `📍【${posName}】${c.nameZh}（${statusText}）${specialNotice}\n👉 指引：${meaning}\n\n`;
+    });
+
+    readingText += `✨ 【靈性大師綜合啟示】\n本牌陣以【${validCards[0].nameZh}】為核心起手，照出您當前局勢的真相[cite: 12]。正如牌卡是一面鏡子，它映射出您內心深處最真實的渴望與焦慮[cite: 12]。未來並非定數，只要您當下的心態有一咪咪微小的改變，能量場就會跟著轉動，創造出您所期望的未來[cite: 12]！`;
+  } else {
+    readingText = `Greetings, Seeker. Regarding your query: "${userQuery}", the cards reflect your inner truth through this ${validCards.length}-card spread:\n\n`;
+    
+    validCards.forEach((c, idx) => {
+      const posName = currentPosList[idx] || `Position ${idx + 1}`;
+      const statusText = c.isReversed ? 'Reversed' : 'Upright';
+      const meaning = c.isReversed 
+        ? (c.reversedEn || 'Energy is currently blocked. Take a moment for inner reflection.') 
+        : (c.uprightEn || 'Energy flows freely. Proceed with clarity and confidence.');
+      
+      readingText += `📍 [${posName}] ${c.nameEn} (${statusText})\n👉 Guidance: ${meaning}\n\n`;
+    });
+
+    readingText += `✨ [Master Synthesis]\nLed by ${validCards[0].nameEn}, this spread mirrors your current state. Remember, tarot reflects present energy—shifting your mindset today transforms your destiny tomorrow!`;
+  }
+
+  typewriterEffect('typewriter-text', readingText, 18);
 
   setTimeout(() => {
     if (resultGrid) resultGrid.scrollIntoView({ behavior: 'smooth', block: 'start' });

@@ -1,0 +1,50 @@
+{
+  "daily-one-card": {
+    "id": "daily-one-card",
+    "name_zh": "單牌今日指引",
+    "name_en": "Daily Single Guidance",
+    "count": 1,
+    "description": "最直覺、快速的每日靈性抽牌，提供當天心境或關鍵事件的核心指引。",
+    "positions_zh": ["今日核心指引"]
+  },
+  "past-present-future": {
+    "id": "past-present-future",
+    "name_zh": "三才時間之流牌陣",
+    "name_en": "Past Present Future Timeline",
+    "count": 3,
+    "description": "經典時間軸牌陣，梳理事件的演變脈絡，從過去因果看清現在與未來的走向。",
+    "positions_zh": ["過去因果脈絡", "現在局勢狀態", "未來發展趨勢"]
+  },
+  "holy-triangle": {
+    "id": "holy-triangle",
+    "name_zh": "聖三角盲點突破陣",
+    "name_en": "Holy Triangle Spread",
+    "count": 3,
+    "description": "快速照出自身盲點的強大牌陣，對比主觀想像與客觀真實，給出突破建言。",
+    "positions_zh": ["我以為的狀態", "客觀真實的狀態", "突破盲點建言"]
+  },
+  "core-four-cards": {
+    "id": "core-four-cards",
+    "name_zh": "直指核心四牌陣",
+    "name_en": "Core Issue & Resource Spread",
+    "count": 4,
+    "description": "當感覺事情卡住卻找不到原因時使用，釐清問題核心、個人障礙、對策與優勢資源。",
+    "positions_zh": ["問題核心關鍵", "當前主要障礙", "行動建言對策", "手邊優勢資源"]
+  },
+  "love-relationship": {
+    "id": "love-relationship",
+    "name_zh": "感情萬用深度分析陣",
+    "name_en": "Love & Relationship Spread",
+    "count": 5,
+    "description": "全面剖析雙方心境、互動態度與未來走向，看清曖昧或交往中的真實能量。",
+    "positions_zh": ["我的當前狀態", "我對對方的感情態度", "對方的當前狀態", "對方對我的感情態度", "關係可能的發展結果"]
+  },
+  "two-choices": {
+    "id": "two-choices",
+    "name_zh": "二選一抉擇牌陣",
+    "name_en": "Two Choice Decision Spread",
+    "count": 5,
+    "description": "適用於工作 Offer 選擇、人生重大抉擇，評估兩種選項的現況與演變結果。",
+    "positions_zh": ["選項 A 的現況", "選項 B 的現況", "選項 A 可能的演變結果", "選項 B 可能的演變結果", "當事人的核心狀態"]
+  }
+}
