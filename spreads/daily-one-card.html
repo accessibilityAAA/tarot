@@ -5,6 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>單牌今日指引 | 專業塔羅牌陣教學與線上占卜 | Astraea Tarot</title>
   <meta name="description" content="最直覺、快速的每日靈性抽牌，提供當天心境或關鍵事件的核心指引。">
+  
+  <script>
+    (function() {
+      var saved = localStorage.getItem('tarot_theme');
+      if (saved === 'light') { document.documentElement.classList.add('light-mode'); }
+    })();
+  </script>
+
   <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="wiki-page">
@@ -30,6 +38,6 @@
       <a href="../index.html?spread=1" class="btn-gold" style="display:inline-block; text-decoration:none; font-size:1.05rem; padding:0.6rem 2rem;">🔮 直接使用「單牌今日指引」進行線上抽牌</a>
     </section>
   </main>
-  <footer class="site-footer"><div class="footer-inner" style="text-align:center;"><p style="font-size:0.8rem; color:var(--footer-text);">© 2026 Astraea Tarot. All Rights Reserved me.</p></div></footer>
+  <footer class="site-footer"><div class="footer-inner" style="text-align:center;"><p style="font-size:0.8rem; color:var(--footer-text);">© 2026 Astraea Tarot. All Rights Reserved.</p></div></footer>
 </body>
 </html>
