@@ -1,86 +1,87 @@
 /* ==========================================================================
-   Astraea AI Tarot - 全局與極致 RWD 樣式表 (css/style.css)
+   SITAROT - Modern UI Stylesheet (css/style.css)
+   完整修復解讀區塊文字顯示、主題切換與響應式佈局
    ========================================================================== */
 
+/* 1. 全域變數定義 */
 :root {
-  --bg-main: #0a0518;
-  --card-bg: rgba(23, 14, 43, 0.75);
-  --glass-border: rgba(192, 132, 252, 0.25);
+  --bg-main: #070412;
+  --card-bg: rgba(18, 11, 38, 0.85);
+  --glass-border: rgba(192, 132, 252, 0.2);
   --text-main: #f3e8ff;
-  --text-sub: #d8b4fe;
+  --text-sub: #c084fc;
   --primary-purple: #a855f7;
-  --border-color: rgba(216, 180, 254, 0.25);
-  --glow-color: rgba(168, 85, 247, 0.4);
+  --border-color: rgba(216, 180, 254, 0.2);
+  --glow-color: rgba(168, 85, 247, 0.35);
   --gold-gradient: linear-gradient(135deg, #f59e0b 0%, #d97706 50%, #b45309 100%);
-  --gold-glow: rgba(245, 158, 11, 0.45);
-  --header-bg: rgba(26, 11, 54, 0.95);
-  
-  --footer-bg: #12072b;
-  --footer-text: #e9d5ff;
+  --gold-glow: rgba(245, 158, 11, 0.4);
+  --header-bg: rgba(11, 6, 26, 0.9);
+  --footer-bg: #05030d;
+  --footer-text: #d8b4fe;
   --footer-link: #fef08a;
-  --footer-link-hover: #f59e0b;
-  --input-bg: rgba(0, 0, 0, 0.35);
-  --focus-ring: #f59e0b;
+  --input-bg: rgba(12, 7, 28, 0.6);
 }
 
-body.light-mode {
-  --bg-main: #f4f1ea;
-  --card-bg: #ffffff;
-  --glass-border: rgba(126, 34, 206, 0.2);
-  --text-main: #0f172a;
-  --text-sub: #581c87;
-  --primary-purple: #7e22ce;
-  --border-color: #cbd5e1;
-  --glow-color: rgba(126, 34, 206, 0.2);
-  --header-bg: #5b21b6;
-  
-  --footer-bg: #e8e3d9;
-  --footer-text: #1e293b;
-  --footer-link: #6b21a8;
-  --footer-link-hover: #b45309;
-  --input-bg: #ffffff;
+/* 2. 日間模式 (Light Mode) 覆蓋 */
+html.light-mode, body.light-mode {
+  --bg-main: #f5f2eb !important;
+  --card-bg: #ffffff !important;
+  --glass-border: rgba(126, 34, 206, 0.2) !important;
+  --text-main: #1e1b4b !important;
+  --text-sub: #6b21a8 !important;
+  --primary-purple: #7e22ce !important;
+  --border-color: #d1d5db !important;
+  --glow-color: rgba(126, 34, 206, 0.15) !important;
+  --header-bg: #ffffff !important;
+  --footer-bg: #e8e3d9 !important;
+  --footer-text: #1e293b !important;
+  --footer-link: #6b21a8 !important;
+  --input-bg: #f8fafc !important;
 }
 
-body.large-mode {
-  font-size: 1.05rem !important;
+/* 3. 大字體模式 (Large Mode) */
+html.large-mode, body.large-mode {
+  font-size: 118% !important;
 }
 
+/* 4. 基本重置 */
 *, *::before, *::after {
-  box-sizing: border-box !important;
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
 }
 
 html, body {
-  width: 100% !important;
-  max-width: 100vw !important;
+  width: 100%;
+  max-width: 100vw;
   min-height: 100vh;
-  overflow-x: hidden !important;
+  overflow-x: hidden;
 }
 
 body {
   background-color: var(--bg-main);
   background-image: 
-    radial-gradient(circle at 50% 15%, rgba(168, 85, 247, 0.18) 0%, transparent 55%),
-    radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 45%);
+    radial-gradient(circle at 50% 10%, rgba(168, 85, 247, 0.12) 0%, transparent 60%),
+    radial-gradient(circle at 85% 85%, rgba(245, 158, 11, 0.08) 0%, transparent 50%);
   color: var(--text-main);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  line-height: 1.4;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
   display: flex;
   flex-direction: column;
 }
 
-/* Header */
+/* 5. 頁首 Header 樣式 */
 .site-header {
   background: var(--header-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  color: #ffffff;
-  padding: 0.45rem 0.85rem;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 0.6rem 1.2rem;
   border-bottom: 1px solid var(--glass-border);
-  flex-shrink: 0;
-  width: 100% !important;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  width: 100%;
 }
 
 .header-inner {
@@ -89,252 +90,439 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 0.35rem;
-  width: 100% !important;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+
+.brand-badge {
+  background: var(--gold-gradient);
+  color: #fff;
+  font-size: 0.72rem;
+  font-weight: 900;
+  padding: 0.15rem 0.45rem;
+  border-radius: 0.3rem;
+  box-shadow: 0 0 10px var(--gold-glow);
 }
 
 .brand-title {
-  font-size: 1.15rem;
-  font-weight: 800;
-  letter-spacing: 0.03em;
-  background: linear-gradient(135deg, #fef08a 0%, #f59e0b 100%);
+  font-size: 1.25rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  background: linear-gradient(135deg, #ffffff 0%, #fef08a 50%, #f59e0b 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  white-space: nowrap;
 }
 
-body.light-mode .brand-title {
+html.light-mode .brand-title, body.light-mode .brand-title {
   background: none;
   -webkit-text-fill-color: initial;
-  color: #ffffff;
+  color: #5b21b6 !important;
 }
 
 .header-actions {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.4rem;
   align-items: center;
-  flex-wrap: wrap;
 }
 
-.btn-head {
-  background: rgba(255, 255, 255, 0.12);
+.btn-icon {
+  background: rgba(255, 255, 255, 0.08);
   border: 1px solid var(--border-color);
-  color: #ffffff;
-  padding: 0.25rem 0.55rem;
-  border-radius: 0.35rem;
-  font-size: 0.82rem;
-  font-weight: bold;
+  color: var(--text-main);
+  padding: 0.3rem 0.6rem;
+  border-radius: 0.5rem;
+  font-size: 0.85rem;
   cursor: pointer;
-  min-height: 30px;
-  display: inline-flex;
-  align-items: center;
-  white-space: nowrap;
+  transition: all 0.2s ease;
 }
 
-.btn-head option {
-  background-color: #1a0b36 !important;
-  color: #f3e8ff !important;
+html.light-mode .btn-icon, body.light-mode .btn-icon {
+  background: #f1f5f9;
 }
 
-/* 主容器 */
+.lang-selector {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  outline: none;
+  cursor: pointer;
+}
+
+html.light-mode .lang-selector, body.light-mode .lang-selector {
+  background: #f1f5f9;
+}
+
+.lang-selector option {
+  background: #0f0826;
+  color: #f3e8ff;
+}
+
+html.light-mode .lang-selector option, body.light-mode .lang-selector option {
+  background: #ffffff;
+  color: #1e1b4b;
+}
+
+/* 6. 主容器與卡片架構 */
 .container {
-  width: 100% !important;
-  max-width: 1000px !important;
-  margin: 0.5rem auto;
-  padding: 0 0.75rem;
+  width: 100%;
+  max-width: 960px;
+  margin: 1rem auto;
+  padding: 0 1rem;
   flex: 1;
 }
 
-.glass-card {
-  background: var(--card-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--glass-border);
-  border-radius: 1rem;
-  padding: 0.85rem;
-  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.35);
-  width: 100% !important;
-  max-width: 100% !important;
+.sitarot-space-card, .glass-card {
+  background: var(--card-bg) !important;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 1.25rem;
+  padding: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  transition: all 0.3s ease;
 }
 
-/* 🌟 預設熱門問題按鈕：手機版自動分行不裁切 */
+.hero-prompt-box {
+  margin-bottom: 1.2rem;
+}
+
+.space-main-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-main);
+  letter-spacing: 0.02em;
+}
+
+.input-wrapper {
+  margin: 1rem 0;
+}
+
+.minimal-input {
+  width: 100%;
+  min-height: 72px;
+  max-height: 120px;
+  padding: 0.85rem 1.1rem;
+  border-radius: 0.85rem;
+  border: 1.5px solid var(--border-color);
+  background: var(--input-bg);
+  color: var(--text-main);
+  font-size: 1rem;
+  font-weight: 600;
+  outline: none;
+  resize: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.minimal-input:focus {
+  border-color: var(--primary-purple);
+  box-shadow: 0 0 18px var(--glow-color);
+}
+
+/* 7. 標籤與牌陣按鈕組 */
 .preset-tags-wrapper {
   display: flex !important;
   flex-wrap: wrap !important;
   justify-content: center !important;
-  gap: 0.35rem !important;
-  margin: 0.5rem 0 !important;
-  width: 100% !important;
+  gap: 0.6rem !important;
+  margin: 1rem 0 !important;
 }
 
 .kw-btn {
-  background: rgba(168, 85, 247, 0.15);
-  border: 1px solid var(--primary-purple);
-  color: var(--text-main);
-  padding: 0.32rem 0.7rem;
-  border-radius: 9999px;
-  font-size: 0.82rem;
-  font-weight: bold;
+  background: rgba(168, 85, 247, 0.12) !important;
+  border: 1.5px solid var(--border-color) !important;
+  color: var(--text-main) !important;
+  padding: 0.45rem 0.95rem !important;
+  border-radius: 9999px !important;
+  font-size: 0.85rem !important;
+  font-weight: 700 !important;
   cursor: pointer;
-  white-space: normal !important;
-  word-break: break-word;
-  max-width: 100%;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  line-height: 1.3 !important;
+  margin: 0 !important;
 }
 
-body.light-mode .kw-btn {
-  background: #f1f5f9;
-  border-color: #7e22ce;
-  color: #581c87;
+html.light-mode .kw-btn, body.light-mode .kw-btn {
+  background: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #431407 !important;
+}
+
+.kw-btn:hover, .kw-btn.active {
+  background: var(--primary-purple) !important;
+  color: #ffffff !important;
+  border-color: var(--primary-purple) !important;
+  box-shadow: 0 4px 15px var(--glow-color) !important;
 }
 
 .spread-btn-group {
   display: flex !important;
-  flex-wrap: wrap !important;
   justify-content: center !important;
-  gap: 0.35rem !important;
-  margin: 0.6rem 0 !important;
-  width: 100% !important;
+  gap: 0.6rem !important;
+  margin: 1.2rem 0 !important;
 }
 
-/* 大按鈕 */
+.spread-chip {
+  background: transparent;
+  color: var(--text-main);
+  border: 1.5px solid var(--border-color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.6rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+html.light-mode .spread-chip, body.light-mode .spread-chip {
+  background: #f8fafc;
+  color: #1e1b4b;
+}
+
+.spread-chip.active {
+  background: var(--primary-purple) !important;
+  color: #ffffff !important;
+  border-color: var(--primary-purple) !important;
+}
+
+/* 8. 金色行動按鈕與狀態 */
+.action-btn-container {
+  margin: 1.2rem 0 0.5rem 0;
+}
+
 .btn-gold {
   background: var(--gold-gradient);
   color: #ffffff;
-  border: 1px solid #fef08a;
+  border: 1.5px solid #fef08a;
   font-weight: 800;
-  padding: 0.55rem 1.6rem;
+  padding: 0.75rem 2.2rem;
   border-radius: 9999px;
+  font-size: 1.05rem;
   cursor: pointer;
-  box-shadow: 0 4px 18px var(--gold-glow);
-  transition: all 0.25s ease;
-  letter-spacing: 0.05em;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
-  max-width: 100% !important;
+  box-shadow: 0 4px 20px var(--gold-glow);
+  transition: all 0.3s ease;
 }
 
-.custom-toast-msg {
-  background: #5b21b6 !important;
-  border: 2px solid #7c3aed !important;
-  color: #ffffff !important;
-  padding: 0.45rem 1rem !important;
-  border-radius: 0.5rem !important;
-  font-weight: 900 !important;
-  font-size: 0.9rem !important;
-  margin: 0.3rem auto 0.5rem auto !important;
-  box-shadow: 0 4px 15px rgba(91, 33, 182, 0.35) !important;
+.btn-gold-disabled {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: var(--text-sub) !important;
+  border: 1px solid var(--border-color) !important;
+  box-shadow: none !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
 }
 
-.input-error-shake {
-  border-color: #ef4444 !important;
-  box-shadow: 0 0 12px rgba(239, 68, 68, 0.5) !important;
+html.light-mode .btn-gold-disabled, body.light-mode .btn-gold-disabled {
+  background: #e2e8f0 !important;
+  color: #64748b !important;
 }
 
-body.light-mode #ritual-blessing-notice {
-  background: rgba(126, 34, 206, 0.1) !important;
-}
-body.light-mode #ritual-blessing-notice > div:first-child {
-  color: #6b21a8 !important;
+.btn-gold-ready {
+  animation: goldPulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1);
 }
 
-#wiki-index-section h2 {
-  color: var(--primary-purple) !important;
-}
-body.light-mode #wiki-index-section h3 {
-  color: #6b21a8 !important;
+@keyframes goldPulse {
+  0%, 100% { box-shadow: 0 0 15px var(--gold-glow); transform: scale(1); }
+  50% { box-shadow: 0 0 32px rgba(245, 158, 11, 0.9); transform: scale(1.02); }
 }
 
-/* 解牌結果區域 */
+.blessing-banner {
+  padding: 1rem;
+  background: rgba(168, 85, 247, 0.12);
+  border: 1px solid var(--primary-purple);
+  border-radius: 0.85rem;
+  margin: 1rem 0;
+}
+
+.blessing-title {
+  font-size: 1rem;
+  font-weight: 800;
+  color: #fef08a;
+}
+
+html.light-mode .blessing-title, body.light-mode .blessing-title {
+  color: #7e22ce !important;
+}
+
+/* 🌟 9. AI 解讀對話框修復重點 (徹底解決白底白字) 🌟 */
 .result-layout-grid {
   display: grid;
-  grid-template-columns: 260px 1fr;
-  gap: 1rem;
+  grid-template-columns: 280px 1fr;
+  gap: 1.2rem;
   align-items: start;
   text-align: left;
-  margin-top: 0.75rem;
-}
-
-.result-left-column {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.result-mini-slots {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  justify-content: center;
-}
-
-.cards-detail-list {
-  background: rgba(0, 0, 0, 0.25);
-  border: 1px solid var(--border-color);
-  border-radius: 0.75rem;
-  padding: 0.65rem;
-}
-
-body.light-mode .cards-detail-list {
-  background: rgba(126, 34, 206, 0.05);
-}
-
-.card-detail-item {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.35rem 0;
-  border-bottom: 1px dashed var(--border-color);
-}
-
-.card-detail-item:last-child {
-  border-bottom: none;
+  margin-top: 1.2rem;
 }
 
 .ai-chat-box {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(18, 11, 38, 0.95) !important;
+  border: 1.5px solid var(--primary-purple) !important;
+  border-radius: 1rem !important;
+  padding: 1.25rem !important;
+  line-height: 1.8 !important;
+  font-size: 0.98rem !important;
+  color: #ffffff !important; /* 強制文字為白色，避免跟背景融合 */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5) !important;
+  text-align: left !important;
+  position: relative;
+  overflow: hidden;
+}
+
+html.light-mode .ai-chat-box, body.light-mode .ai-chat-box {
+  background: #ffffff !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important; /* 日間模式強制為黑字 */
+}
+
+#typewriter-text {
+  color: inherit !important;
+  min-height: 140px !important;
+  font-weight: 500 !important;
+  word-break: break-word !important;
+}
+
+/* 10. 步驟隱藏與漸變動畫 */
+.step-section-hidden {
+  display: none !important;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.step-section-visible {
+  display: block !important;
+  animation: stepFadeIn 0.5s ease-out forwards;
+}
+
+@keyframes stepFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* 11. 塔羅百科區塊 */
+.wiki-section {
+  margin-top: 2rem !important;
+  text-align: left !important;
+  margin-bottom: 3rem !important;
+}
+
+.wiki-main-title {
+  font-size: 1.25rem;
+  color: #fef08a;
+}
+
+html.light-mode .wiki-main-title, body.light-mode .wiki-main-title {
+  color: #6b21a8 !important;
+}
+
+.wiki-subtitle {
+  font-size: 0.8rem;
+  color: var(--text-sub);
+}
+
+.wiki-tab-bar {
+  display: flex;
+  gap: 0.5rem;
+  overflow-x: auto;
+  padding-bottom: 0.8rem;
+  margin: 1.2rem 0;
+}
+
+.article-list-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.article-link-card {
+  background: rgba(168, 85, 247, 0.08);
   border: 1px solid var(--border-color);
-  border-radius: 0.85rem;
-  padding: 1rem;
-  line-height: 1.6;
+  color: var(--text-main);
+  padding: 0.85rem 1.1rem;
+  border-radius: 0.75rem;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
 }
 
-body.light-mode .ai-chat-box {
-  background: #f8fafc;
+html.light-mode .article-link-card, body.light-mode .article-link-card {
+  background: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+  color: #1e1b4b !important;
 }
 
-/* Footer */
+.article-link-card:hover {
+  background: rgba(168, 85, 247, 0.2);
+  border-color: var(--primary-purple);
+}
+
+.card-group-block {
+  margin-bottom: 1.5rem !important;
+  text-align: left !important;
+}
+
+.card-group-title {
+  font-size: 0.95rem !important;
+  font-weight: 800 !important;
+  color: var(--text-sub) !important;
+  margin-bottom: 0.8rem !important;
+}
+
+.card-chips-wrapper {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0.6rem 0.5rem !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  margin-bottom: 1.5rem !important;
+  width: 100% !important;
+  padding-bottom: 0.5rem !important;
+}
+
+/* 12. 頁尾 Footer 樣式 */
 .site-footer {
   background: var(--footer-bg);
   border-top: 1px solid var(--border-color);
-  padding: 1.25rem 1rem;
+  padding: 2rem 1rem;
   font-size: 0.85rem;
   color: var(--footer-text);
-  flex-shrink: 0;
-  margin-top: 1.5rem;
-  width: 100% !important;
+  margin-top: 4rem !important;
+  width: 100%;
 }
 
 .footer-inner {
-  max-width: 1000px;
+  max-width: 960px;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 0.65rem;
+  gap: 1rem;
   align-items: center;
 }
 
 .footer-lang-links {
   display: flex;
+  gap: 1.2rem;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 0.4rem 1rem;
 }
 
-.footer-lang-links a {
+.footer-lang-links a, .footer-policy-links a {
   color: var(--footer-link);
   text-decoration: none;
-  font-weight: bold;
+  font-weight: 700;
 }
 
 .footer-bottom {
@@ -343,180 +531,29 @@ body.light-mode .ai-chat-box {
   width: 100%;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.5rem;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  padding-top: 0.65rem;
+  gap: 0.6rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
 }
 
-.footer-policy-links a {
-  color: var(--footer-link);
-  text-decoration: none;
-  font-weight: bold;
-}
-
-/* Modal 條款視窗 */
-.modal-overlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(8px);
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-  padding: 1rem;
-}
-
-.modal-card {
-  background: #120826;
-  border: 1px solid var(--glass-border);
-  border-radius: 1rem;
-  max-width: 520px;
-  width: 100%;
-  max-height: 80vh;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-header {
-  padding: 0.85rem 1.25rem;
-  border-bottom: 1px solid var(--border-color);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.modal-header h3 {
-  color: #f59e0b;
-  font-size: 1.05rem;
-}
-
-.modal-close-btn {
-  background: transparent;
-  border: none;
-  color: #c084fc;
-  font-size: 1.4rem;
-  cursor: pointer;
-}
-
-.modal-body {
-  padding: 1rem;
-  overflow-y: auto;
-  font-size: 0.88rem;
-  color: #f3e8ff;
-  text-align: left;
-}
-
-/* 📱 手機版 RWD (<= 600px) */
-@media screen and (max-width: 600px) {
-  .header-inner {
-    justify-content: space-between !important;
-  }
-
-  .brand-title {
-    font-size: 0.95rem !important;
-  }
-
-  .btn-head {
-    padding: 0.18rem 0.4rem !important;
-    font-size: 0.72rem !important;
-    min-height: 26px !important;
-  }
-
-  .preset-tags-wrapper {
-    gap: 0.3rem !important;
-  }
-
-  .kw-btn {
-    font-size: 0.75rem !important;
-    padding: 0.3rem 0.6rem !important;
-  }
-
-  .spread-btn-group {
-    display: flex !important;
-    gap: 0.2rem !important;
-    width: 100% !important;
-  }
-
-  .spread-btn-group button {
-    flex: 1 !important;
-    padding: 0.3rem 0.15rem !important;
-    font-size: 0.72rem !important;
-    white-space: nowrap !important;
-  }
-
+/* 13. RWD 響應式適應 (Mobile) */
+@media screen and (max-width: 650px) {
   .result-layout-grid {
     grid-template-columns: 1fr;
   }
-
-  .glass-card {
-    padding: 0.6rem 0.5rem !important;
+  .space-main-title {
+    font-size: 1.15rem;
   }
-
+  .minimal-input {
+    font-size: 0.92rem;
+  }
+  .btn-gold {
+    width: 100%;
+    padding: 0.65rem 1rem;
+    font-size: 0.95rem;
+  }
   .footer-bottom {
     flex-direction: column;
     text-align: center;
-  }
-}
-/* ==========================================================================
-   Step-by-Step 漸進式引導與按鈕高亮提示樣式
-   ========================================================================== */
-
-/* 1. 步驟容器隱藏與平滑展開動畫 */
-.step-section-hidden {
-  display: none !important;
-  opacity: 0;
-  transform: translateY(12px);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-.step-section-visible {
-  display: block !important;
-  animation: stepFadeIn 0.45s ease-out forwards;
-}
-
-@keyframes stepFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(12px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* 2. 「開始占卜」按鈕未完成時的鎖定/提示樣式 */
-.btn-gold-disabled {
-  background: rgba(255, 255, 255, 0.12) !important;
-  color: var(--text-sub) !important;
-  border: 1px solid var(--border-color) !important;
-  box-shadow: none !important;
-  cursor: not-allowed !important;
-  opacity: 0.65;
-  filter: grayscale(0.8);
-}
-
-/* 3. 「開始占卜」抽牌完成後的極致醒目金光脈衝動畫 */
-.btn-gold-ready {
-  background: var(--gold-gradient) !important;
-  color: #ffffff !important;
-  border: 1.5px solid #fef08a !important;
-  box-shadow: 0 0 25px rgba(245, 158, 11, 0.8) !important;
-  animation: goldPulse 1.8s infinite cubic-bezier(0.4, 0, 0.6, 1) !important;
-  transform: scale(1.02);
-}
-
-@keyframes goldPulse {
-  0%, 100% {
-    box-shadow: 0 0 15px rgba(245, 158, 11, 0.6);
-    transform: scale(1);
-  }
-  50% {
-    box-shadow: 0 0 30px rgba(245, 158, 11, 0.95), 0 0 12px rgba(254, 240, 138, 0.8);
-    transform: scale(1.03);
   }
 }

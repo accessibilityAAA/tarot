@@ -146,3 +146,58 @@
     max-height: 68px !important;
   }
 }
+/* ==========================================================================
+   SITAROT - 3D 物理翻牌與神聖光暈特效深化
+   ========================================================================== */
+
+/* 1. 卡槽與卡牌 3D 透視 */
+.slot-box {
+  perspective: 1000px;
+}
+
+.card-render-box {
+  transform-style: preserve-3d;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* 2. 抽卡時的發光粒子衝擊波 */
+.slot-box.active::after {
+  content: '';
+  position: absolute;
+  top: -10%;
+  left: -10%;
+  width: 120%;
+  height: 120%;
+  border-radius: 12px;
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.6) 0%, transparent 70%);
+  opacity: 0;
+  animation: burstGlow 0.8s ease-out forwards;
+  pointer-events: none;
+}
+
+@keyframes burstGlow {
+  0% { transform: scale(0.6); opacity: 0.9; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* 3. AI 解讀完成時的呼吸金雕邊框 */
+.ai-chat-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.ai-chat-box::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #f59e0b, #c084fc, transparent);
+  animation: borderScan 3s infinite linear;
+}
+
+@keyframes borderScan {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
