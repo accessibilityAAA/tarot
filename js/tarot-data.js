@@ -1,162 +1,190 @@
 /* ==========================================================================
-   Astraea AI Tarot - 78 張偉特塔羅牌完整資料庫 (js/tarot-data.js)
-   內建 78 張全牌義 + 自動宇宙牌背 SVG + 支援檔名「00.webp」~「21.webp」無腦替換
+   SITAROT - 78張塔羅牌完整核心資料庫 (js/tarot-data.js)
+   包含 22 張大阿爾克那與 56 張小阿爾克那完整牌義、關鍵字與解讀文本
    ========================================================================== */
 
-// 1. 生成精美歐美宇宙星盤 SVG 牌背 (解決圖檔遺漏導致卡牌空白的根本問題)
-function getCosmicDeckBackSvg() {
-  return `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 160" width="100%" height="100%">
-      <rect width="100%" height="100%" fill="url(#bgGrad)" stroke="#f59e0b" stroke-width="3"/>
-      <defs>
-        <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#3b0764"/>
-          <stop offset="100%" stop-color="#0f172a"/>
-        </linearGradient>
-      </defs>
-      <rect x="6" y="6" width="88" height="148" fill="none" stroke="#c084fc" stroke-width="1" stroke-dasharray="3,2" opacity="0.8"/>
-      <circle cx="50" cy="80" r="28" fill="none" stroke="#f59e0b" stroke-width="1.5" opacity="0.85"/>
-      <circle cx="50" cy="80" r="20" fill="none" stroke="#c084fc" stroke-width="1"/>
-      <path d="M50 56 L50 104 M26 80 L74 80 M33 63 L67 97 M33 97 L67 63" stroke="#f59e0b" stroke-width="1" opacity="0.75"/>
-      <polygon points="50,72 53,78 60,80 53,82 50,88 47,82 40,80 47,78" fill="#fef08a"/>
-    </svg>
-  `;
-}
+const TAROT_CARDS_DB = [
+  // --------------------------------------------------------------------------
+  // 大阿爾克那 (Major Arcana 0-21)
+  // --------------------------------------------------------------------------
+  { id: "the-fool", num: 0, nameZh: "愚者", nameEn: "The Fool", element: "風", 
+    keywords: { upright: ["冒險", "純真", "新開始", "自由"], reversed: ["魯莽", "逃避", "缺乏規劃", "危險"] },
+    uprightZh: "象徵純粹、毫無心理包袱的新起點。拋開過往防備，以純真與好奇擁抱未知的可能性。",
+    reversedZh: "警示草率冒進或因為逃避現實而做出不智決定，需要建立現實的安全邊界。"
+  },
+  { id: "the-magician", num: 1, nameZh: "魔術師", nameEn: "The Magician", element: "風", 
+    keywords: { upright: ["創造力", "顯化", "資源整合", "主動"], reversed: ["欺瞞", "花言巧語", "能力浪費", "盲點"] },
+    uprightZh: "具備成功所需的一切工具與資源，專注於目標進行整合，就能化想法為具體現實。",
+    reversedZh: "注意訊息的真實性，避免被表面的花言巧語所蒙蔽，或警示才華未能正確展現。"
+  },
+  { id: "the-high-priestess", num: 2, nameZh: "女祭司", nameEn: "The High Priestess", element: "水", 
+    keywords: { upright: ["直覺", "潛意識", "靜心", "沉澱"], reversed: ["壓抑", "猜忌", "直覺封閉", "冷漠"] },
+    uprightZh: "答案早已在你心中。靜下心來傾聽內在直覺，勝過外界無謂的嘈雜聲音。",
+    reversedZh: "情緒過度壓抑或忽視了內心的警告，容易因為猜忌與疏離而錯失核心真實。"
+  },
+  { id: "the-empress", num: 3, nameZh: "皇后", nameEn: "The Empress", element: "土", 
+    keywords: { upright: ["豐盛", "滋養", "愛", "創造力"], reversed: ["控制欲", "過度依賴", "耗竭", "浪費"] },
+    uprightZh: "代表極致的豐盛與愛的滋養。計畫結出纍纍碩果，盡情享受生命的慷慨饋贈。",
+    reversedZh: "警示窒息式的控制或過度討好，容易在關係中耗盡自己的心靈能量。"
+  },
+  { id: "the-emperor", num: 4, nameZh: "皇帝", nameEn: "The Emperor", element: "火", 
+    keywords: { upright: ["秩序", "責任", "穩固", "領導力"], reversed: ["專制", "剛愎自用", "控制狂", "混亂"] },
+    uprightZh: "展現強大的邏輯秩序與擔當力。建立明確規矩與穩固基礎，能掌握全盤局勢。",
+    reversedZh: "警示過度僵化或專制獨裁，硬碰硬只會讓溝通陷入僵局與對立。"
+  },
+  { id: "the-hierophant", num: 5, nameZh: "教皇", nameEn: "The Hierophant", element: "土", 
+    keywords: { upright: ["引導", "傳統", "貴人", "信仰"], reversed: ["墨守成規", "理念衝突", "權威壓迫", "叛逆"] },
+    uprightZh: "代表體制引導與貴人相助。遵循成熟經驗或尋求專業建議，能獲得方向。",
+    reversedZh: "打破不合理的死板規範，不要為了迎合權威或傳統而委屈真實的自己。"
+  },
+  { id: "the-lovers", num: 6, nameZh: "戀人", nameEn: "The Lovers", element: "風", 
+    keywords: { upright: ["和諧", "靈魂吸引", "抉擇", "合作"], reversed: ["價值觀分歧", "逃避選擇", "隔閡", "失衡"] },
+    uprightZh: "代表心靈的和諧連結與真誠合作。面臨重要抉擇時，選擇符合靈魂價值的道路。",
+    reversedZh: "價值觀出現分歧或內部溝通斷層，切忌因為恐懼而延遲必要的溝通。"
+  },
+  { id: "the-chariot", num: 7, nameZh: "戰車", nameEn: "The Chariot", element: "水", 
+    keywords: { upright: ["意志力", "突破", "勝利", "方向"], reversed: ["失控", "方向迷失", "情緒衝動", "挫折"] },
+    uprightZh: "以堅定的意志力統合衝突力量，克服眼前的挑戰，朝著目標勇敢前進。",
+    reversedZh: "警示失控與情緒化衝動，當前的拉扯需要先停下校準方向，切忌盲目硬闖。"
+  },
+  { id: "strength", num: 8, nameZh: "力量", nameEn: "Strength", element: "火", 
+    keywords: { upright: ["以柔克剛", "勇氣", "包容", "自律"], reversed: ["自卑", "內心恐懼", "軟弱", "失去耐性"] },
+    uprightZh: "真正的強大來自內心的慈悲與耐性。以柔克剛，能撫平最躁動的狂野能量。",
+    reversedZh: "被內在的恐懼與自卑感佔據，需要重拾對自己的信任，給予自我溫柔包容。"
+  },
+  { id: "the-hermit", num: 9, nameZh: "隱士", nameEn: "The Hermit", element: "土", 
+    keywords: { upright: ["內省", "尋求真理", "沉澱", "智慧"], reversed: ["孤立", "逃避現實", "孤僻", "隔絕"] },
+    uprightZh: "暫時退回內在的平靜城堡。這是一段尋找自我真理、進行深度思考的黃金沉澱期。",
+    reversedZh: "過度孤立排外或陷入自憐情緒，試著敞開心扉，適度接受外界的溫暖與協助。"
+  },
+  { id: "wheel-of-fortune", num: 10, nameZh: "命運之輪", nameEn: "Wheel of Fortune", element: "火", 
+    keywords: { upright: ["轉機", "順應時勢", "宇宙契機", "循環"], reversed: ["抗拒改變", "低潮", "重複循環", "阻礙"] },
+    uprightZh: "宇宙的輪盤正在轉動！順應時勢與轉機，把握不可多得的命運契機。",
+    reversedZh: "抗拒改變只會增加痛苦。接納短暫的低潮，這是在為下一波起飛蓄積能量。"
+  },
+  { id: "justice", num: 11, nameZh: "正義", nameEn: "Justice", element: "風", 
+    keywords: { upright: ["客觀", "公平", "因果", "理性"], reversed: ["偏頗", "逃避責任", "不公", "審判失衡"] },
+    uprightZh: "以理性客觀的角度衡量一切。種什麼因得什麼果，誠實面對能帶來最公正的平衡。",
+    reversedZh: "警示不對等的對待或試圖掩蓋失誤，逃避責任只會讓局勢變得更加複雜。"
+  },
+  { id: "the-hanged-man", num: 12, nameZh: "倒吊人", nameEn: "The Hanged Man", element: "水", 
+    keywords: { upright: ["換位思考", "臣服", "等待時機", "覺察"], reversed: ["無謂犧牲", "死板固執", "拖延", "麻木"] },
+    uprightZh: "換個倒立的角度看世界，局勢將豁然開朗。主動臣服於當下，等待最佳時機。",
+    reversedZh: "警示做無謂的委屈與犧牲，如果固執不願改變舊思維，只會陷入毫無意義的拖延。"
+  },
+  { id: "death", num: 13, nameZh: "死神", nameEn: "Death", element: "水", 
+    keywords: { upright: ["重生", "階段結束", "蛻變", "放下"], reversed: ["抗拒結束", "拖泥帶水", "恐懼改變", "停滯"] },
+    uprightZh: "舊有的階段徹底結束，迎來靈魂的深刻重生。勇敢放下過去，才能擁抱新篇章。",
+    reversedZh: "強行抱著早已枯萎的舊事物不放，恐懼改變會讓你錯過早日重生的機會。"
+  },
+  { id: "temperance", num: 14, nameZh: "節制", nameEn: "Temperance", element: "火", 
+    keywords: { upright: ["調和", "和諧溝通", "淨化", "適中"], reversed: ["失衡", "溝通不順", "極端", "揮霍"] },
+    uprightZh: "代表完美的調和與靈魂轉換。透過溫和對等流動，能將混亂淨化為和諧。",
+    reversedZh: "生活或關係出現極端失衡，溝通出現代溝，需要重新調整生活節奏與心態。"
+  },
+  { id: "the-devil", num: 15, nameZh: "惡魔", nameEn: "The Devil", element: "土", 
+    keywords: { upright: ["執著", "慾望", "心靈枷鎖", "束縛"], reversed: ["覺醒解脫", "打破枷鎖", "擺脫控制", "重生"] },
+    uprightZh: "警示被物質慾望或不健康的心理執著所牽絆，鎖鏈其實是鬆的，關鍵在於你是否想開。",
+    reversedZh: "意識到有毒關係或不健康習慣的危害，正在展現覺醒的力量，打破枷鎖獲取自由。"
+  },
+  { id: "the-tower", num: 16, nameZh: "高塔", nameEn: "The Tower", element: "火", 
+    keywords: { upright: ["破除假象", "突發劇變", "覺醒", "重構"], reversed: ["掩耳盜鈴", "危機延緩", "強行支撐", "恐懼"] },
+    uprightZh: "強烈但必要的覺醒！虛假的伪裝與不穩固的基礎被擊碎，讓真正的聖殿能重新重建。",
+    reversedZh: "試圖掩蓋已經產生的裂痕，掩耳盜鈴只會延緩危機爆發，請坦然面對現實。"
+  },
+  { id: "the-star", num: 17, nameZh: "星星", nameEn: "The Star", element: "風", 
+    keywords: { upright: ["希望", "心靈療癒", "信念", "平靜"], reversed: ["悲觀", "信心危機", "失去期待", "沮喪"] },
+    uprightZh: "暴風雨後的溫柔曙光。保持純粹的信任與希望，靈魂正獲得深度的滋養與療癒。",
+    reversedZh: "陷入短暫的信心危機或悲觀情緒中，請記得：即使雲層遮蔽，星光依然在為你閃耀。"
+  },
+  { id: "the-moon", num: 18, nameZh: "月亮", nameEn: "The Moon", element: "水", 
+    keywords: { upright: ["潛意識不安", "迷霧", "直覺考驗", "幻想"], reversed: ["迷霧散去", "真相大白", "清醒", "釋懷"] },
+    uprightZh: "映照出潛意識深處的恐懼與迷霧。不要被想像出來的陰影嚇倒，信任直覺指引。",
+    reversedZh: "困擾已久的迷霧終於散去，真相大白，內心的不安與疑慮逐步獲得釋懷。"
+  },
+  { id: "the-sun", num: 19, nameZh: "太陽", nameEn: "The Sun", element: "火", 
+    keywords: { upright: ["喜悅", "成功", "光明", "生命力"], reversed: ["熱情稍退", "延遲成功", "過度自負", "短暫陰霾"] },
+    uprightZh: "充滿光明與生命的極致喜悅！一切顯得坦蕩清晰，目標順利達成，成功唾手可得。",
+    reversedZh: "雖然進度稍有延遲或熱情降溫，但光明依然存在，調整步調即可重拾活力。"
+  },
+  { id: "judgement", num: 20, nameZh: "審判", nameEn: "Judgement", element: "火", 
+    keywords: { upright: ["靈魂覺醒", "重大召喚", "清晰抉擇", "重生"], reversed: ["自我懷疑", "懊悔過去", "錯失良機", "猶豫"] },
+    uprightZh: "聽見來自靈魂深處的召喚。這是總結過去、清醒做出人生重大決定的轉折時刻。",
+    reversedZh: "陷入對過去失誤的自我懷疑與懊悔中，猶豫不決會讓你錯過眼前的突破良機。"
+  },
+  { id: "the-world", num: 21, nameZh: "世界", nameEn: "The World", element: "土", 
+    keywords: { upright: ["圓滿", "達成目標", "完美統合", "新循環"], reversed: ["未竟之業", "缺乏突破", "功虧一潰", "最後一哩路"] },
+    uprightZh: "象徵階段性的完美圓滿與大統合！內在與外在達到和諧，準備優雅邁入下一個新循環。",
+    reversedZh: "離成功只差最後一哩路，檢視是否有未竟之業或細節疏漏，補齊即可達成圓滿。"
+  },
 
-// 2. 78 張卡牌資料庫
-const TAROT_CARDS_DB = (function () {
-  const db = [];
+  // --------------------------------------------------------------------------
+  // 小阿爾克那 - 權杖組 (Wands 1-14)
+  // --------------------------------------------------------------------------
+  { id: "ace-of-wands", nameZh: "權杖一", nameEn: "Ace of Wands", element: "火",
+    keywords: { upright: ["熱情衝勁", "新計畫", "靈感", "生命力"], reversed: ["動力不足", "延遲", "三分鐘熱度", "挫折"] },
+    uprightZh: "點燃新計畫與熱情的火花！心中充滿靈感與行動力，是開創事業的黃金起點。",
+    reversedZh: "出現三分鐘熱度或動力脫節的情況，需要重新找回最初的熱情與明確方向。"
+  },
+  { id: "two-of-wands", nameZh: "權杖二", nameEn: "Two of Wands", element: "火",
+    keywords: { upright: ["遠見", "規劃", "跨出舒適圈", "抉擇"], reversed: ["猶豫不決", "局限", "害怕未知", "保守"] },
+    uprightZh: "站在高處進行長遠的規劃與佈局。你已掌握既有成果，準備勇敢跨出舒適圈。",
+    reversedZh: "因為害怕未知的風險而縮回安全區，猶豫不決會讓你錯失擴展版圖的良機。"
+  },
+  { id: "three-of-wands", nameZh: "權杖三", nameEn: "Three of Wands", element: "火",
+    keywords: { upright: ["擴展", "遠景實現", "合作", "展望"], reversed: ["合作卡關", "延誤", "眼光短淺", "溝通脫節"] },
+    uprightZh: "遠航的船隻正在駛回成果！事業與計畫進入實質擴展期，眼光放遠收穫無量。",
+    reversedZh: "計畫進度面臨延誤或海外/跨界合作不順，需要重新檢視供應鏈與團隊溝通。"
+  },
+  { id: "four-of-wands", nameZh: "權杖四", nameEn: "Four of Wands", element: "火",
+    keywords: { upright: ["慶祝", "穩固安居", "和諧家庭", "階段成功"], reversed: ["不穩定", "內部不和", "暫時停滯", "過渡期"] },
+    uprightZh: "值得歡慶的階段性勝利！建立了穩固的安全城堡，無論家庭或團隊皆呈現和諧氣氛。",
+    reversedZh: "內部出現短暫的步調不一或基礎不穩，需要投入時間處理家庭或團隊內部的細節。"
+  },
 
-  // 大阿爾克那 Major Arcana (22張)
-  const majorList = [
-    { num: "00", en: "The Fool", zh: "愚者", icon: "🃏", up: "新開始、無畏冒險、純真信賴", rev: "輕率冒失、盲目衝動、逃避責任" },
-    { num: "01", en: "The Magician", zh: "魔術師", icon: "🪄", up: "創造力、資源整合、顯化能力", rev: "投機取巧、操弄人心、意志薄弱" },
-    { num: "02", en: "The High Priestess", zh: "女祭司", icon: "🌙", up: "直覺敏銳、內在智慧、靜心觀察", rev: "忽視直覺、情緒壓抑、表面浮躁" },
-    { num: "03", en: "The Empress", zh: "皇后", icon: "👑", up: "豐盛富足、母性滋養、愛與和諧", rev: "過度依賴、創造力阻塞、過度控制" },
-    { num: "04", en: "The Emperor", zh: "皇帝", icon: "🏛️", up: "權威領導、嚴謹秩序、穩固架構", rev: "專制獨裁、剛愎自用、規則混亂" },
-    { num: "05", en: "The Hierophant", zh: "教皇", icon: "🔔", up: "精神指引、傳統價值、良師益友", rev: "打破陳腐、盲從教條、叛逆創新" },
-    { num: "06", en: "The Lovers", zh: "戀人", icon: "💕", up: "靈魂契合、真摯情感、重大選擇", rev: "價值觀衝突、溝通失衡、猶豫不決" },
-    { num: "07", en: "The Chariot", zh: "戰車", icon: "🛡️", up: "堅強意志、克服困難、快速推進", rev: "方向失控、情緒衝動、挫折受阻" },
-    { num: "08", en: "Strength", zh: "力量", icon: "🦁", up: "柔能克剛、內在勇氣、包容耐心", rev: "自我懷疑、軟弱無力、暴躁失控" },
-    { num: "09", en: "The Hermit", zh: "隱士", icon: "🕯️", up: "沉思內省、獨處尋道、燈塔指引", rev: "孤立排外、偏執自私、逃避人群" },
-    { num: "10", en: "Wheel of Fortune", zh: "命運之輪", icon: "🎡", up: "命運轉折、幸運契機、順應時勢", rev: "抗拒改變、低潮阻礙、重複錯誤" },
-    { num: "11", en: "Justice", zh: "正義", icon: "⚖️", up: "公平公正、客觀理性、因果報應", rev: "不公不義、偏見袒護、逃避責任" },
-    { num: "12", en: "The Hanged Man", zh: "倒吊人", icon: "🙃", up: "主動臣服、換位思考、暫停沉澱", rev: "無謂犧牲、拖延逃避、原地踏步" },
-    { num: "13", en: "Death", zh: "死神", icon: "🥀", up: "舊事結束、徹底蛻變、全新重生", rev: "恐懼改變、死守舊物、痛苦沉淪" },
-    { num: "14", en: "Temperance", zh: "節制", icon: "🕊️", up: "中庸之道、和諧調和、平衡節奏", rev: "極端過度、失去平衡、消耗無度" },
-    { num: "15", en: "The Devil", zh: "惡魔", icon: "🔥", up: "物質執著、慾望枷鎖、盲目沉迷", rev: "掙脫枷鎖、意識覺醒、重獲自由" },
-    { num: "16", en: "The Tower", zh: "高塔", icon: "⚡", up: "突發衝擊、幻滅崩解、徹底覺醒", rev: "災難延後、掩耳盜鈴、恐懼瓦解" },
-    { num: "17", en: "The Star", zh: "星星", icon: "⭐", up: "希望曙光、靈魂療癒、靈感泉湧", rev: "失去信心、絕望沮喪、悲觀自憐" },
-    { num: "18", en: "The Moon", zh: "月亮", icon: "🌕", up: "潛意識不安、迷霧幻象、直覺考驗", rev: "撥雲見日、克服恐懼、真相大白" },
-    { num: "19", en: "The Sun", zh: "太陽", icon: "☀️", up: "成功光明、喜悅活力、自信熱情", rev: "暫時陰霾、延遲成功、缺乏熱情" },
-    { num: "20", en: "Judgement", zh: "審判", icon: "🎺", up: "靈魂召喚、深刻覺醒、重生昇華", rev: "自我批判、猶豫延誤、悔恨糾結" },
-    { num: "21", en: "The World", zh: "世界", icon: "🌍", up: "大圓滿、完美結束、成就統合", rev: "未竟之業、臨門一腳、缺乏閉環" }
-  ];
+  // --------------------------------------------------------------------------
+  // 小阿爾克那 - 聖盃組 (Cups 1-14)
+  // --------------------------------------------------------------------------
+  { id: "ace-of-cups", nameZh: "聖盃一", nameEn: "Ace of Cups", element: "水",
+    keywords: { upright: ["情感流動", "愛與關懷", "靈性滋養", "和諧"], reversed: ["情感壓抑", "心碎", "付出失衡", "冷漠"] },
+    uprightZh: "愛與情感的泉湧而出！心靈獲得充沛的滋養，適合開啟一段美好的情感或藝術創作。",
+    reversedZh: "感覺情緒枯竭或付出得不到回應，需要先把這份愛與關懷轉向滋養你自己。"
+  },
+  { id: "two-of-cups", nameZh: "聖盃二", nameEn: "Two of Cups", element: "水",
+    keywords: { upright: ["互相吸引", "和諧夥伴", "平等溝通", "契合"], reversed: ["溝通脫節", "衝突", "關係失衡", "疏離"] },
+    uprightZh: "彼此心靈的高度契合與互相吸引。建立在平等、尊重與真誠基礎上的和諧關係。",
+    reversedZh: "溝通出現誤解或利益衝突，雙方心態出現不對等，需要重新開誠布公坦誠相對。"
+  },
 
-  majorList.forEach((item) => {
-    db.push({
-      id: `major_${parseInt(item.num, 10)}`,
-      number: item.num,
-      nameEn: item.en,
-      nameZh: item.zh,
-      icon: item.icon,
-      image: `assets/images/cards/${item.num}.webp`, // 支援將圖片命名為 00.webp ~ 21.webp 無腦替換
-      uprightEn: `${item.en} brings energy of: ${item.up}.`,
-      uprightZh: `【${item.zh}】正位：${item.up}。`,
-      reversedEn: `Reversed ${item.en} cautions: ${item.rev}.`,
-      reversedZh: `【${item.zh}】逆位：${item.rev}。`
-    });
-  });
+  // --------------------------------------------------------------------------
+  // 小阿爾克那 - 寶劍組 (Swords 1-14)
+  // --------------------------------------------------------------------------
+  { id: "ace-of-swords", nameZh: "寶劍一", nameEn: "Ace of Swords", element: "風",
+    keywords: { upright: ["突破", "理智清晰", "真相", "決斷力"], reversed: ["混亂", "偏見", "言語傷害", "思考卡關"] },
+    uprightZh: "理智與決斷力的雙面寶劍！撥開迷霧看清真相，以極高的智慧與邏輯破除障礙。",
+    reversedZh: "思考陷入混亂與偏見中，注意過度犀利的言詞傷害到身邊真正關心你的人。"
+  },
+  { id: "three-of-swords", nameZh: "寶劍三", nameEn: "Three of Swords", element: "風",
+    keywords: { upright: ["心碎", "悲傷釋放", "現實痛感", "療癒契機"], reversed: ["走過陣痛", "接納傷痛", "逐漸復原", "寬恕"] },
+    uprightZh: "經歷現實帶來的陣痛與心碎。不要壓抑淚水，允許悲傷流動，這是徹底療癒的開端。",
+    reversedZh: "陣痛期正在過去，你開始學會接納過去的傷害與寬恕，心靈正逐步重獲新生。"
+  },
 
-  // 小阿爾克那 Minor Arcana (56張)
-  const suits = [
-    { prefix: "w", en: "Wands", zh: "權杖", icon: "🪄" },
-    { prefix: "c", en: "Cups", zh: "聖盃", icon: "🍷" },
-    { prefix: "s", en: "Swords", zh: "寶劍", icon: "🗡️" },
-    { prefix: "p", en: "Pentacles", zh: "星幣", icon: "🪙" }
-  ];
-
-  const ranks = [
-    { idx: 1, num: "Ace", zh: "一", up: "新起源、潛能爆發", rev: "起步受阻、時機未到" },
-    { idx: 2, num: "2", zh: "二", up: "規劃未來、抉擇溝通", rev: "猶豫不決、溝通脫節" },
-    { idx: 3, num: "3", zh: "三", up: "成果初顯、團隊合作", rev: "進度延誤、內部矛盾" },
-    { idx: 4, num: "4", zh: "四", up: "穩定安居、鞏固基礎", rev: "不穩定、不安現狀" },
-    { idx: 5, num: "5", zh: "五", up: "競爭挑戰、利益衝突", rev: "化解爭端、達成和解" },
-    { idx: 6, num: "6", zh: "六", up: "勝利榮耀、獲得認可", rev: "短暫挫折、缺乏肯定" },
-    { idx: 7, num: "7", zh: "七", up: "堅守陣地、捍衛立場", rev: "力不從心、壓力過重" },
-    { idx: 8, num: "8", zh: "八", up: "快速推進、訊息傳遞", rev: "訊息誤導、阻礙延誤" },
-    { idx: 9, num: "9", zh: "九", up: "堅持到底、累積實力", rev: "筋疲力盡、過度防備" },
-    { idx: 10, num: "10", zh: "十", up: "責任重擔、極限考驗", rev: "卸下重負、崩潰瓦解" },
-    { idx: 11, num: "Page", zh: "侍者", up: ["好奇學習", "新鮮訊息"], rev: "不成熟、缺乏定性" },
-    { idx: 12, num: "Knight", zh: "騎士", up: "勇往直前、無畏衝刺", rev: "魯莽衝動、缺乏耐性" },
-    { idx: 13, num: "Queen", zh: "王后", up: "自信魅力、溫暖滋養", rev: "情緒化、嫉妒控制" },
-    { idx: 14, num: "King", zh: "國王", up: "成熟領導、掌控大局", rev: "專制獨裁、嚴苛冷酷" }
-  ];
-
-  suits.forEach((suit) => {
-    ranks.forEach((rank) => {
-      const isZhName = `${suit.zh}${rank.zh}`;
-      const isEnName = `${rank.num} of ${suit.en}`;
-
-      db.push({
-        id: `${suit.en.toLowerCase()}_${rank.num.toLowerCase()}`,
-        nameEn: isEnName,
-        nameZh: isZhName,
-        icon: suit.icon,
-        image: `assets/images/cards/${suit.prefix}_${rank.idx}.webp`, // 支援 w_1.webp ~ p_14.webp 替換
-        uprightEn: `${isEnName} (Upright): ${rank.up}.`,
-        uprightZh: `【${isZhName}】正位：${rank.up}。`,
-        reversedEn: `${isEnName} (Reversed): ${rank.rev}.`,
-        reversedZh: `【${isZhName}】逆位：${rank.rev}。`
-      });
-    });
-  });
-
-  return db;
-})();
-
-// 未抽牌卡槽渲染 (暗牌狀態)
-function renderHiddenCardHtml(index) {
-  return `
-    <div class="card-render-box" style="padding:0; border-color:#f59e0b;">
-      <div class="card-number-badge">${index + 1}</div>
-      ${getCosmicDeckBackSvg()}
-    </div>
-  `;
-}
-
-// 翻牌後渲染 (明牌狀態，支援圖片自動載入，失敗則自動用 SVG 備份)
-function renderNativeCardHtml(card, isReversed, isZh, index) {
-  const name = isZh ? card.nameZh : card.nameEn;
-  const status = isReversed ? (isZh ? '逆位' : 'Reversed') : (isZh ? '正位' : 'Upright');
-  const statusBg = isReversed ? '#ef4444' : '#10b981';
-  const imgUrl = card.image || `assets/images/cards/${card.number || '00'}.webp`;
-
-  return `
-    <div class="card-render-box ${isReversed ? 'card-reversed' : ''}">
-      <div class="card-number-badge">${index + 1}</div>
-      
-      <!-- 若圖檔存在則顯示，否則自動轉為 SVG 質感卡牌 -->
-      <img src="${imgUrl}" 
-           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" 
-           alt="${name}" 
-           style="width:100%; height:75%; object-fit:cover; border-radius:4px; margin-bottom:0.2rem;">
-      
-      <div style="display:none; flex-direction:column; align-items:center; justify-content:center; height:75%;">
-        <div style="font-size:0.65rem; color:#f59e0b; font-weight:800;">ASTRAEA</div>
-        <div style="font-size:1.8rem; margin:0.1rem 0;">${card.icon || '☯️'}</div>
-      </div>
-
-      <div style="font-size:0.78rem; font-weight:800; text-align:center; color:#ffffff; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:100%;">
-        ${name}
-      </div>
-      <div style="font-size:0.65rem; color:#ffffff; font-weight:bold; background:${statusBg}; padding:1px 6px; border-radius:8px;">
-        ${status}
-      </div>
-    </div>
-  `;
-}
+  // --------------------------------------------------------------------------
+  // 小阿爾克那 - 星幣組 (Pentacles 1-14)
+  // --------------------------------------------------------------------------
+  { id: "ace-of-pentacles", nameZh: "星幣一", nameEn: "Ace of Pentacles", element: "土",
+    keywords: { upright: ["物質契機", "實質回報", "穩固起點", "豐盛"], reversed: ["錯失良機", "財務透支", "基礎不穩", "短視"] },
+    uprightZh: "宇宙遞來的一枚實質金幣！代表極具潛力的財務、事業或健康方面的實質新契機。",
+    reversedZh: "警示財務規劃不當或投資視角過於短視，需要重新檢視預算與風險控制。"
+  },
+  { id: "ten-of-pentacles", nameZh: "星幣十", nameEn: "Ten of Pentacles", element: "土",
+    keywords: { upright: ["家族豐盛", "長期安定", "資產傳承", "圓滿"], reversed: ["家族爭執", "資產風險", "財務負擔", "基礎動搖"] },
+    uprightZh: "物質與家族圓滿的頂峰！享有長期穩固的資產安全感與物質豐盛，基業長青。",
+    reversedZh: "注意家族或團隊內部的財務爭執，或是因為過度重視物質而忽視了情感連結。"
+  }
+];
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { TAROT_CARDS_DB, getCosmicDeckBackSvg, renderHiddenCardHtml, renderNativeCardHtml };
+  module.exports = TAROT_CARDS_DB;
 }

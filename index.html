@@ -2,47 +2,149 @@
 <html lang="zh-TW">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-  <title>Astraea AI 塔羅占卜 | 免費線上 AI 塔羅牌與百科全書</title>
-  <meta name="description" content="Astraea AI Tarot 提供免費線上西洋塔羅牌占卜、每日指引與完整的 78 張塔羅牌百科指南。">
-  <link rel="canonical" href="https://www.longminglee.com/index.html">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>SITAROT - 沉浸式心靈對話與深度塔羅探索</title>
+  <meta name="description" content="SITAROT - 沉浸式心靈對話與深度塔羅探索空間。">
+  <link rel="canonical" href="https://sitarot.com/index.html">
   
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/tarot-deck.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/tarot-deck.css">
+  <link rel="stylesheet" href="./css/modal-widgets.css">
 
-  <script src="js/i18n.js" defer></script>
-  <script src="js/tarot-data.js" defer></script>
-  <script src="js/audio-engine.js" defer></script>
-  <script src="js/app.js" defer></script>
+  <!-- html2canvas 用於生成社群分享籤詩卡 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+
+  <!-- JS 載入順序：防護 -> 字典 -> 資料庫 -> 引擎 -> 主程式 -->
+  <script src="./js/security-sanitizer.js" defer></script>
+  <script src="./js/i18n.js" defer></script>
+  <script src="./js/tarot-data-major.js" defer></script>
+  <script src="./js/tarot-data-minor.js" defer></script>
+  <script src="./js/tarot-data.js" defer></script>
+  <script src="./js/tarot-matrix-db.js" defer></script>
+  <script src="./js/spreads-data.js" defer></script>
+  <script src="./js/audio-engine.js" defer></script>
+  <script src="./js/tarot-engine.js" defer></script>
+  <script src="./js/ai-reader.js" defer></script>
+  <script src="./js/app.js" defer></script>
+
+  <style>
+    /* 極簡 RWD 與解讀卡片樣式釘牢 */
+    #typewriter-text {
+      color: #1e1b4b !important;
+      font-size: 0.98rem !important;
+      line-height: 1.8 !important;
+      font-weight: 500 !important;
+      min-height: 120px !important;
+      height: auto !important;
+      word-break: break-word !important;
+      white-space: pre-wrap !important;
+      text-align: left !important;
+      display: block !important;
+      visibility: visible !important;
+      opacity: 1 !important;
+      margin-bottom: 1rem !important;
+    }
+    
+    .ai-chat-box {
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: space-between !important;
+      padding: 1.5rem !important;
+      background: #ffffff !important;
+      border-radius: 12px !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06) !important;
+      min-height: 200px !important;
+      height: auto !important;
+    }
+
+    .prayer-banner {
+      background: rgba(168, 85, 247, 0.1);
+      border: 1px dashed rgba(168, 85, 247, 0.4);
+      padding: 0.8rem 1.2rem;
+      border-radius: 10px;
+      margin-bottom: 1.2rem;
+      text-align: center;
+      color: var(--text-main, #334155);
+      font-size: 0.92rem;
+    }
+
+    .preset-tags-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0.8rem 0 1rem 0;
+    }
+
+    /* AdSense 原生廣告預留容器 */
+    .adsense-native-box {
+      margin: 1.2rem 0;
+      padding: 0.8rem;
+      background: rgba(248, 250, 252, 0.8);
+      border: 1px dashed rgba(203, 213, 225, 0.8);
+      border-radius: 10px;
+      text-align: center;
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+
+    /* 社群分享籤詩卡跳窗 */
+    #share-card-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0,0,0,0.75);
+      z-index: 9999;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+    }
+
+    .share-card-content {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+      color: #ffffff;
+      padding: 1.8rem;
+      border-radius: 16px;
+      max-width: 420px;
+      width: 100%;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      text-align: center;
+    }
+
+    @media (max-width: 600px) {
+      .preset-tags-wrapper .kw-btn {
+        font-size: 0.82rem;
+        padding: 0.4rem 0.7rem;
+      }
+    }
+  </style>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "WebApplication",
-    "name": "Astraea AI Tarot",
-    "url": "https://www.longminglee.com/index.html",
-    "description": "免費線上塔羅牌占卜工具與靜態塔羅百科全書。",
+    "name": "SITAROT",
+    "url": "https://sitarot.com/index.html",
+    "description": "SITAROT Intuitive Tarot Exploration Platform",
     "applicationCategory": "LifestyleApplication",
     "operatingSystem": "All"
   }
   </script>
 </head>
-<body>
+<body class="sitarot-theme">
 
-  <!-- 1. 頂部 Header 工具列 -->
   <header class="site-header" role="banner">
     <div class="header-inner">
-      <a href="javascript:void(0)" onclick="resetToHome()" style="text-decoration: none; color: inherit;" title="返回首頁">
-        <h1 class="brand-title" id="brand-title">🔮 Astraea AI 塔羅占卜</h1>
+      <a href="javascript:void(0)" onclick="resetToHome()" class="brand-logo" title="SITAROT Home">
+        <h1 class="brand-title" id="brand-title">SITAROT</h1>
       </a>
       
       <div class="header-actions">
-        <a href="#wiki-index-section" class="btn-head" id="btn-head-wiki" style="text-decoration:none;" title="查看塔羅百科">📚 塔羅百科</a>
-        <button type="button" class="btn-head" id="btn-head-font" onclick="toggleLargeFont()" aria-label="Toggle Font Size">🔠 大字體</button>
-        <button type="button" class="btn-head" id="theme-btn" onclick="toggleDarkMode()" aria-label="Toggle Theme">☀️ 白天</button>
-        
-        <select class="btn-head" id="lang-select" onchange="switchLanguage(this.value)" style="outline:none; cursor:pointer;" aria-label="Select Language">
-          <option value="zh-TW">正體中文</option>
+        <button type="button" class="btn-icon" id="btn-head-font" onclick="toggleLargeFont()" title="大字體">🔠</button>
+        <button type="button" class="btn-icon" id="theme-btn" onclick="toggleDarkMode()" title="主題切換">☀️</button>
+        <select class="lang-selector" id="lang-select" onchange="switchLanguage(this.value)" aria-label="Select Language">
+          <option value="zh-TW">繁體中文</option>
           <option value="zh-CN">简体中文</option>
           <option value="en">English</option>
           <option value="ja">日本語</option>
@@ -52,210 +154,233 @@
     </div>
   </header>
 
-  <!-- 2. 主要內容區域 -->
   <main class="container" role="main">
-    <div class="glass-card" style="text-align: center;">
-      
-      <!-- Toast 提示訊息區 -->
-      <div id="toast-banner-box" style="display: none;" class="custom-toast-msg" aria-live="polite" role="status"></div>
+    <div class="sitarot-space-card">
+      <div id="toast-banner-box" class="custom-toast-msg" style="display: none;" aria-live="polite" role="status"></div>
 
-      <!-- 設定區：Step 1 輸入與熱門問題 -->
+      <!-- 第一階段：輸入問題與選擇牌陣 -->
       <div id="interactive-setup-area">
-        <label for="user-query" id="user-query-label" style="display:block; font-size:1.05rem; font-weight:800; color:var(--primary-purple); margin-bottom:0.4rem; text-align:center;">
-          🔮 請輸入您想請示的心靈困惑 / Input Your Question：
-        </label>
-        <textarea id="user-query" style="width:100%; min-height:60px; max-height:80px; padding:0.6rem 0.8rem; border-radius:0.6rem; border:1.5px solid var(--border-color); background:var(--input-bg); color:var(--text-main); font-size:0.95rem; font-weight:bold; outline:none; resize:none;" placeholder="例如：他現在對我有什麼想法？或點擊下方熱門問題..."></textarea>
-
-        <div class="preset-tags-wrapper" role="group" aria-label="Preset Questions">
-          <button type="button" onclick="fillQuestion('love')" id="tag-love" class="kw-btn">💕 我的真命天子在哪裡？</button>
-          <button type="button" onclick="fillQuestion('career')" id="tag-career" class="kw-btn">💼 該換工作還是留著？</button>
-          <button type="button" onclick="fillQuestion('fortune')" id="tag-fortune" class="kw-btn">🪙 未來三個月財運？</button>
-          <button type="button" onclick="fillQuestion('universe')" id="tag-universe" class="kw-btn">✨ 宇宙今天想告訴我什麼？</button>
+        <div class="hero-prompt-box">
+          <label for="user-query" id="user-query-label" class="space-main-title">
+            今天，你想問什麼？
+          </label>
         </div>
 
-        <!-- 🌟 Step 2 預設隱藏：打字或選完問題後展開 -->
-        <div class="spread-btn-group step-section-hidden" role="radiogroup" aria-label="Select Spread">
-          <button type="button" id="btn-spread-1" onclick="selectSpread(1)" aria-checked="true" style="background:var(--primary-purple); color:#FFF; border:1px solid var(--primary-purple); padding:0.35rem 0.75rem; border-radius:0.4rem; font-size:0.85rem; font-weight:bold; cursor:pointer;">1張牌 (每日指引)</button>
-          <button type="button" id="btn-spread-3" onclick="selectSpread(3)" aria-checked="false" style="background:transparent; color:var(--text-main); border:1px solid var(--border-color); padding:0.35rem 0.75rem; border-radius:0.4rem; font-size:0.85rem; font-weight:bold; cursor:pointer;">3張牌 (時間軸)</button>
-          <button type="button" id="btn-spread-5" onclick="selectSpread(5)" aria-checked="false" style="background:transparent; color:var(--text-main); border:1px solid var(--border-color); padding:0.35rem 0.75rem; border-radius:0.4rem; font-size:0.85rem; font-weight:bold; cursor:pointer;">5張牌 (深度牌陣)</button>
+        <!-- 熱門問題快選按鈕 -->
+        <div class="preset-tags-wrapper">
+          <button type="button" onclick="fillQuestion('love')" class="kw-btn">💕 感情心態</button>
+          <button type="button" onclick="fillQuestion('career')" class="kw-btn">💼 職涯抉擇</button>
+          <button type="button" onclick="fillQuestion('fortune')" class="kw-btn">🪙 財運分析</button>
+          <button type="button" onclick="fillQuestion('universe')" class="kw-btn">✨ 宇宙指引</button>
+        </div>
+
+        <div class="input-wrapper">
+          <textarea id="user-query" class="minimal-input" placeholder="例如：我跟他還有可能嗎？" rows="2"></textarea>
+        </div>
+
+        <!-- 1 / 3 / 5 張牌切換選單 -->
+        <div class="spread-btn-group" style="display: flex; justify-content: center; gap: 0.6rem; margin: 1.2rem 0;">
+          <button type="button" id="btn-spread-1" onclick="selectSpread(1)" class="spread-chip active">1張牌 (每日指引)</button>
+          <button type="button" id="btn-spread-3" onclick="selectSpread(3)" class="spread-chip">3張牌 (時間軸)</button>
+          <button type="button" id="btn-spread-5" onclick="selectSpread(5)" class="spread-chip">5張牌 (深度牌陣)</button>
+        </div>
+
+        <!-- 觸發第二階段按鈕 -->
+        <div id="setup-action-box" class="action-btn-container" style="margin-top: 1rem;">
+          <button type="button" id="btn-submit-query" onclick="handleQuerySubmit()" class="btn-gold">
+            開始選牌 🔮
+          </button>
         </div>
       </div>
 
-      <!-- 🌟 78 張展牌區：預設隱藏 -->
-      <div id="fan-deck-stage-wrapper" class="step-section-hidden" style="position: relative;">
-        <p id="tarot-hint-status" style="font-weight:800; color:var(--primary-purple); margin:0.4rem 0 0.2rem 0; font-size:0.95rem; z-index:100; position:relative;" aria-live="polite"></p>
+      <!-- 第二階段：展牌與卡槽區（附帶誠心祈禱引導） -->
+      <div id="fan-deck-stage-wrapper" class="step-section-hidden" style="display: none;">
+        <div class="prayer-banner">
+          ✨ <b>請誠心默禱</b>：深呼吸，在心中默念你的問題，憑直覺選擇吸引你的卡牌。
+        </div>
+        <p id="tarot-hint-status" class="status-hint" aria-live="polite"></p>
         <div id="fan-deck-wrapper" class="fan-deck-stage" role="region" aria-label="Tarot Deck Stage"></div>
       </div>
 
-      <!-- 🌟 未抽牌時居中的卡槽：預設隱藏 -->
-      <div id="slots-grid" class="slots-grid step-section-hidden" role="region" aria-label="Selected Card Slots"></div>
+      <div id="slots-grid" class="slots-grid step-section-hidden" style="display: none;" role="region" aria-label="Selected Card Slots"></div>
 
-      <!-- 🔮 正式觸發解讀大按鈕 -->
-      <div id="start-divination-btn-box" style="margin: 0.5rem 0 0.2rem 0;">
-        <button type="button" id="btn-submit-divination" onclick="startTarotDivination()" class="btn-gold btn-gold-disabled" style="font-size: 1rem; width: 80%; max-width: 320px; min-height: 42px;">
-          🔮 請先點擊上方卡牌完成抽牌
+      <!-- 開啟 AI 解讀按鈕 -->
+      <div id="start-divination-btn-box" class="action-btn-container step-section-hidden" style="display: none;">
+        <button type="button" id="btn-submit-divination" onclick="startTarotDivination()" class="btn-gold btn-gold-disabled">
+          🔮 請點擊上方卡牌進行抽牌
         </button>
       </div>
 
-      <!-- 重抽按鈕 (解籤後顯示) -->
-      <div id="re-draw-btn-box" style="display: none; margin: 0.5rem 0;">
-        <button type="button" id="btn-redraw-action" onclick="resetToHome()" class="btn-gold" style="font-size: 0.9rem; padding: 0.4rem 1.4rem;">
-          🔄 重新請示 / Read Again
+      <div id="re-draw-btn-box" style="display: none;" class="action-btn-container">
+        <button type="button" id="btn-redraw-action" onclick="resetToHome()" class="btn-gold">
+          🔄 重新提問 / SITAROT
         </button>
       </div>
 
-      <!-- 誠心祈禱沉澱提示橫幅 -->
-      <div id="ritual-blessing-notice" style="display: none; padding: 0.75rem; background: rgba(147, 51, 234, 0.15); border: 1px solid var(--primary-purple); border-radius: 0.6rem; margin: 0.4rem 0;">
-        <div id="ritual-blessing-title" style="font-size: 0.98rem; font-weight: 800; color: #fef08a; margin-bottom: 0.15rem;">✨ 請誠心默禱，靜心感受宇宙指引...</div>
-        <div id="ritual-blessing-sub" style="font-size: 0.82rem; color: var(--text-sub);">大師正在為您連結靈性能量，揭示牌陣奧秘...</div>
+      <div id="ritual-blessing-notice" style="display: none;" class="blessing-banner">
+        <div id="ritual-blessing-title" class="blessing-title">✨ 靜心沉澱，正在梳理潛意識脈絡...</div>
       </div>
 
-      <!-- 解籤專用：雙欄式區域 -->
+      <!-- 第三階段：對話與解讀成果區 -->
       <div id="result-two-column-wrapper" style="display: none;" class="result-layout-grid">
         <div class="result-left-column">
-          <div id="result-left-slots" class="result-mini-slots"></div>
-          <div id="cards-summary"></div>
+          <div id="result-left-slots" class="result-mini-slots" style="display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center;"></div>
+          <div id="cards-summary" style="margin-top: 0.8rem;"></div>
         </div>
 
         <div class="ai-chat-box">
-          <div id="typewriter-text" style="font-size:0.92rem; color:var(--text-main);" aria-live="polite"></div>
+          <div id="typewriter-text" class="typewriter-content" aria-live="polite"></div>
+          
+          <!-- AdSense 原生廣告預留版位 (解讀下方高點擊率位置) -->
+          <div id="adsense-result-box" class="adsense-native-box">
+            <span>✨ 贊助商廣告載入區域 (AdSense Ready)</span>
+          </div>
+
+          <div class="result-actions-bar" style="margin-top: 1.2rem; display: flex; gap: 0.6rem; justify-content: center; flex-wrap: wrap;">
+            <button type="button" onclick="saveToTarotJournal()" class="kw-btn">
+              📖 保存至靈魂日誌
+            </button>
+            <button type="button" onclick="generateShareCard()" class="kw-btn" style="background: var(--primary-purple); color: #fff;">
+              ✨ 生成靈魂籤詩卡 (分享)
+            </button>
+          </div>
         </div>
       </div>
 
     </div>
 
-    <!-- Google AdSense 廣告預留位 -->
-    <div class="adsense-slot adsense-mid" style="text-align:center; margin:1.5rem 0;">
-      <!-- Google AdSense Code -->
-    </div>
-
-    <!-- 3. 靜態塔羅百科全書檢索大區塊 -->
-    <section id="wiki-index-section" class="glass-card" style="margin-top:1.2rem; text-align:left; padding:1.2rem;">
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border-color); padding-bottom:0.6rem; margin-bottom:0.8rem;">
-        <h2 id="wiki-title" style="font-size:1.15rem; color:var(--gold-accent); margin:0;">📚 Astraea 塔羅百科資料庫</h2>
-        <span id="wiki-sub" style="font-size:0.75rem; color:var(--text-sub);">查遍整個塔羅世界</span>
+    <!-- 百科地基 -->
+    <section id="wiki-index-section" class="sitarot-space-card wiki-section">
+      <div class="wiki-header">
+        <div>
+          <h2 id="wiki-title" class="wiki-main-title">📚 SITAROT 心靈百科</h2>
+          <span id="wiki-sub" class="wiki-subtitle">探索 78 張牌與心理象徵</span>
+        </div>
       </div>
 
-      <!-- 百科分類頁籤 (Tabs) -->
-      <div style="display:flex; gap:0.4rem; overflow-x:auto; padding-bottom:0.5rem; margin-bottom:1rem;" role="tablist">
-        <button type="button" class="kw-btn" onclick="switchWikiTab('articles')" id="tab-btn-articles" style="background:var(--primary-purple); color:#fff;">📖 專題文章</button>
+      <div class="wiki-tab-bar" role="tablist">
+        <button type="button" class="kw-btn active" onclick="switchWikiTab('articles')" id="tab-btn-articles">📖 專題文章</button>
         <button type="button" class="kw-btn" onclick="switchWikiTab('cards')" id="tab-btn-cards">🎴 78張牌義</button>
-        <button type="button" class="kw-btn" onclick="switchWikiTab('questions')" id="tab-btn-questions">❓ 熱門問題庫</button>
+        <button type="button" class="kw-btn" onclick="switchWikiTab('questions')" id="tab-btn-questions">❓ 熱門專題</button>
         <button type="button" class="kw-btn" onclick="switchWikiTab('combinations')" id="tab-btn-combinations">🔗 雙牌組合</button>
         <button type="button" class="kw-btn" onclick="switchWikiTab('spreads')" id="tab-btn-spreads">📐 經典牌陣</button>
       </div>
 
-      <!-- 頁籤內容 0: 專題文章（由 build.js 全自動動態替換注入） -->
       <div id="wiki-tab-articles" class="wiki-tab-content">
-        <!-- AUTO_ARTICLES_START -->
-<div style="display:flex; flex-direction:column; gap:0.5rem;">
-    <a href="./articles/tarot-origin-and-psychology.html" class="kw-btn" style="text-decoration:none; font-size:0.88rem; text-align:left; padding:0.55rem 0.85rem; display:block; white-space:normal; line-height:1.4;">📖 【解牌原理】塔羅牌為什麼會準？揭密塔羅的由來、榮格同步性與潛意識投射</a>
-    <a href="./articles/tarot-structure-and-elements.html" class="kw-btn" style="text-decoration:none; font-size:0.88rem; text-align:left; padding:0.55rem 0.85rem; display:block; white-space:normal; line-height:1.4;">📖 【結構大解析】78張塔羅牌全解構：大/小阿爾克那與四元素密碼</a>
-    <a href="./articles/tarot-spreads-guide.html" class="kw-btn" style="text-decoration:none; font-size:0.88rem; text-align:left; padding:0.55rem 0.85rem; display:block; white-space:normal; line-height:1.4;">📖 ✦ 塔羅初學者必學的5大萬用牌陣！超簡單牌陣＆解牌心法分享</a>
-  </div>
-  <!-- AUTO_ARTICLES_END -->
+        <div class="article-list-grid">
+          <a href="./articles/tarot-origin-and-psychology.html" class="article-link-card">📖 【解牌原理】塔羅牌為什麼會準？揭密塔羅的由來、榮格同步性與潛意識投射</a>
+          <a href="./articles/tarot-structure-and-elements.html" class="article-link-card">📖 【結構大解析】78張塔羅牌全解構：大/小阿爾克那與四元素密碼</a>
+          <a href="./articles/tarot-spreads-guide.html" class="article-link-card">📖 ✦ 塔羅初學者必學的5大萬用牌陣！超簡單牌陣＆解牌心法分享</a>
+        </div>
       </div>
 
-      <!-- 頁籤內容 1: 78 張牌 -->
       <div id="wiki-tab-cards" class="wiki-tab-content" style="display:none;">
-        <div style="margin-bottom:0.8rem;">
-          <h3 id="wiki-major-title" style="font-size:0.88rem; color:#fef08a; margin-bottom:0.4rem;">大阿爾克那 (Major Arcana)</h3>
-          <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
-            <a href="./cards/the-fool.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">00 愚者</a>
-            <a href="./cards/the-magician.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">01 魔術師</a>
-            <a href="./cards/the-high-priestess.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">02 女祭司</a>
-            <a href="./cards/the-empress.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">03 皇后</a>
-            <a href="./cards/the-emperor.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">04 皇帝</a>
-            <a href="./cards/the-hierophant.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">05 教皇</a>
-            <a href="./cards/the-lovers.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">06 戀人</a>
-            <a href="./cards/the-chariot.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">07 戰車</a>
-            <a href="./cards/strength.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">08 力量</a>
-            <a href="./cards/the-hermit.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">09 隱士</a>
-            <a href="./cards/wheel-of-fortune.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">10 命運之輪</a>
-            <a href="./cards/justice.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">11 正義</a>
-            <a href="./cards/the-hanged-man.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">12 倒吊人</a>
-            <a href="./cards/death.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">13 死神</a>
-            <a href="./cards/temperance.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">14 節制</a>
-            <a href="./cards/the-devil.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">15 惡魔</a>
-            <a href="./cards/the-tower.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">16 高塔</a>
-            <a href="./cards/the-star.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">17 星星</a>
-            <a href="./cards/the-moon.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">18 月亮</a>
-            <a href="./cards/the-sun.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">19 太陽</a>
-            <a href="./cards/judgement.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">20 審判</a>
-            <a href="./cards/the-world.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">21 世界</a>
+        <div class="card-group-block">
+          <h3 id="wiki-major-title" class="card-group-title">大阿爾克那 (Major Arcana)</h3>
+          <div class="card-chips-wrapper">
+            <a href="./cards/the-fool.html" class="kw-btn">00 愚者</a>
+            <a href="./cards/the-magician.html" class="kw-btn">01 魔術師</a>
+            <a href="./cards/the-high-priestess.html" class="kw-btn">02 女祭司</a>
+            <a href="./cards/the-empress.html" class="kw-btn">03 皇后</a>
+            <a href="./cards/the-emperor.html" class="kw-btn">04 皇帝</a>
+            <a href="./cards/the-hierophant.html" class="kw-btn">05 教皇</a>
+            <a href="./cards/the-lovers.html" class="kw-btn">06 戀人</a>
+            <a href="./cards/the-chariot.html" class="kw-btn">07 戰車</a>
+            <a href="./cards/strength.html" class="kw-btn">08 力量</a>
+            <a href="./cards/the-hermit.html" class="kw-btn">09 隱士</a>
+            <a href="./cards/wheel-of-fortune.html" class="kw-btn">10 命運之輪</a>
+            <a href="./cards/justice.html" class="kw-btn">11 正義</a>
+            <a href="./cards/the-hanged-man.html" class="kw-btn">12 倒吊人</a>
+            <a href="./cards/death.html" class="kw-btn">13 死神</a>
+            <a href="./cards/temperance.html" class="kw-btn">14 節制</a>
+            <a href="./cards/the-devil.html" class="kw-btn">15 惡魔</a>
+            <a href="./cards/the-tower.html" class="kw-btn">16 高塔</a>
+            <a href="./cards/the-star.html" class="kw-btn">17 星星</a>
+            <a href="./cards/the-moon.html" class="kw-btn">18 月亮</a>
+            <a href="./cards/the-sun.html" class="kw-btn">19 太陽</a>
+            <a href="./cards/judgement.html" class="kw-btn">20 審判</a>
+            <a href="./cards/the-world.html" class="kw-btn">21 世界</a>
           </div>
         </div>
 
-        <div>
-          <h3 id="wiki-minor-title" style="font-size:0.88rem; color:#fef08a; margin-bottom:0.4rem;">小阿爾克那 (Minor Arcana)</h3>
-          <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
-            <a href="./cards/ace-of-wands.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">🪄 權杖一</a>
-            <a href="./cards/two-of-wands.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">🪄 權杖二</a>
-            <a href="./cards/ace-of-cups.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">🍷 聖盃一</a>
-            <a href="./cards/two-of-cups.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">🍷 聖盃二</a>
-            <a href="./cards/ace-of-swords.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">🗡️ 寶劍一</a>
-            <a href="./cards/ace-of-pentacles.html" class="kw-btn" style="text-decoration:none; font-size:0.8rem;">🪙 星幣一</a>
+        <div class="card-group-block">
+          <h3 id="wiki-minor-title" class="card-group-title">小阿爾克那 (Minor Arcana)</h3>
+          <div class="card-chips-wrapper">
+            <a href="./cards/ace-of-wands.html" class="kw-btn">🪄 權杖一</a>
+            <a href="./cards/two-of-wands.html" class="kw-btn">🪄 權杖二</a>
+            <a href="./cards/ace-of-cups.html" class="kw-btn">🍷 聖盃一</a>
+            <a href="./cards/two-of-cups.html" class="kw-btn">🍷 聖盃二</a>
+            <a href="./cards/ace-of-swords.html" class="kw-btn">🗡️ 寶劍一</a>
+            <a href="./cards/ace-of-pentacles.html" class="kw-btn">🪙 星幣一</a>
           </div>
         </div>
       </div>
 
-      <!-- 頁籤內容 2: 熱門問題庫 -->
       <div id="wiki-tab-questions" class="wiki-tab-content" style="display:none;">
-        <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
-          <a href="./questions/love-crush.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">💕 他現在對我有什麼想法？</a>
-          <a href="./questions/career-change.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">💼 該換工作還是繼續留著？</a>
-          <a href="./questions/fortune-three-months.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">🪙 未來三個月整體財運？</a>
+        <div class="card-chips-wrapper">
+          <a href="./questions/love-crush.html" class="kw-btn">💕 他現在對我有什麼想法？</a>
+          <a href="./questions/career-change.html" class="kw-btn">💼 該換工作還是繼續留著？</a>
+          <a href="./questions/fortune-three-months.html" class="kw-btn">🪙 未來三個月整體財運？</a>
         </div>
       </div>
 
-      <!-- 頁籤內容 3: 雙牌組合 -->
       <div id="wiki-tab-combinations" class="wiki-tab-content" style="display:none;">
-        <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
-          <a href="./combinations/fool-lovers.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">🃏 愚者 ＋ 💕 戀人</a>
-          <a href="./combinations/emperor-empress.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">🏛 皇帝 ＋ 👑 皇后</a>
-          <a href="./combinations/fool-magician.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">🃏 愚者 ＋ 🪄 魔術師</a>
+        <div class="card-chips-wrapper">
+          <a href="./combinations/tower-star.html" class="kw-btn">⚡ 高塔 ＋ ⭐ 星星</a>
         </div>
       </div>
 
-      <!-- 頁籤內容 4: 經典牌陣 -->
       <div id="wiki-tab-spreads" class="wiki-tab-content" style="display:none;">
-        <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
-          <a href="./spreads/daily-one-card.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">🎴 單牌今日指引 (1張)</a>
-          <a href="./spreads/past-present-future.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">⏳ 三才時間軸牌陣 (3張)</a>
-          <a href="./spreads/love-deep-analysis.html" class="kw-btn" style="text-decoration:none; font-size:0.82rem;">❤ 五牌感情深入分析陣 (5張)</a>
+        <div class="card-chips-wrapper">
+          <a href="./spreads/daily-one-card.html" class="kw-btn">🎴 單牌今日指引 (1張)</a>
+          <a href="./spreads/past-present-future.html" class="kw-btn">⏳ 三才時間軸牌陣 (3張)</a>
+          <a href="./spreads/love-deep-analysis.html" class="kw-btn">❤ 五牌感情深入分析陣 (5張)</a>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- 4. 頁底 Footer 區塊 -->
   <footer class="site-footer" role="contentinfo">
     <div class="footer-inner">
       <div class="footer-lang-links" aria-label="Language Selector">
         <a href="javascript:void(0)" onclick="switchLanguage('en')">English</a>
-        <a href="javascript:void(0)" onclick="switchLanguage('zh-TW')">正體中文</a>
+        <a href="javascript:void(0)" onclick="switchLanguage('zh-TW')">繁體中文</a>
         <a href="javascript:void(0)" onclick="switchLanguage('zh-CN')">简体中文</a>
         <a href="javascript:void(0)" onclick="switchLanguage('ja')">日本語</a>
         <a href="javascript:void(0)" onclick="switchLanguage('ko')">한국어</a>
       </div>
 
       <div class="footer-bottom">
-        <span id="footer-copy">© 2026 Astraea AI Tarot Ltd. 版權所有.</span>
+        <span id="footer-copy">© 2026 SITAROT. All Rights Reserved.</span>
         <div class="footer-policy-links">
-          <a href="javascript:void(0)" id="link-privacy" onclick="openPolicyModal('privacy')">隱私政策</a> · 
-          <a href="javascript:void(0)" id="link-terms" onclick="openPolicyModal('terms')">服務條款</a> · 
-          <a href="javascript:void(0)" id="link-refund" onclick="openPolicyModal('refund')">退款政策</a>
+          <a href="javascript:void(0)" onclick="openPolicyModal('privacy')">隱私政策</a> · 
+          <a href="javascript:void(0)" onclick="openPolicyModal('terms')">服務條款</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- 5. 條款視窗 Modal -->
-  <div id="policy-modal" class="modal-overlay" style="display: none;" onclick="closePolicyModal(event)">
+  <!-- 社群分享籤詩圖卡彈窗 -->
+  <div id="share-card-modal" onclick="closeShareModal(event)">
+    <div class="share-card-content" onclick="event.stopPropagation()">
+      <div id="share-canvas-target" style="padding: 1.2rem; background: #0f172a; border-radius: 12px; border: 1px dashed #f59e0b;">
+        <h2 style="color: #fef08a; font-size: 1.2rem; margin-bottom: 0.5rem;">✨ SITAROT 靈魂籤詩</h2>
+        <p id="share-card-query" style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 1rem;"></p>
+        <div id="share-card-cards" style="display: flex; justify-content: center; gap: 0.4rem; margin-bottom: 1rem;"></div>
+        <p id="share-card-quote" style="font-size: 0.9rem; color: #ffffff; line-height: 1.6; font-style: italic; background: rgba(255,255,255,0.05); padding: 0.8rem; border-radius: 8px;"></p>
+        <div style="margin-top: 1rem; font-size: 0.75rem; color: #94a3b8;">
+          🌐 SITAROT.com · 探索你的潛意識脈絡
+        </div>
+      </div>
+      <button type="button" onclick="closeShareModal()" class="kw-btn" style="margin-top: 1rem;">關閉</button>
+    </div>
+  </div>
+
+  <!-- 條款跳窗 Modal -->
+  <div id="policy-modal" class="modal-overlay" onclick="closePolicyModal(event)">
     <div class="modal-card" onclick="event.stopPropagation()">
       <div class="modal-header">
-        <h3 id="modal-title">條款標題</h3>
+        <h3 id="modal-title">隱私政策與條款</h3>
         <button type="button" class="modal-close-btn" onclick="closePolicyModal()">×</button>
       </div>
       <div class="modal-body" id="modal-content">

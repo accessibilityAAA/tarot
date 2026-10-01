@@ -1,153 +1,93 @@
 /* ==========================================================================
-   天下第一塔羅牌 - AI 串流解牌與對接模組 (js/ai-reader.js)
-   支援 Cloudflare Worker 安全代理、打字機流暢渲染與離線本地降級解牌
+   SITAROT - 靈動故事解讀引擎 (js/ai-reader.js)
+   完全移除任何網路連線與非同步 API，100% 本地同步直出，絕不空白卡死！
    ========================================================================== */
 
 const AIReaderEngine = (function () {
-  const WORKER_PROXY_URL = "https://ai-proxy.your-subdomain.workers.dev"; // 部署後的 Cloudflare Worker URL
-  let typewriterTimer = null;
+  function clearChatHistory() {}
 
-  // 1. 建立組合 AI Prompt
-  function buildTarotPrompt(cards, query, spreadCount, lang) {
-    const isZh = lang.startsWith("zh");
-    const spreadInfo = typeof TAROT_SPREADS_DB !== "undefined" ? TAROT_SPREADS_DB[spreadCount] : null;
-    const spreadName = spreadInfo ? (spreadInfo.name[lang] || spreadInfo.name["zh-TW"]) : `${spreadCount} Card Spread`;
+  // 點擊開啟解讀的核心進入點
+  function requestReading(cards, query, spreadCount, lang, outputTextId) {
+    const outputEl = document.getElementById(outputTextId);
+    if (!outputEl) return;
 
-    let cardDetails = cards.map((c, i) => {
-      const posInfo = (spreadInfo && spreadInfo.positions && spreadInfo.positions[i])
-        ? (spreadInfo.positions[i].name[lang] || spreadInfo.positions[i].name["zh-TW"])
-        : `Position ${i + 1}`;
-      
-      const cardName = isZh ? c.nameZh : c.nameEn;
-      const orientation = c.isReversed ? (isZh ? "逆位" : "Reversed") : (isZh ? "正位" : "Upright");
-      const keywords = c.isReversed ? c.reversedKeywords.join(", ") : c.uprightKeywords.join(", ");
-      
-      return `[${posInfo}] : ${cardName} (${orientation}) - Key Concepts: ${keywords}`;
-    }).join("\n");
-
-    const promptText = isZh
-      ? `【求問者問題】：${query}\n【選用牌陣】：${spreadName}\n【抽取卡牌】：\n${cardDetails}\n\n請以溫暖、專業且具啟發性的心理塔羅大師語氣，針對問題與牌陣進行深度剖析。請包含：\n1. 牌陣整體能量概覽\n2. 各位置卡牌的具體心理與現實指引\n3. 給求問者的核心行動建議。`
-      : `[User Query]: ${query}\n[Tarot Spread]: ${spreadName}\n[Drawn Cards]:\n${cardDetails}\n\nPlease interpret this reading empathetically as a Master Tarot Reader. Provide:\n1. Overall Energy Overview\n2. Specific Insights for each Position\n3. Clear, Actionable Advice.`;
-
-    return SecuritySanitizer.sanitizePrompt(promptText);
-  }
-
-  // 2. 打字機串流效果
-  function runTypewriterStream(targetElementId, fullText, speed = 20, onComplete = null) {
-    const container = document.getElementById(targetElementId);
-    if (!container) return;
-
-    if (typewriterTimer) clearInterval(typewriterTimer);
-    container.innerHTML = "";
-
-    let index = 0;
-    const cleanText = String(fullText);
-
-    typewriterTimer = setInterval(() => {
-      if (index < cleanText.length) {
-        const char = cleanText.charAt(index);
-        if (char === "\n") {
-          container.innerHTML += "<br>";
-        } else {
-          container.innerHTML += SecuritySanitizer.escapeHTML(char);
-        }
-        index++;
-      } else {
-        clearInterval(typewriterTimer);
-        typewriterTimer = null;
-        if (typeof onComplete === "function") onComplete();
-      }
-    }, speed);
-  }
-
-  // 3. 離線本地備用解牌算法 (當 API 無法連線時自動降級備用)
-  function generateLocalFallbackReading(cards, query, lang) {
-    const isZh = lang.startsWith("zh");
-    const safeQuery = SecuritySanitizer.sanitizeInput(query);
-    const firstCard = cards[0];
-
-    if (isZh) {
-      let analysis = `親愛的心靈探索者，針對您所請示的問題：「${safeQuery}」，宇宙能量已透過塔羅牌陣為您顯化指引。\n\n`;
-      analysis += `主導當前局勢的核心卡牌為【${firstCard.nameZh}】(${firstCard.isReversed ? "逆位" : "正位"})。\n`;
-      analysis += `${firstCard.isReversed ? firstCard.reversedZh : firstCard.uprightZh}\n\n`;
-      
-      if (cards.length > 1) {
-        analysis += `從整體牌陣的能量流轉來看，當前情勢正處於梳理與轉換的關鍵期。不論眼前面臨何種考驗，請保持內心的清明與自信。\n\n`;
-      }
-
-      analysis += `💡 【心靈行動建議】：${firstCard.advice || "信任內心的直覺，勇敢踏出調整的腳步，幸運隨後就會明朗。"}`;
-      return analysis;
-    } else {
-      let analysis = `Greetings, Seeker of Truth. Regarding your query: "${safeQuery}", the cosmic energy speaks through your spread.\n\n`;
-      analysis += `The dominant card shaping your energy is ${firstCard.nameEn} (${firstCard.isReversed ? "Reversed" : "Upright"}).\n`;
-      analysis += `${firstCard.isReversed ? firstCard.reversedEn : firstCard.uprightEn}\n\n`;
-      
-      analysis += `💡 [Actionable Advice]: ${firstCard.advice || "Trust your inner wisdom and take clear, deliberate action."}`;
-      return analysis;
-    }
-  }
-
-  // 4. 觸發 AI 解牌流程
-  async function requestReading(cards, query, spreadCount, lang, outputTextId) {
-    const safeQuery = SecuritySanitizer.sanitizeInput(query);
-    const validCards = SecuritySanitizer.validateCardsData(cards);
-
-    if (validCards.length === 0) return;
-
-    const prompt = buildTarotPrompt(validCards, safeQuery, spreadCount, lang);
-
-    // 播放勝音/祝禱音效
-    if (typeof TarotAudio !== "undefined") {
+    if (typeof TarotAudio !== "undefined" && TarotAudio.playChime) {
       TarotAudio.playChime();
     }
 
-    try {
-      // 嘗試透過 Workers Proxy 請求線上 API
-      const response = await fetch(WORKER_PROXY_URL, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ prompt, lang })
-      });
-
-      if (!response.ok || !response.body) {
-        throw new Error("Worker Proxy unavailable");
-      }
-
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder();
-      const outputEl = document.getElementById(outputTextId);
-      if (outputEl) outputEl.innerHTML = "";
-
-      let accumulatedText = "";
-
-      while (true) {
-        const { done, value } = await reader.read();
-        if (done) break;
-
-        const chunk = decoder.decode(value, { stream: true });
-        accumulatedText += chunk;
-
-        if (outputEl) {
-          outputEl.innerHTML = SecuritySanitizer.escapeHTML(accumulatedText).replace(/\n/g, "<br>");
-        }
-      }
-
-    } catch (err) {
-      console.warn("[AIReaderEngine] 線上 API 無法連線，啟用本地降級解牌引擎：", err.message);
-      
-      // 自動降級為本地純淨解讀
-      const fallbackText = generateLocalFallbackReading(validCards, safeQuery, lang);
-      runTypewriterStream(outputTextId, fallbackText, 22);
-    }
+    // 🌟 完全純同步寫入 DOM，0 秒響應、零網路失敗風險！
+    fallbackDirectReading(cards, query, spreadCount, outputTextId);
   }
 
   return {
-    buildTarotPrompt,
-    runTypewriterStream,
-    generateLocalFallbackReading,
-    requestReading
+    requestReading: requestReading,
+    clearChatHistory: clearChatHistory
   };
 })();
+
+// 本地深層故事解讀生成器
+function fallbackDirectReading(cards, query, spreadCount, outputTextId) {
+  const outputEl = document.getElementById(outputTextId);
+  if (!outputEl) return;
+
+  const validCards = (cards && cards.length) ? cards : [];
+  const count = validCards.length || spreadCount || 1;
+
+  // 1. 抓取牌陣各坑位名稱
+  const roleNames = (typeof TAROT_MATRIX_DB !== 'undefined' && TAROT_MATRIX_DB.spreadPositions)
+    ? (TAROT_MATRIX_DB.spreadPositions[count] || TAROT_MATRIX_DB.spreadPositions[1])
+    : {
+        1: ["當前核心指引"],
+        3: ["過去的根源與因果", "現在的局勢與迷霧", "未來的突破與演變"],
+        5: ["你的內在心態", "對方的真實心態", "當前的溝通障礙", "建議採取的策略", "最終演變結果"]
+      }[count] || ["當前指引"];
+
+  let text = `🔮 SITAROT 心靈折射・深層故事解讀\n\n`;
+  text += `關於你請示的困惑：「${query || '當前運勢指引'}」，這 ${count} 張牌映照出你潛意識中的能量脈絡：\n\n`;
+
+  // 2. 逐張解析並結合牌義資料庫
+  if (Array.isArray(validCards)) {
+    validCards.forEach((c, idx) => {
+      if (!c) return;
+      const role = roleNames[idx] || `第 ${idx + 1} 階段`;
+      const cardName = c.nameZh || c.nameEn || c.name || '塔羅牌';
+      const status = c.isReversed ? '逆位 🌙' : '正位 ☀️';
+
+      let cardNarrative = "";
+      
+      // 優先從 TAROT_MATRIX_DB 或 TAROT_CARDS_DB 撈取剖析敘事
+      const cardKey = (c.id || "").toLowerCase();
+      const matrixMatch = (typeof TAROT_MATRIX_DB !== 'undefined' && TAROT_MATRIX_DB.cardsReading) 
+        ? TAROT_MATRIX_DB.cardsReading[cardKey] 
+        : null;
+
+      if (matrixMatch) {
+        const dir = c.isReversed ? 'reversed' : 'upright';
+        cardNarrative = matrixMatch[dir]?.general || matrixMatch[dir]?.love || matrixMatch[dir]?.career || "";
+      }
+
+      if (!cardNarrative) {
+        if (c.isReversed) {
+          cardNarrative = c.reversedZh || c.reversedMeaning || (c.keywords && c.keywords.reversed ? `呈現【${c.keywords.reversed.join('、')}】的能量。代表你在這個環節感到了內心的阻礙，可能是過度壓抑或執著於舊思維。` : '暗示此處存在著未被察覺的內在阻礙，需要停下腳步重新校準。');
+        } else {
+          cardNarrative = c.uprightZh || c.uprightMeaning || (c.keywords && c.keywords.upright ? `展現【${c.keywords.upright.join('、')}】的流動。意味著內在的力量正在顯化，只要保持清醒就能順應推動力。` : '展現順暢的顯化能量，指引你勇敢擁抱當前的轉變。');
+        }
+      }
+
+      text += `🌱 【${role}】—— ${cardName}（${status}）\n`;
+      text += `${cardNarrative}\n\n`;
+    });
+  }
+
+  text += `✨ 【大師靈魂提問】：貫穿這 ${count} 張牌，局勢的癥結不在於外部環境，而是你如何看待眼前的瓶頸。允許當下的迷霧存在，答案自然會浮現出來。`;
+
+  // 3. 🌟 強制賦予文字顏色，直接寫入 DOM，絕不留白！
+  outputEl.style.color = "#1e1b4b";
+  outputEl.style.display = "block";
+  outputEl.style.visibility = "visible";
+  outputEl.style.opacity = "1";
+  outputEl.innerHTML = text.replace(/\n/g, "<br>");
+}
 
 if (typeof module !== "undefined" && module.exports) {
   module.exports = AIReaderEngine;

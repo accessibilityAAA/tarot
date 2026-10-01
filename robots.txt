@@ -3,10 +3,14 @@ Allow: /
 Allow: /css/
 Allow: /js/
 Allow: /assets/
+Allow: /cards/
+Allow: /combinations/
+Allow: /questions/
+Allow: /spreads/
+Allow: /articles/
 
-Allow: /tarot.html
 Allow: /manifest.json
 
 Disallow: /workers/
 
-Sitemap: https://www.longminglee.com/sitemap.xml
+Sitemap: https://sitarot.com/sitemap.xml
